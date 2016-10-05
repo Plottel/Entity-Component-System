@@ -66,7 +66,7 @@ namespace MyGame
             _world.AddEntity(newEntity, components);
         }
 
-        public static void CreateBullet(float x, float y, int speed, int damage)
+        public static void CreateBullet(float x, float y, int speed, int damage, Rectangle target)
         {
             //Create Entity and add to world
             Entity newEntity = _world.CreateEntity();
@@ -76,7 +76,7 @@ namespace MyGame
             components.Add(new CRenderable(Color.Black));
             components.Add(new CPosition(x, y, 5));
             components.Add(new CVelocity(-speed, 0, speed));
-            components.Add(new CProjectile(SwinGame.CreateRectangle(0, 0, 0, 0)));
+            components.Add(new CProjectile(target));
             components.Add(new CDamage(damage));
 
             _world.AddEntity(newEntity, components);
@@ -117,7 +117,7 @@ namespace MyGame
             components.Add(new CRenderable(SwinGame.RGBAColor(148, 0, 211, 100)));
             components.Add(new CPosition(x, y, size));
             components.Add(new CPoison(1, 5000, _world.GameTime));
-            components.Add(new CApplyPoison());
+            components.Add(new CAppliesDebuff());
 
             _world.AddEntity(newEntity, components);
         }

@@ -46,9 +46,14 @@ namespace MyGame
             set {_height = value;}
         }
 
+        public Rectangle Rect
+        {
+            get {return SwinGame.CreateRectangle(X, Y, Width, Height);}
+        }
+
         public Point2D Centre
         {
-            get {return SwinGame.RectangleCenter(SwinGame.CreateRectangle(X, Y, Width, Height));}
+            get {return SwinGame.RectangleCenter(Rect);}
         }
     }
 }

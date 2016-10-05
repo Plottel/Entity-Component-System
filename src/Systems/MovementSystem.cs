@@ -5,7 +5,7 @@ namespace MyGame
 {
     public class MovementSystem : System
     {
-        public MovementSystem(World world) : base(new List<Type> {typeof(CPosition), typeof(CVelocity)}, new List<Type> {typeof(CNotMoving)}, world)
+        public MovementSystem(World world) : base(new List<Type> {typeof(CPosition), typeof(CVelocity)}, new List<Type> {typeof(CFrozen)}, world)
         {
         }
 

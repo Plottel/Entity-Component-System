@@ -112,7 +112,10 @@ namespace MyGame
                 AIPosComp = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
                 AIGunComp = World.GetComponentOfEntity(entID, typeof(CGun)) as CGun;
 
-                EntityFactory.CreateBullet(AIPosComp.X, AIPosComp.Y, AIGunComp.BulletSpeed, AIGunComp.BulletDamage);
+                CPosition targetPos = World.GetComponentOfEntity(AIComp.TargetID, typeof(CPosition)) as CPosition;
+                Rectangle targetRect = SwinGame.CreateRectangle(targetPos.X, targetPos.Y, targetPos.Width, targetPos.Height);
+
+                EntityFactory.CreateBullet(AIPosComp.X, AIPosComp.Y, AIGunComp.BulletSpeed, AIGunComp.BulletDamage, targetRect);
             }
 
             AIComp.LastAttackTime = World.GameTime;

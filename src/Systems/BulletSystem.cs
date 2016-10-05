@@ -1,37 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
-using SwinGameSDK;
 
 namespace MyGame
 {
-    public class BulletSystem : System
+    public class BulletSystem : ProjectileSystem
     {
-        public BulletSystem (World world) : base(new List<Type> {typeof(CProjectile), typeof(CPosition), typeof(CDamage)}, new List<Type> {}, world)
+        public BulletSystem (World world) : base(world)
         {
+            InclusionMask.Add(typeof(CDamage));
+        }
+
+        private void RemoveDeadBullets(List<int> toRemove)
+        {
+            foreach (int bullet in toRemove)
+            {
+                World.RemoveEntity(bullet);
+            }
         }
 
         public override void Process()
         {
-            int playerID = World.GetAllEntitiesWithTag(typeof(CPlayer))[0];
-            CPosition playerPos = World.GetComponentOfEntity(playerID, typeof(CPosition)) as CPosition;
-            CHealth playerHealth = World.GetComponentOfEntity(playerID, typeof(CHealth)) as CHealth;
-            Rectangle playerRect = SwinGame.CreateRectangle(playerPos.X, playerPos.Y, playerPos.Width, playerPos.Height);
+            CProjectile bulletProj;
+            CPosition bulletPos;
+            CDamage bulletDam;
+            CPosition enemyPos;
+            CHealth enemyHealth;
+            List<int> deadBullets = new List<int>();
 
-            CPosition projPos;
-            CDamage projDam;
-
+            //For each bullet
             for (int i = 0; i < Entities.Count; i++)
             {
-                projPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                bulletProj = World.GetComponentOfEntity(Entities[i], typeof(CProjectile)) as CProjectile;
+                bulletPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
 
-                if (CollisionSystem.AreColliding(playerPos, projPos))
+                /*              THIS WILL BE USEFUL WHEN MAKING BULLETS THAT SHOOT UNITS OTHER THAN THE CASTLE
+                 * 
+                 * 
+                 * 
+                 * 
+                List<int> enemies = World.GetAllEntitiesWithTag(typeof(CAI)); //Get new list for each bullet - entities can be removed
+                //For each potential collision target
+                foreach (int e in enemies)
                 {
-                    projDam = World.GetComponentOfEntity(Entities[i], typeof(CDamage)) as CDamage;
-                    playerHealth.Damage += projDam.Damage;
+                    enemyPos = World.GetComponentOfEntity(e, typeof(CPosition)) as CPosition;
 
-                    World.RemoveEntity(Entities[i]);
+                    if (CollisionSystem.AreColliding(bulletPos, enemyPos))
+                    {
+                        bulletDam = World.GetComponentOfEntity(Entities[i], typeof(CDamage)) as CDamage;
+                        enemyHealth = World.GetComponentOfEntity(e, typeof(CHealth)) as CHealth;
+
+                        enemyHealth.Damage += bulletDam.Damage; //Inflict bullet damage
+
+                        deadBullets.Add(Entities[i]);
+                        break;
+                    }
+                }*/
+
+                if (ReachedTarget(bulletProj, bulletPos))
+                {
+                    deadBullets.Add(Entities[i]);
                 }
             }
+            RemoveDeadBullets(deadBullets);
         }
     }
 }

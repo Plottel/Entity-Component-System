@@ -16,11 +16,12 @@ namespace MyGame
             world.AddSystem(new InputSystem(world));
             world.AddSystem(new SpawningSystem(world));
             world.AddSystem(new AISystem(world));
+            world.AddSystem(new ProjectileSystem(world));
             world.AddSystem(new BulletSystem(world));
             world.AddSystem(new FreezingBulletSystem(world));
-            world.AddSystem(new UnfreezingSystem(world));
-            world.AddSystem(new PoisonApplicationSystem(world));
-            world.AddSystem(new PoisonSystem(world));
+            world.AddSystem(new FrozenSystem(world));
+            world.AddSystem(new ApplyPoisonSystem(world));
+            world.AddSystem(new PoisonedSystem(world));
             world.AddSystem(new HealthSystem(world));
             world.AddSystem(new MovementSystem(world));
             world.AddSystem(new CollisionSystem(world));

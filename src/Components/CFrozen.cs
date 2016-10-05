@@ -1,12 +1,12 @@
 ﻿using System;
 namespace MyGame
 {
-    public class CNotMoving : Component
+    public class CFrozen : Component
     {
         private int _duration;
         private uint _timeApplied;
 
-        public CNotMoving (int duration, uint timeApplied)
+        public CFrozen (int duration, uint timeApplied)
         {
             _duration = duration;
             _timeApplied = timeApplied;

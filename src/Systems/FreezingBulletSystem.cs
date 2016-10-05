@@ -4,38 +4,46 @@ using SwinGameSDK;
 
 namespace MyGame
 {
-    public class FreezingBulletSystem : System
+    public class FreezingBulletSystem : ProjectileSystem
     {
 
-        public FreezingBulletSystem (World world) : base(new List<Type> {typeof(CProjectile), typeof(CPosition)}, new List<Type> {typeof(CDamage)}, world)
+        public FreezingBulletSystem (World world) : base(world)
         {
+            ExclusionMask.Add(typeof(CDamage));
         }
 
         public override void Process()
         {
+            CProjectile bulletProj;
             CPosition bulletPos;
             CPosition enemyPos;
 
-            List<int> entsToFreeze = World.GetAllEntitiesWithTag(typeof(CAI));
+            List<int> enemies = World.GetAllEntitiesWithTag(typeof(CAI));
 
             //For each Freezing Bullet
             for (int i = 0; i < Entities.Count; i++)
             {
-                if (ReachedTarget(Entities[i]))
+                bulletProj = World.GetComponentOfEntity(Entities[i], typeof(CProjectile)) as CProjectile;
+                bulletPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                
+                if (ReachedTarget(bulletProj, bulletPos))
                 {
-                    bulletPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
-
                     //For each Entity which can be frozen
-                    foreach (int toFreeze in entsToFreeze)
+                    foreach (int e in enemies)
                     {
-                        enemyPos = World.GetComponentOfEntity(toFreeze, typeof(CPosition)) as CPosition;
-
-                        if (CollisionSystem.AreColliding(bulletPos, enemyPos))
+                        enemyPos = World.GetComponentOfEntity(e, typeof(CPosition)) as CPosition;
+                        CPosition AOE = new CPosition(bulletPos.X - 20, bulletPos.Y - 20, bulletPos.Width + 40, bulletPos.Width + 40);
+                        if (CollisionSystem.AreColliding(AOE, enemyPos))
                         {
                             //Don't add multiple Freze components (entity may collide with 2 bullets)
-                            if (!World.EntityHasComponent(toFreeze, typeof(CNotMoving)))
+                            if (!World.EntityHasComponent(e, typeof(CFrozen)))
                             {
-                                World.AddComponentToEntity(toFreeze, new CNotMoving(3000, World.GameTime));
+                                World.AddComponentToEntity(e, new CFrozen(3000, World.GameTime));
+                            }
+                            else //Refresh duration on Frozen component
+                            {
+                                CFrozen enemyFrozenComp = World.GetComponentOfEntity(e, typeof(CFrozen)) as CFrozen;
+                                enemyFrozenComp.TimeApplied = World.GameTime;
                             }
                         }
                     }
@@ -44,14 +52,6 @@ namespace MyGame
                     World.RemoveEntity(Entities[i]);
                 }
             }
-        }
-
-        private bool ReachedTarget(int entID)
-        {
-            CPosition pos = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
-            CProjectile proj = World.GetComponentOfEntity(entID, typeof(CProjectile)) as CProjectile;
-
-            return SwinGame.RectanglesIntersect(SwinGame.CreateRectangle(pos.X, pos.Y, pos.Width, pos.Height), proj.Target);
         }
     }
 }

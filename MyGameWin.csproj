@@ -62,19 +62,21 @@
     <Compile Include="src\Components\CDamage.cs" />
     <Compile Include="src\Components\AttackType.cs" />
     <Compile Include="src\Components\CAI.cs" />
-    <Compile Include="src\Components\Tags\CProjectile.cs" />
     <Compile Include="src\Systems\AISystem.cs" />
     <Compile Include="src\Components\AIState.cs" />
     <Compile Include="src\Components\CPoison.cs" />
-    <Compile Include="src\Systems\PoisonSystem.cs" />
-    <Compile Include="src\Systems\BulletSystem.cs" />
+    <Compile Include="src\Systems\PoisonedSystem.cs" />
+    <Compile Include="src\Systems\ProjectileSystem.cs" />
     <Compile Include="src\Systems\CollisionSystem.cs" />
-    <Compile Include="src\Systems\PoisonApplicationSystem.cs" />
-    <Compile Include="src\Components\CApplyPoison.cs" />
+    <Compile Include="src\Systems\ApplyPoisonSystem.cs" />
     <Compile Include="src\Systems\HealthSystem.cs" />
     <Compile Include="src\Systems\FreezingBulletSystem.cs" />
-    <Compile Include="src\Components\CNotMoving.cs" />
-    <Compile Include="src\Systems\UnfreezingSystem.cs" />
+    <Compile Include="src\Components\CFrozen.cs" />
+    <Compile Include="src\Systems\FrozenSystem.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="src\Components\Tags\CAppliesDebuff.cs" />
+    <Compile Include="src\Components\CProjectile.cs" />
+    <Compile Include="src\Systems\BulletSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
