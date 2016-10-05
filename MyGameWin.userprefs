@@ -6,21 +6,22 @@
       <Breakpoint file="H:\FFNEW\src\GameMain.cs" line="33" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\GameMain.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\World.cs">
     <Files>
-      <File FileName="src\Systems\AISystem.cs" Line="38" Column="41" />
-      <File FileName="src\Systems\MovementSystem.cs" Line="26" Column="14" />
-      <File FileName="src\Components\AIComponent.cs" Line="46" Column="37" />
-      <File FileName="src\Components\VelocityComponent.cs" Line="18" Column="10" />
-      <File FileName="src\GameMain.cs" Line="8" Column="34" />
-      <File FileName="src\Components\NotMovingComponent.cs" Line="4" Column="48" />
-      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="46" Column="58" />
-      <File FileName="src\EntityFactory.cs" Line="58" Column="26" />
-      <File FileName="src\Systems\InputSystem.cs" Line="5" Column="2" />
-      <File FileName="src\Components\PositionComponent.cs" Line="14" Column="10" />
-      <File FileName="src\Components\Tags\ProjectileComponent.cs" Line="18" Column="35" />
-      <File FileName="src\Systems\UnfreezingSystem.cs" Line="25" Column="94" />
-      <File FileName="src\Systems\PoisonApplicationSystem.cs" Line="15" Column="10" />
+      <File FileName="src\Systems\UnfreezingSystem.cs" Line="10" Column="10" />
+      <File FileName="src\Systems\SpawningSystem.cs" Line="12" Column="40" />
+      <File FileName="src\Systems\RenderingSystem.cs" Line="9" Column="142" />
+      <File FileName="src\Systems\PoisonSystem.cs" Line="10" Column="134" />
+      <File FileName="src\Systems\PoisonApplicationSystem.cs" Line="9" Column="158" />
+      <File FileName="src\Systems\MovementSystem.cs" Line="11" Column="9" />
+      <File FileName="src\Systems\InputSystem.cs" Line="9" Column="108" />
+      <File FileName="src\Systems\HealthSystem.cs" Line="17" Column="14" />
+      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="12" Column="10" />
+      <File FileName="src\Systems\CollisionSystem.cs" Line="10" Column="10" />
+      <File FileName="src\Systems\BulletSystem.cs" Line="11" Column="10" />
+      <File FileName="src\Systems\AISystem.cs" Line="13" Column="39" />
+      <File FileName="src\Components\HealthComponent.cs" Line="14" Column="9" />
+      <File FileName="src\World.cs" Line="131" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />

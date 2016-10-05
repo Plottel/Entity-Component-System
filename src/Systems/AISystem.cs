@@ -1,21 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using SwinGameSDK;
 
 namespace MyGame
 {
     public class AISystem : System
     {
-        public AISystem (World world) : base ((int)ComponentType.AI, world)
+        public AISystem (World world) : base (new List<Type> {typeof(CAI)}, new List<Type> {}, world)
         {
         }      
 
         public override void Process()
         {
-            AIComponent AIComp;
+            CAI AIComp;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                AIComp = World.GetComponentOfEntity(Entities[i], typeof(AIComponent)) as AIComponent;
+                AIComp = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
 
                 //Singular if statements rather than else-if to allow AI to update state multiple times per frame
                 if (AIComp.State == AIState.GetTarget)
@@ -42,9 +43,9 @@ namespace MyGame
             }
         }
 
-        private void GetTarget(AIComponent AIComp)
+        private void GetTarget(CAI AIComp)
         {
-            int playerID = World.GetAllEntitiesWithTag(typeof(PlayerComponent))[0];
+            int playerID = World.GetAllEntitiesWithTag(typeof(CPlayer))[0];
             AIComp.TargetID = playerID;
 
             AIComp.State = AIState.CheckRange;
@@ -52,15 +53,15 @@ namespace MyGame
 
         private void CheckRange(int entID)
         {
-            AIComponent AIComp;
-            PositionComponent AIPosComp;
-            PositionComponent targetPosComp;
+            CAI AIComp;
+            CPosition AIPosComp;
+            CPosition targetPosComp;
             Rectangle targetRect;
             Rectangle AIRect;
 
-            AIComp = World.GetComponentOfEntity(entID, typeof(AIComponent)) as AIComponent;
-            AIPosComp = World.GetComponentOfEntity(entID, typeof(PositionComponent)) as PositionComponent;
-            targetPosComp = World.GetComponentOfEntity(AIComp.TargetID, typeof(PositionComponent)) as PositionComponent;
+            AIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+            AIPosComp = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
+            targetPosComp = World.GetComponentOfEntity(AIComp.TargetID, typeof(CPosition)) as CPosition;
 
             targetRect = SwinGame.CreateRectangle(targetPosComp.X, targetPosComp.Y, targetPosComp.Width, targetPosComp.Height);
             AIRect = SwinGame.CreateRectangle(AIPosComp.X - AIComp.Range, 
@@ -80,7 +81,7 @@ namespace MyGame
             }
         }
 
-        private void CheckCooldown(AIComponent AIComp)
+        private void CheckCooldown(CAI AIComp)
         {
             if (World.GameTime - AIComp.LastAttackTime >= AIComp.Cooldown)
             {
@@ -90,26 +91,26 @@ namespace MyGame
 
         private void Attack(int entID)
         {
-            AIComponent AIComp;
-            DamageComponent AIDamComp;
-            PositionComponent AIPosComp;
-            GunComponent AIGunComp;
-            HealthComponent targetHealthComp;
+            CAI AIComp;
+            CDamage AIDamComp;
+            CPosition AIPosComp;
+            CGun AIGunComp;
+            CHealth targetHealthComp;
 
-            AIComp = World.GetComponentOfEntity(entID, typeof(AIComponent)) as AIComponent;
+            AIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
 
             if (AIComp.AttackType == AttackType.Melee)
             {
-                AIDamComp = World.GetComponentOfEntity(entID, typeof(DamageComponent)) as DamageComponent;
-                targetHealthComp = World.GetComponentOfEntity(AIComp.TargetID, typeof(HealthComponent)) as HealthComponent;
+                AIDamComp = World.GetComponentOfEntity(entID, typeof(CDamage)) as CDamage;
+                targetHealthComp = World.GetComponentOfEntity(AIComp.TargetID, typeof(CHealth)) as CHealth;
 
                 targetHealthComp.Damage += AIDamComp.Damage;
             }
 
             if (AIComp.AttackType == AttackType.Gun)
             {
-                AIPosComp = World.GetComponentOfEntity(entID, typeof(PositionComponent)) as PositionComponent;
-                AIGunComp = World.GetComponentOfEntity(entID, typeof(GunComponent)) as GunComponent;
+                AIPosComp = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
+                AIGunComp = World.GetComponentOfEntity(entID, typeof(CGun)) as CGun;
 
                 EntityFactory.CreateBullet(AIPosComp.X, AIPosComp.Y, AIGunComp.BulletSpeed, AIGunComp.BulletDamage);
             }
@@ -120,8 +121,8 @@ namespace MyGame
 
         private void UpdateVelocity(int entID)
         {
-            AIComponent AIComp = World.GetComponentOfEntity(entID, typeof(AIComponent)) as AIComponent;
-            VelocityComponent velComp = World.GetComponentOfEntity(entID, typeof(VelocityComponent)) as VelocityComponent;
+            CAI AIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+            CVelocity velComp = World.GetComponentOfEntity(entID, typeof(CVelocity)) as CVelocity;
 
             if (AIComp.IsInRange)
             {

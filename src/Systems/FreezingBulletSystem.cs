@@ -6,44 +6,36 @@ namespace MyGame
 {
     public class FreezingBulletSystem : System
     {
-        private int _exclusionMask;
 
-        public FreezingBulletSystem (World world) : base((int)ComponentType.Projectile | (int)ComponentType.Position, world)
+        public FreezingBulletSystem (World world) : base(new List<Type> {typeof(CProjectile), typeof(CPosition)}, new List<Type> {typeof(CDamage)}, world)
         {
-            _exclusionMask = (int)ComponentType.Damage;
-        }
-
-        public override bool EntityHasRequiredComponents(int entMask)
-        {
-            //Freezing Bullet System will NOT operate on Entities with a Damage component
-            return (base.EntityHasRequiredComponents(entMask)) && ((entMask & _exclusionMask) != _exclusionMask);
         }
 
         public override void Process()
         {
-            PositionComponent bulletPos;
-            PositionComponent enemyPos;
+            CPosition bulletPos;
+            CPosition enemyPos;
 
-            List<int> entsToFreeze = World.GetAllEntitiesWithTag(typeof(AIComponent));
+            List<int> entsToFreeze = World.GetAllEntitiesWithTag(typeof(CAI));
 
             //For each Freezing Bullet
             for (int i = 0; i < Entities.Count; i++)
             {
                 if (ReachedTarget(Entities[i]))
                 {
-                    bulletPos = World.GetComponentOfEntity(Entities[i], typeof(PositionComponent)) as PositionComponent;
+                    bulletPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
 
                     //For each Entity which can be frozen
                     foreach (int toFreeze in entsToFreeze)
                     {
-                        enemyPos = World.GetComponentOfEntity(toFreeze, typeof(PositionComponent)) as PositionComponent;
+                        enemyPos = World.GetComponentOfEntity(toFreeze, typeof(CPosition)) as CPosition;
 
                         if (CollisionSystem.AreColliding(bulletPos, enemyPos))
                         {
                             //Don't add multiple Freze components (entity may collide with 2 bullets)
-                            if (!World.EntityHasComponent(toFreeze, typeof(NotMovingComponent)))
+                            if (!World.EntityHasComponent(toFreeze, typeof(CNotMoving)))
                             {
-                                World.AddComponentToEntity(toFreeze, new NotMovingComponent(3000, World.GameTime));
+                                World.AddComponentToEntity(toFreeze, new CNotMoving(3000, World.GameTime));
                             }
                         }
                     }
@@ -56,8 +48,8 @@ namespace MyGame
 
         private bool ReachedTarget(int entID)
         {
-            PositionComponent pos = World.GetComponentOfEntity(entID, typeof(PositionComponent)) as PositionComponent;
-            ProjectileComponent proj = World.GetComponentOfEntity(entID, typeof(ProjectileComponent)) as ProjectileComponent;
+            CPosition pos = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
+            CProjectile proj = World.GetComponentOfEntity(entID, typeof(CProjectile)) as CProjectile;
 
             return SwinGame.RectanglesIntersect(SwinGame.CreateRectangle(pos.X, pos.Y, pos.Width, pos.Height), proj.Target);
         }

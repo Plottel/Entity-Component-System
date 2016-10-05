@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using SwinGameSDK;
 
 namespace MyGame
 {
     public class InputSystem : System
     {
-        public InputSystem (World world) : base((int)ComponentType.Player, world)
+        public InputSystem (World world) : base(new List<Type> {typeof(CPlayer)}, new List<Type> {}, world)
         {
             
         }
@@ -23,7 +24,7 @@ namespace MyGame
 
                 if (SwinGame.MouseClicked(MouseButton.RightButton))
                 {
-                    PositionComponent playerPos = World.GetComponentOfEntity(Entities[0], typeof(PositionComponent)) as PositionComponent;
+                    CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
 
                     float targetX = SwinGame.MouseX();
                     float targetY = SwinGame.MouseY();

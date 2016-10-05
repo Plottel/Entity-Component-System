@@ -6,13 +6,15 @@ namespace MyGame
     public abstract class System : EntityListener
     {
         private List<int> _entities;
-        private int _mask;
+        private List<Type> _inclusionMask;
+        private List<Type> _exclusionMask;
         private World _world;
 
-        protected System(int mask, World world)
+        protected System(List<Type> inclusionMask, List<Type> exclusionMask, World world)
         {
             _entities = new List<int>();
-            _mask = mask;
+            _inclusionMask = inclusionMask;
+            _exclusionMask = exclusionMask;
             _world = world;
         }
 
@@ -22,10 +24,16 @@ namespace MyGame
             set {_entities = value;}
         }
 
-        public int Mask
+        public List<Type> InclusionMask
         {
-            get {return _mask;}
-            set {_mask = value;}
+            get {return _inclusionMask;}
+            set {_inclusionMask = value;}
+        }
+
+        public List<Type> ExclusionMask
+        {
+            get {return _exclusionMask;}
+            set {_exclusionMask = value;}
         }
 
         protected World World
@@ -34,6 +42,7 @@ namespace MyGame
             set {_world = value;}
         }
 
+        //Optimise with key - Contains
         public bool HasEntity(int entID)
         {
             foreach (int e in Entities)
@@ -46,9 +55,26 @@ namespace MyGame
             return false;
         }
 
-        public virtual bool EntityHasRequiredComponents(int entMask)
+        public bool EntityPassesFilter(int entID)
         {
-            return (entMask & Mask) == Mask;
+            Dictionary<Type, Component> entMask = World.GetAllComponentsOfEntity(entID);
+
+            foreach (Type t in InclusionMask)
+            {
+                if (!entMask.ContainsKey(t))
+                {
+                    return false;
+                }
+            }
+
+            foreach (Type t in ExclusionMask)
+            {
+                if (entMask.ContainsKey(t))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public abstract void Process();

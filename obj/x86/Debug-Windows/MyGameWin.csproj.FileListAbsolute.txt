@@ -158,3 +158,41 @@ C:\Users\Matt\Desktop\ECS\bin\Debug\SwinGame.dll
 C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGame.exe
 C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\minotauranimations.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\playeranimations.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\startup.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\FFImages.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\FileDialog.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\splash.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\arial.ttf
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\cour.ttf
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\maven_pro_regular.ttf
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\brickpath.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\fdFile.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\fdFolder.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\fence.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_Active.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_Background.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_Inactive.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_Scroll.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_ScrollSmall.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\grass.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\minotaur.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\player.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\stonepath.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\Swinburne.jpg
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\SwinGameAni.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\Thumbs.db
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\level.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\panels\FileDialog.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\sounds\error.wav
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\sounds\SwinGameStart.wav
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\SwinGame.icns
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\SwinGame.ico
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\test.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll

@@ -4,7 +4,6 @@ namespace MyGame
     public class Entity
     {
         private int _id;
-        private int _mask;
 
         public Entity (int id)
         {
@@ -15,12 +14,6 @@ namespace MyGame
         {
             get {return _id;}
             set {_id = value;}
-        }
-
-        public int Mask
-        {
-            get {return _mask;}
-            set {_mask = value;}
         }
     }
 }

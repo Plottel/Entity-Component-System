@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SwinGameSDK;
 
 namespace MyGame
@@ -10,7 +11,7 @@ namespace MyGame
         private Random _random;
         private uint _spawningInterval;
 
-        public SpawningSystem (World world) : base((int)ComponentType.None, world)
+        public SpawningSystem (World world) : base(new List<Type> {}, new List<Type> {}, world)
         {
             _random = new Random();
             _spawningInterval = 2000;

@@ -1,26 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace MyGame
 {
     public class HealthSystem : System
     {
-        public HealthSystem (World world) : base ((int)ComponentType.Health, world)
+        public HealthSystem (World world) : base (new List<Type> {typeof(CHealth)}, new List<Type> {}, world)
         {
-        }
-
-        private bool OutOfHealth(HealthComponent healthComp)
-        {
-            return healthComp.Damage >= healthComp.Health;
         }
 
         public override void Process()
         {
-            HealthComponent healthComp;
+            CHealth healthComp;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                healthComp = World.GetComponentOfEntity(Entities[i], typeof(HealthComponent)) as HealthComponent;
+                healthComp = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
 
-                if (OutOfHealth(healthComp))
+                if (healthComp.OutOfHealth)
                 {
                     World.RemoveEntity(Entities[i]);
                 }
