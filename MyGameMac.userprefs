@@ -1,0 +1,9 @@
+﻿<Properties StartupItem="MyGameMac.csproj">
+  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Mac" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MyGameMac PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

@@ -1,0 +1,95 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug-Windows</Configuration>
+    <ProjectGuid>{A9DCAC72-BC77-4C33-BE70-BBFD31D7C798}</ProjectGuid>
+    <RootNamespace>MyGame</RootNamespace>
+    <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
+    <AssemblyName>MyGame</AssemblyName>
+    <SuppressXamMacUpsell>True</SuppressXamMacUpsell>
+    <SuppressXamMacMigration>True</SuppressXamMacMigration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputType>WinExe</OutputType>
+    <ApplicationIcon>Resources\SwinGame.ico</ApplicationIcon>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-Windows|x86' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <CreatePackage>false</CreatePackage>
+    <EnablePackageSigning>false</EnablePackageSigning>
+    <IncludeMonoRuntime>false</IncludeMonoRuntime>
+    <UseSGen>false</UseSGen>
+    <UseRefCounting>false</UseRefCounting>
+    <Profiling>false</Profiling>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <OutputType>WinExe</OutputType>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);CopyLibsToOut</PrepareForRunDependsOn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="Resources\" />
+    <Folder Include="src\Components\" />
+    <Folder Include="src\Components\Tags\" />
+    <Folder Include="src\Systems\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\GameMain.cs" />
+    <Compile Include="src\Components\Component.cs" />
+    <Compile Include="src\Components\ComponentType.cs" />
+    <Compile Include="src\Systems\RenderingSystem.cs" />
+    <Compile Include="src\Systems\System.cs" />
+    <Compile Include="src\Entity.cs" />
+    <Compile Include="src\EntityFactory.cs" />
+    <Compile Include="src\EntityListener.cs" />
+    <Compile Include="src\World.cs" />
+    <Compile Include="src\Components\RenderableComponent.cs" />
+    <Compile Include="src\Components\PositionComponent.cs" />
+    <Compile Include="src\Components\Tags\PlayerComponent.cs" />
+    <Compile Include="src\Systems\InputSystem.cs" />
+    <Compile Include="src\Components\VelocityComponent.cs" />
+    <Compile Include="src\Systems\MovementSystem.cs" />
+    <Compile Include="src\Systems\SpawningSystem.cs" />
+    <Compile Include="src\Components\HealthComponent.cs" />
+    <Compile Include="src\Components\GunComponent.cs" />
+    <Compile Include="src\Components\DamageComponent.cs" />
+    <Compile Include="src\Components\AttackType.cs" />
+    <Compile Include="src\Components\AIComponent.cs" />
+    <Compile Include="src\Components\Tags\ProjectileComponent.cs" />
+    <Compile Include="src\Systems\AISystem.cs" />
+    <Compile Include="src\Components\AIState.cs" />
+    <Compile Include="src\Components\PoisonComponent.cs" />
+    <Compile Include="src\Systems\PoisonSystem.cs" />
+    <Compile Include="src\Systems\BulletSystem.cs" />
+    <Compile Include="src\Systems\CollisionSystem.cs" />
+    <Compile Include="src\Systems\PoisonApplicationSystem.cs" />
+    <Compile Include="src\Components\ApplyPoison.cs" />
+    <Compile Include="src\Systems\HealthSystem.cs" />
+    <Compile Include="src\Systems\FreezingBulletSystem.cs" />
+    <Compile Include="src\Components\NotMovingComponent.cs" />
+    <Compile Include="src\Systems\UnfreezingSystem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SwinGame">
+      <HintPath>lib\SwinGame.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <WinLibs Include="lib\win32\*.dll" />
+  </ItemGroup>
+  <Target Name="CopyLibsToOut">
+    <Copy SourceFiles="@(WinLibs)" DestinationFolder="$(OutDir)" />
+  </Target>
+</Project>

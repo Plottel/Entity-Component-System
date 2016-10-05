@@ -1,0 +1,27 @@
+﻿<Properties StartupItem="MyGameWin.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Windows|x86" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="H:\FFNEW\src\GameMain.cs" line="33" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\GameMain.cs">
+    <Files>
+      <File FileName="src\Systems\AISystem.cs" Line="38" Column="41" />
+      <File FileName="src\Systems\MovementSystem.cs" Line="26" Column="14" />
+      <File FileName="src\Components\AIComponent.cs" Line="46" Column="37" />
+      <File FileName="src\Components\VelocityComponent.cs" Line="18" Column="10" />
+      <File FileName="src\GameMain.cs" Line="8" Column="34" />
+      <File FileName="src\Components\NotMovingComponent.cs" Line="4" Column="48" />
+      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="46" Column="58" />
+      <File FileName="src\EntityFactory.cs" Line="58" Column="26" />
+      <File FileName="src\Systems\InputSystem.cs" Line="5" Column="2" />
+      <File FileName="src\Components\PositionComponent.cs" Line="14" Column="10" />
+      <File FileName="src\Components\Tags\ProjectileComponent.cs" Line="18" Column="35" />
+      <File FileName="src\Systems\UnfreezingSystem.cs" Line="25" Column="94" />
+      <File FileName="src\Systems\PoisonApplicationSystem.cs" Line="15" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
