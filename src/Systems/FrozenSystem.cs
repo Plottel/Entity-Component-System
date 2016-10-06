@@ -11,13 +11,13 @@ namespace MyGame
 
         public override void Process()
         {
-            CFrozen notMoving;
+            CFrozen entFrozen;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                notMoving = World.GetComponentOfEntity(Entities[i], typeof(CFrozen)) as CFrozen;
+                entFrozen = World.GetComponentOfEntity(Entities[i], typeof(CFrozen)) as CFrozen;
 
-                if (Utils.EffectHasEnded(World.GameTime, notMoving.TimeApplied, notMoving.Duration))
+                if (Utils.EffectHasEnded(World.GameTime, entFrozen.TimeApplied, entFrozen.Duration))
                 {
                     World.RemoveComponentFromEntity(Entities[i], typeof(CFrozen));
                 }

@@ -5,14 +5,14 @@ namespace MyGame
 {
     public class CProjectile : Component
     {
-        private Rectangle _target;
+        private CPosition _target;
 
-        public CProjectile (Rectangle target)
+        public CProjectile (CPosition target)
         {
             _target = target;
         }
 
-        public Rectangle Target
+        public CPosition Target
         {
             get {return _target;}
             set {_target = value;}

@@ -84,7 +84,7 @@ namespace MyGame
             Entities.Add(entID);
         }
 
-        public void Remove(int entID)
+        public virtual void Remove(int entID)
         {
             Entities.Remove(entID);
         }

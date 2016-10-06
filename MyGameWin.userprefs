@@ -6,23 +6,6 @@
       <Breakpoint file="H:\FFNEW\src\GameMain.cs" line="33" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\World.cs">
-    <Files>
-      <File FileName="src\Systems\UnfreezingSystem.cs" Line="10" Column="10" />
-      <File FileName="src\Systems\SpawningSystem.cs" Line="12" Column="40" />
-      <File FileName="src\Systems\RenderingSystem.cs" Line="9" Column="142" />
-      <File FileName="src\Systems\PoisonSystem.cs" Line="10" Column="134" />
-      <File FileName="src\Systems\PoisonApplicationSystem.cs" Line="9" Column="158" />
-      <File FileName="src\Systems\MovementSystem.cs" Line="11" Column="9" />
-      <File FileName="src\Systems\InputSystem.cs" Line="9" Column="108" />
-      <File FileName="src\Systems\HealthSystem.cs" Line="17" Column="14" />
-      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="12" Column="10" />
-      <File FileName="src\Systems\CollisionSystem.cs" Line="10" Column="10" />
-      <File FileName="src\Systems\BulletSystem.cs" Line="11" Column="10" />
-      <File FileName="src\Systems\AISystem.cs" Line="13" Column="39" />
-      <File FileName="src\Components\HealthComponent.cs" Line="14" Column="9" />
-      <File FileName="src\World.cs" Line="131" Column="18" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

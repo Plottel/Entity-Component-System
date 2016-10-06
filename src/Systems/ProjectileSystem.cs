@@ -10,9 +10,17 @@ namespace MyGame
         {
         }
 
-        protected bool ReachedTarget(CProjectile projComp, CPosition posComp)
+        protected bool ReachedTarget(CProjectile entProjectile, CPosition entPos)
         {
-            return SwinGame.RectanglesIntersect(projComp.Target, SwinGame.CreateRectangle(posComp.X, posComp.Y, posComp.Width, posComp.Height));
+            return Utils.AreColliding(entProjectile.Target, entPos);
+        }
+
+        protected void RemoveDeadProjectiles(List<int> toRemove)
+        {
+            foreach (int projectile in toRemove)
+            {
+                World.RemoveEntity(projectile);
+            }
         }
 
         public override void Process()

@@ -18,6 +18,8 @@ namespace MyGame
             CPosition bulletPos;
             CPosition enemyPos;
 
+            List<int> deadFreezingBullets = new List<int>();
+
             List<int> enemies = World.GetAllEntitiesWithTag(typeof(CAI));
 
             //For each Freezing Bullet
@@ -29,29 +31,29 @@ namespace MyGame
                 if (ReachedTarget(bulletProj, bulletPos))
                 {
                     //For each Entity which can be frozen
-                    foreach (int e in enemies)
+                    foreach (int enemy in enemies)
                     {
-                        enemyPos = World.GetComponentOfEntity(e, typeof(CPosition)) as CPosition;
+                        enemyPos = World.GetComponentOfEntity(enemy, typeof(CPosition)) as CPosition;
                         CPosition AOE = new CPosition(bulletPos.X - 20, bulletPos.Y - 20, bulletPos.Width + 40, bulletPos.Width + 40);
-                        if (CollisionSystem.AreColliding(AOE, enemyPos))
+                        if (Utils.AreColliding(AOE, enemyPos))
                         {
                             //Don't add multiple Freze components (entity may collide with 2 bullets)
-                            if (!World.EntityHasComponent(e, typeof(CFrozen)))
+                            if (!World.EntityHasComponent(enemy, typeof(CFrozen)))
                             {
-                                World.AddComponentToEntity(e, new CFrozen(3000, World.GameTime));
+                                World.AddComponentToEntity(enemy, new CFrozen(3000, World.GameTime));
                             }
                             else //Refresh duration on Frozen component
                             {
-                                CFrozen enemyFrozenComp = World.GetComponentOfEntity(e, typeof(CFrozen)) as CFrozen;
-                                enemyFrozenComp.TimeApplied = World.GameTime;
+                                CFrozen enemyFrozen= World.GetComponentOfEntity(enemy, typeof(CFrozen)) as CFrozen;
+                                enemyFrozen.TimeApplied = World.GameTime;
                             }
                         }
                     }
-
                     //Entity has reached its target and exploded, so kill it
-                    World.RemoveEntity(Entities[i]);
+                    deadFreezingBullets.Add(Entities[i]);
                 }
             }
+            RemoveDeadProjectiles(deadFreezingBullets);
         }
     }
 }

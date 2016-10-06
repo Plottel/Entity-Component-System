@@ -67,7 +67,6 @@
     <Compile Include="src\Components\CPoison.cs" />
     <Compile Include="src\Systems\PoisonedSystem.cs" />
     <Compile Include="src\Systems\ProjectileSystem.cs" />
-    <Compile Include="src\Systems\CollisionSystem.cs" />
     <Compile Include="src\Systems\ApplyPoisonSystem.cs" />
     <Compile Include="src\Systems\HealthSystem.cs" />
     <Compile Include="src\Systems\FreezingBulletSystem.cs" />
@@ -77,6 +76,8 @@
     <Compile Include="src\Components\Tags\CAppliesDebuff.cs" />
     <Compile Include="src\Components\CProjectile.cs" />
     <Compile Include="src\Systems\BulletSystem.cs" />
+    <Compile Include="src\Components\CTeam.cs" />
+    <Compile Include="src\Components\Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">

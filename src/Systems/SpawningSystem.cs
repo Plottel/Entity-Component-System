@@ -22,8 +22,8 @@ namespace MyGame
             if (World.GameTime % _spawningInterval < 17)
             {
                 _spawnAtY = _random.Next(50, 550);
-                EntityFactory.CreateWalker(_spawnAtX, _spawnAtY);
-                EntityFactory.CreateShooter(_spawnAtX, _spawnAtY);
+                EntityFactory.CreateWalker(_spawnAtX, _spawnAtY, Team.Enemy);
+                EntityFactory.CreateShooter(_spawnAtX, _spawnAtY, Team.Enemy);
             }
         }
     }

@@ -11,13 +11,13 @@ namespace MyGame
 
         public override void Process()
         {
-            CHealth healthComp;
+            CHealth entHealth;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                healthComp = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
+                entHealth = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
 
-                if (healthComp.OutOfHealth)
+                if (entHealth.OutOfHealth)
                 {
                     World.RemoveEntity(Entities[i]);
                 }

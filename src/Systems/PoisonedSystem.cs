@@ -16,17 +16,17 @@ namespace MyGame
         {
             if (World.GameTime % _tickInterval < 17)
             {
-                CPoison poisonComp;
-                CHealth healthComp;
+                CPoison entPoison;
+                CHealth entHealth;
 
                 for (int i = 0; i < Entities.Count; i++)
                 {
-                    poisonComp = World.GetComponentOfEntity(Entities[i], typeof(CPoison)) as CPoison;
+                    entPoison = World.GetComponentOfEntity(Entities[i], typeof(CPoison)) as CPoison;
 
-                    if (!Utils.EffectHasEnded(World.GameTime, poisonComp.TimeApplied, poisonComp.Duration))
+                    if (!Utils.EffectHasEnded(World.GameTime, entPoison.TimeApplied, entPoison.Duration))
                     {
-                        healthComp = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
-                        healthComp.Damage += poisonComp.Strength;
+                        entHealth = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
+                        entHealth.Damage += entPoison.Strength;
                     }
                     else
                     {

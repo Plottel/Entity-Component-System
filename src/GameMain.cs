@@ -24,7 +24,6 @@ namespace MyGame
             world.AddSystem(new PoisonedSystem(world));
             world.AddSystem(new HealthSystem(world));
             world.AddSystem(new MovementSystem(world));
-            world.AddSystem(new CollisionSystem(world));
             world.AddSystem(new RenderingSystem(world));
 
             EntityFactory.CreatePlayer();

@@ -5,17 +5,17 @@ namespace MyGame
 {
     public class CRenderable : Component
     {
-        private Color _color;
+        private Bitmap _img;
         
-        public CRenderable (Color color)
+        public CRenderable (Bitmap img)
         {
-            _color = color;
+            _img = img;
         }
 
-        public Color Color
+        public Bitmap Img
         {
-            get {return _color;}
-            set {_color = value;}
+            get {return _img;}
+            set {_img = value;}
         }
     }
 }

@@ -11,16 +11,16 @@ namespace MyGame
 
         public override void Process()
         {
-            CPosition posComp;
-            CVelocity velComp;
+            CPosition entPos;
+            CVelocity entVel;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                posComp = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
-                velComp = World.GetComponentOfEntity(Entities[i], typeof(CVelocity)) as CVelocity;
+                entPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                entVel = World.GetComponentOfEntity(Entities[i], typeof(CVelocity)) as CVelocity;
 
-                posComp.X += velComp.DX;
-                posComp.Y += velComp.DY;
+                entPos.X += entVel.DX;
+                entPos.Y += entVel.DY;
             }
         }
     }

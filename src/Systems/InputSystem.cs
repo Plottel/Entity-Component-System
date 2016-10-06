@@ -16,20 +16,29 @@ namespace MyGame
             if (Entities.Count != 0)
             {
                 Point2D pt = SwinGame.MousePosition();
+                CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
 
                 if (SwinGame.MouseClicked(MouseButton.LeftButton))
                 {
-                    EntityFactory.CreatePoisonPool(pt.X - 50, pt.Y - 50, 100);
+                    EntityFactory.CreatePoisonPool(pt.X, pt.Y);
                 }
 
                 if (SwinGame.MouseClicked(MouseButton.RightButton))
                 {
-                    CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
-
                     float targetX = SwinGame.MouseX();
                     float targetY = SwinGame.MouseY();
 
                     EntityFactory.CreateFreezingBullet(playerPos.Centre.X, playerPos.Centre.Y, targetX, targetY, 3);
+                }
+
+                if (SwinGame.KeyTyped(KeyCode.WKey))
+                {
+                    EntityFactory.CreateWalker(150, 300, Team.Player);
+                }
+
+                if (SwinGame.KeyTyped(KeyCode.SKey))
+                {
+                    EntityFactory.CreateShooter(150, 300, Team.Player);
                 }
             }
         }
