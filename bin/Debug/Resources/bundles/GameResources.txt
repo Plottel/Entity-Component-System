@@ -1,0 +1,2 @@
+Bitmap,FreezingBulletSplash,freezingbulletsplash.png,100,100,4,1,4
+ANIM,FreezingBulletSplashAnim,FreezingBulletSplashAnim.txt

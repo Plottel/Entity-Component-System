@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace MyGame
 {
     public enum Team

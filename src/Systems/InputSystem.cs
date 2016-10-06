@@ -33,12 +33,12 @@ namespace MyGame
 
                 if (SwinGame.KeyTyped(KeyCode.WKey))
                 {
-                    EntityFactory.CreateWalker(150, 300, Team.Player);
+                    EntityFactory.CreateWalker(150, 300, new CTeam(Team.Player));
                 }
 
                 if (SwinGame.KeyTyped(KeyCode.SKey))
                 {
-                    EntityFactory.CreateShooter(150, 300, Team.Player);
+                    EntityFactory.CreateShooter(150, 300, new CTeam(Team.Player));
                 }
             }
         }

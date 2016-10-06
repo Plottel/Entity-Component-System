@@ -77,7 +77,7 @@ namespace MyGame
             _world.AddEntity(newEntity, components);           
         }
 
-        public static void CreateWalker(float x, float y, Team team)
+        public static void CreateWalker(float x, float y, CTeam teamComp)
         {
             //Create Entity and add to world
             Entity newEntity = _world.CreateEntity();
@@ -92,12 +92,12 @@ namespace MyGame
             components.Add(new CHealth(3));
             components.Add(new CAI(5, 1000, AttackType.Melee));
             components.Add(new CDamage(1));
-            components.Add(new CTeam(team));
+            components.Add(new CTeam(teamComp.Team));
 
             _world.AddEntity(newEntity, components);
         }
 
-        public static void CreateShooter(float x, float y, Team team)
+        public static void CreateShooter(float x, float y, CTeam teamComp)
         {
             //Create Entity and add to world
             Entity newEntity = _world.CreateEntity();
@@ -112,12 +112,12 @@ namespace MyGame
             components.Add(new CHealth(3));
             components.Add(new CAI(100, 2000, AttackType.Gun));
             components.Add(new CGun(5, 2));
-            components.Add(new CTeam(team));
+            components.Add(new CTeam(teamComp.Team));
 
             _world.AddEntity(newEntity, components);
         }
 
-        public static void CreateBullet(float x, float y, int speed, int damage, CPosition target, Team team)
+        public static void CreateBullet(float x, float y, int speed, int damage, CPosition target, CTeam teamComp)
         {
             //Create Entity and add to world
             Entity newEntity = _world.CreateEntity();
@@ -140,7 +140,7 @@ namespace MyGame
             components.Add(new CPosition(x, y, 5));
 
             components.Add(new CDamage(damage));
-            components.Add(new CTeam(team));
+            components.Add(new CTeam(teamComp.Team));
 
             _world.AddEntity(newEntity, components);
         }
@@ -155,7 +155,6 @@ namespace MyGame
             components.Add(new CRenderable(CreateFreezingBulletImg()));
             components.Add(new CPosition(x, y, 15));
 
-
             float xOffset = (targetX - x);
             float yOffset = (targetY - y);
 
@@ -166,7 +165,6 @@ namespace MyGame
 
             components.Add(new CVelocity(xVel, yVel, speed));
             components.Add(new CProjectile(new CPosition(targetX - 5, targetY - 5, 10, 10)));
-            components.Add(new CTeam(Team.Player));
 
             _world.AddEntity(newEntity, components);
         }
@@ -183,6 +181,22 @@ namespace MyGame
             components.Add(new CPoison(1, 5000, _world.GameTime));
             components.Add(new CAppliesDebuff());
             components.Add(new CTeam(Team.Player));
+
+            _world.AddEntity(newEntity, components);
+        }
+
+        public static void CreateAnimation(float x, float y, Animation anim, Bitmap img)
+        {
+            //Create Entity and add to world
+            Entity newEntity = _world.CreateEntity();
+
+            int width = SwinGame.BitmapWidth(img);
+            int height = SwinGame.BitmapHeight(img);
+
+            //Create components and pass to world to send to Systems
+            List<Component> components = new List<Component>();
+            components.Add(new CPosition(x, y, width, height));
+            components.Add(new CAnimation(img, anim));
 
             _world.AddEntity(newEntity, components);
         }

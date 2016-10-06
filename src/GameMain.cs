@@ -9,6 +9,7 @@ namespace MyGame
         {
             //Open the game window
             SwinGame.OpenGraphicsWindow("GameMain", 800, 600);
+            SwinGame.LoadResourceBundleNamed("GameResources", "GameResources.txt", false);
 
             World world = new World();
 
@@ -25,6 +26,7 @@ namespace MyGame
             world.AddSystem(new HealthSystem(world));
             world.AddSystem(new MovementSystem(world));
             world.AddSystem(new RenderingSystem(world));
+            world.AddSystem(new AnimationRenderingSystem(world));
 
             EntityFactory.CreatePlayer();
 
@@ -39,7 +41,7 @@ namespace MyGame
                 SwinGame.DrawFramerate(300, 10);
                 world.Process();
 
-                SwinGame.RefreshScreen(100);
+                SwinGame.RefreshScreen(60);
             }
         }
     }

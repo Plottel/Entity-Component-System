@@ -1,8 +1,0 @@
-BITMAP,Player,player.png,32,48,16,1,16
-ANIM,PlayerAnimations,playeranimations.txt
-BITMAP,Minotaur,minotaur.png,68,90,20,1,20
-ANIM,MinotaurAnimations,minotauranimations.txt
-BITMAP,Fence,fence.png,32,32,8,1,8
-BITMAP,BrickPath,brickpath.png,32,32,3,1,3
-BITMAP,Grass,grass.png,32,32,6,1,6
-BITMAP,StonePath,stonepath.png,32,32,8,1,8

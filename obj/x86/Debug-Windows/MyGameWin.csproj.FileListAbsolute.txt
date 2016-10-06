@@ -161,10 +161,7 @@ C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\minotauranimations.txt
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\playeranimations.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\startup.txt
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\FFImages.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\FileDialog.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\splash.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\arial.ttf
@@ -196,3 +193,6 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\test.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\FreezingBulletSplashAnim.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\GameResources.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\freezingbulletsplash.png

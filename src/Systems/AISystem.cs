@@ -35,61 +35,88 @@ namespace MyGame
 
         public override void Process()
         {
-            CAI AIComp;
+            List<int> playerTeamEnts = GetEntitiesOnTeam(Team.Player);
+            List<int> enemyTeamEnts = GetEntitiesOnTeam(Team.Enemy);
 
-            SortEntitiesIntoTeams();
+            ProcessAI(playerTeamEnts, enemyTeamEnts);
+            ProcessAI(enemyTeamEnts, playerTeamEnts);
+        }
 
-            for (int i = 0; i < Entities.Count; i++)
+        private List<int> GetEntitiesOnTeam(Team team)
+        {
+            List<int> result = new List<int>();
+            CTeam entTeamComp;
+            foreach (int ent in Entities)
             {
-                AIComp = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
-
-                //Singular if statements rather than else-if to allow AI to update state multiple times per frame
-                if (AIComp.State == AIState.GetTarget)
+                entTeamComp = World.GetComponentOfEntity(ent, typeof(CTeam)) as CTeam;
+                if (entTeamComp.Team == team)
                 {
-                    if (_playerTeamEnts.Contains(Entities[i]))
+                    result.Add(ent);
+                }
+            }
+            return result;
+        }
+
+        private void ProcessAI(List<int> allyEnts, List<int> enemyEnts)
+        {
+            CAI allyAIComp;
+
+            for (int i = 0; i < allyEnts.Count; i++)
+            {
+                allyAIComp = World.GetComponentOfEntity(allyEnts[i], typeof(CAI)) as CAI;
+
+                if (!World.HasEntity(allyAIComp.TargetID))
+                {
+                    allyAIComp.State = AIState.GetTarget;
+                    allyAIComp.IsInRange = false;
+                }
+
+                //Singular if statements rather than switch to allow AI to update state multiple times per frame
+                if (allyAIComp.State == AIState.GetTarget)
+                {
+                    if (enemyEnts.Count > 0) //If there are potential targets
                     {
-                        if (_enemyTeamEnts.Count > 0)
-                        {
-                            GetTarget(Entities[i], _enemyTeamEnts);
-                        }
+                        GetTarget(allyEnts[i], enemyEnts); //Get a target
                     }
-                    else
+                    else //Otherwise, do default movement. If enemy, assign target to Caste - If player, run back to Castle
                     {
-                        if (_playerTeamEnts.Count > 0)
-                        {
-                            GetTarget(Entities[i], _playerTeamEnts);
-                        }                       
+                        DoDefaultMovement(allyEnts[i]);
                     }
                 }
 
-                if (AIComp.State == AIState.CheckRange)
+                if (allyAIComp.State == AIState.CheckRange)
                 {
-                    CheckRange(Entities[i]);
+                    CheckRange(allyEnts[i]);
                 }
 
-                if (AIComp.State == AIState.CheckCooldown)
+                if (allyAIComp.State == AIState.CheckCooldown)
                 {
-                    CheckCooldown(AIComp);
+                    CheckCooldown(allyAIComp);
                 }
 
-                if (AIComp.State == AIState.Ready)
+                if (allyAIComp.State == AIState.Ready)
                 {
-                    Attack(Entities[i]);
+                    Attack(allyEnts[i]);
                 }
 
-                UpdateVelocity(Entities[i]);
+                UpdateVelocity(allyEnts[i]);
             }
         }
 
         //Search for the closest Entity of the opposite team and assign it as TargetID
-        private void GetTarget(int needsTarget, List<int> enemyEnts)
+        private void GetTarget(int allyEnt, List<int> enemyEnts)
         {
-            //Maps entity IDs against distances
-            Dictionary<int, float> distances = new Dictionary<int, float>();
-            distances.Clear();
+            float xOffset;
+            float yOffset;
+            float distance;
+            int closestTarget;
 
-            CAI needsTargetAI = World.GetComponentOfEntity(needsTarget, typeof(CAI)) as CAI;
-            CPosition needsTargetPos = World.GetComponentOfEntity(needsTarget, typeof(CPosition)) as CPosition;
+            //Maps entity IDs against distances
+            Dictionary<int, float> enemyEntDistances = new Dictionary<int, float>();
+            enemyEntDistances.Clear(); //Maybe don't need this anymore?
+
+            CAI allyAIComp = World.GetComponentOfEntity(allyEnt, typeof(CAI)) as CAI;
+            CPosition allyPos = World.GetComponentOfEntity(allyEnt, typeof(CPosition)) as CPosition;
             CPosition enemyPos;
 
             //Determine distance from each enemy 
@@ -97,46 +124,35 @@ namespace MyGame
             {
                 enemyPos = World.GetComponentOfEntity(enemyID, typeof(CPosition)) as CPosition;
 
-                float xOffset = (enemyPos.X - needsTargetPos.X);
-                float yOffset = (enemyPos.Y - needsTargetPos.Y);
+                xOffset = (enemyPos.X - allyPos.X);
+                yOffset = (enemyPos.Y - allyPos.Y);
+                distance = (float)Math.Sqrt((xOffset * xOffset) + (yOffset * yOffset));
 
-                float distance = (float)Math.Sqrt((xOffset * xOffset) + (yOffset * yOffset));
-
-                distances.Add(enemyID, distance);
+                enemyEntDistances.Add(enemyID, distance); //Add to list of distances to consider
             }
 
-            int closestTarget = distances.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
-            needsTargetAI.TargetID = closestTarget;
-            needsTargetAI.State = AIState.CheckRange;
+            closestTarget = enemyEntDistances.Aggregate((l, r) => l.Value < r.Value ? l : r).Key; //Finds key for smallest value
+
+            allyAIComp.TargetID = closestTarget;
+            allyAIComp.State = AIState.CheckRange;
         }
 
-        private void CheckRange(int entID)
+        private void CheckRange(int toCheck)
         {
-            CAI toCheckAI;
-            CPosition toCheckPos;
-            CPosition targetPos;
-            Rectangle targetRect;
-            Rectangle AIRect;
-
-            toCheckAI = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
-            toCheckPos = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
-            targetPos = World.GetComponentOfEntity(toCheckAI.TargetID, typeof(CPosition)) as CPosition;
-            targetRect = targetPos.Rect;
-
-            AIRect = SwinGame.CreateRectangle(toCheckPos.X - toCheckAI.Range, 
-                                              toCheckPos.Y - toCheckAI.Range, 
-                                              toCheckPos.Width + (toCheckAI.Range * 2), 
-                                              toCheckPos.Height + (toCheckAI.Range * 2));
+            CAI allyAIComp = World.GetComponentOfEntity(toCheck, typeof(CAI)) as CAI;
+            CPosition allyPos = World.GetComponentOfEntity(toCheck, typeof(CPosition)) as CPosition;
+            Circle allyAttackRadius = SwinGame.CreateCircle(allyPos.Centre.X, allyPos.Centre.Y, allyAIComp.Range + allyPos.Width);
+            CPosition enemyPos = World.GetComponentOfEntity(allyAIComp.TargetID, typeof(CPosition)) as CPosition;
 
             //If AI is in range
-            if (SwinGame.RectanglesIntersect(AIRect, targetRect))
+            if (SwinGame.CircleRectCollision(allyAttackRadius, enemyPos.Rect))
             {
-                toCheckAI.State = AIState.CheckCooldown;
-                toCheckAI.IsInRange = true;
+                allyAIComp.State = AIState.CheckCooldown;
+                allyAIComp.IsInRange = true;
             }
             else
             {
-                toCheckAI.IsInRange = false;
+                allyAIComp.IsInRange = false;
             }
         }
 
@@ -150,54 +166,67 @@ namespace MyGame
 
         private void Attack(int entID)
         {
-            CAI AIComp;
-            CDamage AIDamComp;
-            CPosition AIPosComp;
-            CGun AIGunComp;
-            CHealth targetHealthComp;
-            CTeam AITeamComp = World.GetComponentOfEntity(entID, typeof(CTeam)) as CTeam;
-            Team AITeam = AITeamComp.Team;
+            CAI entAIComp;
+            CDamage entDamComp;
+            CPosition entPos;
+            CGun entGunComp;
+            CHealth enemyHealth;
+            CTeam entTeamComp = World.GetComponentOfEntity(entID, typeof(CTeam))as CTeam;
 
-            AIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+            entAIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
 
-            if (AIComp.AttackType == AttackType.Melee)
+            if (!World.HasEntity(entAIComp.TargetID))
             {
-                AIDamComp = World.GetComponentOfEntity(entID, typeof(CDamage)) as CDamage;
-                targetHealthComp = World.GetComponentOfEntity(AIComp.TargetID, typeof(CHealth)) as CHealth;
-
-                targetHealthComp.Damage += AIDamComp.Damage;
+                entAIComp.State = AIState.GetTarget;
+                entAIComp.IsInRange = false;
             }
-
-            if (AIComp.AttackType == AttackType.Gun)
+            else
             {
-                AIPosComp = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
-                AIGunComp = World.GetComponentOfEntity(entID, typeof(CGun)) as CGun;
+                if (entAIComp.AttackType == AttackType.Melee)
+                {
+                    entDamComp = World.GetComponentOfEntity(entID, typeof(CDamage)) as CDamage;
+                    enemyHealth = World.GetComponentOfEntity(entAIComp.TargetID, typeof(CHealth)) as CHealth;
 
-                CPosition targetPos = World.GetComponentOfEntity(AIComp.TargetID, typeof(CPosition)) as CPosition;
+                    enemyHealth.Damage += entDamComp.Damage;
+                }
 
-                EntityFactory.CreateBullet(AIPosComp.X, AIPosComp.Y, AIGunComp.BulletSpeed, AIGunComp.BulletDamage, new CPosition(targetPos.X, 
-                                                                                                                                  targetPos.Y, 
-                                                                                                                                  targetPos.Width, 
-                                                                                                                                  targetPos.Height), AITeam);
+                if (entAIComp.AttackType == AttackType.Gun)
+                {
+                    entPos = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
+                    entGunComp = World.GetComponentOfEntity(entID, typeof(CGun)) as CGun;
+
+                    CPosition targetPos = World.GetComponentOfEntity(entAIComp.TargetID, typeof(CPosition)) as CPosition;
+
+                    EntityFactory.CreateBullet(entPos.X, entPos.Y, entGunComp.BulletSpeed, entGunComp.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
+                                                                                                                              targetPos.Centre.Y - 5, 
+                                                                                                                              10, 
+                                                                                                                              10), entTeamComp);
+                }
             }
-
-            AIComp.LastAttackTime = World.GameTime;
-            AIComp.State = AIState.CheckRange;
+            entAIComp.LastAttackTime = World.GameTime;
+            entAIComp.State = AIState.CheckRange;
         }
 
         private void UpdateVelocity(int entID)
         {
-            CAI AIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
-            CVelocity velComp = World.GetComponentOfEntity(entID, typeof(CVelocity)) as CVelocity;
+            CAI entAIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+            CVelocity entVelComp = World.GetComponentOfEntity(entID, typeof(CVelocity)) as CVelocity;
 
-            if (AIComp.IsInRange)
+            if (entAIComp.IsInRange)
             {
-                velComp.DX = 0;
-                velComp.DY = 0;
+                entVelComp.DX = 0;
+                entVelComp.DY = 0;
             }
             else
             {
-                MoveTowardsTarget(entID);
+                if (World.HasEntity(entAIComp.TargetID))
+                {
+                    MoveTowardsTarget(entID);
+                }
+                else
+                {
+                    DoDefaultMovement(entID);
+                }
             }
         }
 
@@ -206,10 +235,12 @@ namespace MyGame
             CAI toMoveAI = World.GetComponentOfEntity(toMove, typeof(CAI)) as CAI;
             CVelocity toMoveVel = World.GetComponentOfEntity(toMove, typeof(CVelocity)) as CVelocity;
             CPosition toMovePos = World.GetComponentOfEntity(toMove, typeof(CPosition)) as CPosition;
-            CPosition targetPos = World.GetComponentOfEntity(toMoveAI.TargetID, typeof(CPosition)) as CPosition;
+            CPosition targetPos;
+
+            targetPos = World.GetComponentOfEntity(toMoveAI.TargetID, typeof(CPosition)) as CPosition;
 
             //If not targeting the castle, move on both axes
-            if (toMoveAI.TargetID != 0)
+            if (toMoveAI.TargetID != 1)
             {
                 if (toMovePos.X > targetPos.Centre.X) {toMoveVel.DX = -toMoveVel.Speed;} //If to the right of target, move left
                 if (toMovePos.X < targetPos.Centre.X) {toMoveVel.DX = toMoveVel.Speed;} //If to the left of target, move right
@@ -223,27 +254,30 @@ namespace MyGame
             }
         }
 
-        private void SortEntitiesIntoTeams()
+        private void DoDefaultMovement(int entID)
         {
-            //Empty the lists so it's fresh each frame
-            _playerTeamEnts.Clear();
-            _playerTeamEnts.Add(0); //0 is ID for castle because it's made first
-            _enemyTeamEnts.Clear();
-
-            CTeam team;
-
-            foreach (int entID in Entities)
+            CTeam entTeamComp = World.GetComponentOfEntity(entID, typeof(CTeam)) as CTeam;
+            if (entTeamComp.Team == Team.Enemy)
             {
-                team = World.GetComponentOfEntity(entID, typeof(CTeam)) as CTeam;
+                CAI AIComp = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+                AIComp.TargetID = 1; //Assign target to the Castle
+                AIComp.State = AIState.CheckRange;
+            }
+            else
+            {
+                //Move back to the Castle
+                CVelocity velComp = World.GetComponentOfEntity(entID, typeof(CVelocity)) as CVelocity;
+                CPosition posComp = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
 
-                if (team.Team == Team.Player)
+                if (posComp.X > 200)
                 {
-                    _playerTeamEnts.Add(entID);
+                    velComp.DX = -velComp.Speed;
                 }
                 else
                 {
-                    _enemyTeamEnts.Add(entID);
+                    velComp.DX = 0;
                 }
+                velComp.DY = 0;
             }
         }
     }

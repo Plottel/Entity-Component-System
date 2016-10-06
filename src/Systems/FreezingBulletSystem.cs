@@ -30,11 +30,16 @@ namespace MyGame
                 
                 if (ReachedTarget(bulletProj, bulletPos))
                 {
+                    EntityFactory.CreateAnimation(bulletPos.X - 50, 
+                                                  bulletPos.Y - 50, 
+                                                  SwinGame.CreateAnimation("Splash", SwinGame.AnimationScriptNamed("FreezingBulletSplashAnim")), 
+                                                  SwinGame.BitmapNamed("FreezingBulletSplash"));
+
                     //For each Entity which can be frozen
                     foreach (int enemy in enemies)
                     {
                         enemyPos = World.GetComponentOfEntity(enemy, typeof(CPosition)) as CPosition;
-                        CPosition AOE = new CPosition(bulletPos.X - 20, bulletPos.Y - 20, bulletPos.Width + 40, bulletPos.Width + 40);
+                        CPosition AOE = new CPosition(bulletPos.X - 50, bulletPos.Y - 50, bulletPos.Width + 100, bulletPos.Width + 100);
                         if (Utils.AreColliding(AOE, enemyPos))
                         {
                             //Don't add multiple Freze components (entity may collide with 2 bullets)

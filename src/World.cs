@@ -16,7 +16,7 @@ namespace MyGame
         {
             _entityComponents = new Dictionary<int, Dictionary<Type, Component>>();
             _systems = new List<System>();
-            _nextID = 0;
+            _nextID = 1;
 
             //Pass world to Entity factory so it can create 
             EntityFactory.World = this;
@@ -58,6 +58,11 @@ namespace MyGame
         public bool EntityHasComponent(int entID, Type t)
         {
             return _entityComponents[entID].ContainsKey(t);
+        }
+
+        public bool HasEntity(int entID)
+        {
+            return _entityComponents.ContainsKey(entID);
         }
 
         //Add passed in component to the World Dictionary

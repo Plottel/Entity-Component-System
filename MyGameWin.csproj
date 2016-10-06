@@ -76,8 +76,10 @@
     <Compile Include="src\Components\Tags\CAppliesDebuff.cs" />
     <Compile Include="src\Components\CProjectile.cs" />
     <Compile Include="src\Systems\BulletSystem.cs" />
-    <Compile Include="src\Components\CTeam.cs" />
+    <Compile Include="src\Components\Tags\CTeam.cs" />
     <Compile Include="src\Components\Team.cs" />
+    <Compile Include="src\Components\CAnimation.cs" />
+    <Compile Include="src\Systems\AnimationRenderingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -90,6 +92,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <WinLibs Include="lib\win32\*.dll" />
+    <None Include="Resources\animations\FreezingBulletSplashAnim.txt" />
+    <None Include="Resources\bundles\GameResources.txt" />
   </ItemGroup>
   <Target Name="CopyLibsToOut">
     <Copy SourceFiles="@(WinLibs)" DestinationFolder="$(OutDir)" />
