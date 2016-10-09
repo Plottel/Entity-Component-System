@@ -1,168 +1,9 @@
-H:\FFNEW\bin\Debug\Resources\.DS_Store
-H:\FFNEW\bin\Debug\Resources\animations\.DS_Store
-H:\FFNEW\bin\Debug\Resources\animations\minotauranimations.txt
-H:\FFNEW\bin\Debug\Resources\animations\playeranimations.txt
-H:\FFNEW\bin\Debug\Resources\animations\startup.txt
-H:\FFNEW\bin\Debug\Resources\bundles\FFImages.txt
-H:\FFNEW\bin\Debug\Resources\bundles\FileDialog.txt
-H:\FFNEW\bin\Debug\Resources\bundles\splash.txt
-H:\FFNEW\bin\Debug\Resources\fonts\arial.ttf
-H:\FFNEW\bin\Debug\Resources\fonts\cour.ttf
-H:\FFNEW\bin\Debug\Resources\fonts\maven_pro_regular.ttf
-H:\FFNEW\bin\Debug\Resources\images\.DS_Store
-H:\FFNEW\bin\Debug\Resources\images\brickpath.png
-H:\FFNEW\bin\Debug\Resources\images\fdFile.png
-H:\FFNEW\bin\Debug\Resources\images\fdFolder.png
-H:\FFNEW\bin\Debug\Resources\images\fence.png
-H:\FFNEW\bin\Debug\Resources\images\FileDialog_Active.png
-H:\FFNEW\bin\Debug\Resources\images\FileDialog_Background.png
-H:\FFNEW\bin\Debug\Resources\images\FileDialog_Inactive.png
-H:\FFNEW\bin\Debug\Resources\images\FileDialog_Scroll.png
-H:\FFNEW\bin\Debug\Resources\images\FileDialog_ScrollSmall.png
-H:\FFNEW\bin\Debug\Resources\images\grass.png
-H:\FFNEW\bin\Debug\Resources\images\minotaur.png
-H:\FFNEW\bin\Debug\Resources\images\player.png
-H:\FFNEW\bin\Debug\Resources\images\stonepath.png
-H:\FFNEW\bin\Debug\Resources\images\Swinburne.jpg
-H:\FFNEW\bin\Debug\Resources\images\SwinGameAni.png
-H:\FFNEW\bin\Debug\Resources\level.txt
-H:\FFNEW\bin\Debug\Resources\panels\FileDialog.txt
-H:\FFNEW\bin\Debug\Resources\sounds\error.wav
-H:\FFNEW\bin\Debug\Resources\sounds\SwinGameStart.wav
-H:\FFNEW\bin\Debug\Resources\SwinGame.icns
-H:\FFNEW\bin\Debug\Resources\SwinGame.ico
-H:\FFNEW\bin\Debug\Resources\test.txt
-H:\FFNEW\bin\Debug\MyGame.exe
-H:\FFNEW\bin\Debug\MyGame.pdb
-H:\FFNEW\bin\Debug\SwinGame.dll
-H:\FFNEW\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
-H:\FFNEW\obj\x86\Debug-Windows\MyGame.exe
-H:\FFNEW\obj\x86\Debug-Windows\MyGame.pdb
-H:\FFNEW\bin\Debug\Resources\images\NilBitmap.bmp
-H:\FFNEW\bin\Debug\Resources\images\Thumbs.db
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\.DS_Store
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\animations\.DS_Store
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\animations\minotauranimations.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\animations\playeranimations.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\animations\startup.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\bundles\FFImages.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\bundles\FileDialog.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\bundles\splash.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\fonts\arial.ttf
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\fonts\cour.ttf
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\fonts\maven_pro_regular.ttf
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\.DS_Store
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\brickpath.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\fdFile.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\fdFolder.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\fence.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\FileDialog_Active.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\FileDialog_Background.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\FileDialog_Inactive.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\FileDialog_Scroll.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\FileDialog_ScrollSmall.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\grass.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\minotaur.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\NilBitmap.bmp
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\player.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\stonepath.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\Swinburne.jpg
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\SwinGameAni.png
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\images\Thumbs.db
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\level.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\panels\FileDialog.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\sounds\error.wav
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\sounds\SwinGameStart.wav
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\SwinGame.icns
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\SwinGame.ico
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\Resources\test.txt
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\MyGame.exe
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\MyGame.pdb
-C:\Users\Matt\Desktop\FFNEW\bin\Debug\SwinGame.dll
-C:\Users\Matt\Desktop\FFNEW\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
-C:\Users\Matt\Desktop\FFNEW\obj\x86\Debug-Windows\MyGame.exe
-C:\Users\Matt\Desktop\FFNEW\obj\x86\Debug-Windows\MyGame.pdb
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\animations\minotauranimations.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\animations\playeranimations.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\animations\startup.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\bundles\FFImages.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\bundles\FileDialog.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\bundles\splash.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\fonts\arial.ttf
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\fonts\cour.ttf
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\fonts\maven_pro_regular.ttf
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\brickpath.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\fdFile.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\fdFolder.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\fence.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\FileDialog_Active.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\FileDialog_Background.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\FileDialog_Inactive.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\FileDialog_Scroll.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\FileDialog_ScrollSmall.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\grass.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\minotaur.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\player.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\stonepath.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\Swinburne.jpg
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\SwinGameAni.png
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\images\Thumbs.db
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\level.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\panels\FileDialog.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\sounds\error.wav
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\sounds\SwinGameStart.wav
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\SwinGame.icns
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\SwinGame.ico
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\Resources\test.txt
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\MyGame.exe
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\MyGame.pdb
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\bin\Debug\SwinGame.dll
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\obj\x86\Debug-Windows\MyGame.exe
-C:\Users\Matt\Desktop\Uni Stuff\FreedomFighter\obj\x86\Debug-Windows\MyGame.pdb
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\animations\minotauranimations.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\animations\playeranimations.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\animations\startup.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\bundles\FFImages.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\bundles\FileDialog.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\bundles\splash.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\fonts\arial.ttf
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\fonts\cour.ttf
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\fonts\maven_pro_regular.ttf
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\brickpath.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\fdFile.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\fdFolder.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\fence.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\FileDialog_Active.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\FileDialog_Background.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\FileDialog_Inactive.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\FileDialog_Scroll.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\FileDialog_ScrollSmall.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\grass.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\minotaur.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\player.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\stonepath.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\Swinburne.jpg
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\SwinGameAni.png
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\images\Thumbs.db
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\level.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\panels\FileDialog.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\sounds\error.wav
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\sounds\SwinGameStart.wav
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\SwinGame.icns
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\SwinGame.ico
-C:\Users\Matt\Desktop\ECS\bin\Debug\Resources\test.txt
-C:\Users\Matt\Desktop\ECS\bin\Debug\MyGame.exe
-C:\Users\Matt\Desktop\ECS\bin\Debug\MyGame.pdb
-C:\Users\Matt\Desktop\ECS\bin\Debug\SwinGame.dll
-C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
-C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGame.exe
-C:\Users\Matt\Desktop\ECS\obj\x86\Debug-Windows\MyGame.pdb
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGameWin.csprojResolveAssemblyReference.cache
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\BatteringRamAnims.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\FreezingBulletSplashAnim.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\startup.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\SwordManAnims.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\FileDialog.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\GameResources.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\splash.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\arial.ttf
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\cour.ttf
@@ -176,23 +17,25 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDia
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_Inactive.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_Scroll.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\FileDialog_ScrollSmall.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\freezingbulletsplash.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\grass.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\minotaur.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\player.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\stonepath.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\Swinburne.jpg
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\SwinGameAni.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\swordman.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\Thumbs.db
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\level.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\panels\FileDialog.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\sounds\error.wav
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\sounds\SwinGameStart.wav
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\level.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\SwinGame.icns
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\SwinGame.ico
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\test.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\FreezingBulletSplashAnim.txt
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\bundles\GameResources.txt
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\freezingbulletsplash.png
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\batteringram.png

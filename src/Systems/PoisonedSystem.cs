@@ -6,6 +6,7 @@ namespace MyGame
     public class PoisonedSystem : System
     {
         private uint _tickInterval;
+        private uint _lastTick;
 
         public PoisonedSystem (World world) : base(new List<Type> {typeof(CPoison), typeof(CHealth)}, new List<Type> {}, world)
         {
@@ -14,8 +15,10 @@ namespace MyGame
 
         public override void Process()
         {
-            if (World.GameTime % _tickInterval < 17)
+            if (World.GameTime - _lastTick >= _tickInterval)
             {
+                _lastTick = World.GameTime;
+
                 CPoison entPoison;
                 CHealth entHealth;
 

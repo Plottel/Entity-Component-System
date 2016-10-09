@@ -5,7 +5,7 @@ namespace MyGame
 {
     public class FrozenSystem : System
     {
-        public FrozenSystem (World world) : base(new List<Type> {typeof(CFrozen)}, new List<Type>{}, world)
+        public FrozenSystem (World world) : base(new List<Type> {typeof(CFrozen)}, new List<Type>{typeof(CAppliesDebuff)}, world)
         {
         }
 

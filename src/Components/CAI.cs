@@ -10,16 +10,21 @@ namespace MyGame
         private int _cooldown;
         private uint _lastAttackTime;
         private AttackType _attackType;
-        private AIState _state;
         private bool _isInRange;
+        private bool _attackIsReady;
 
-        public CAI (int range, int cooldown, AttackType attackType)
+        public CAI (int range, int cooldown, AttackType attackType) : this (range, cooldown, attackType, 0)
+        {           
+        }
+
+        public CAI(int range, int cooldown, AttackType attackType, int targetID)
         {
             _range = range;
             _cooldown = cooldown;
             _attackType = attackType;
-            _state = AIState.GetTarget;
             _isInRange = false;
+            _attackIsReady = false;
+            _targetID = targetID;
         }
 
         public int TargetID
@@ -37,6 +42,7 @@ namespace MyGame
         public int Cooldown
         {
             get {return _cooldown;}
+            set {_cooldown = value;}
         }
 
         public uint LastAttackTime
@@ -56,10 +62,10 @@ namespace MyGame
             set {_isInRange = value;}
         }
 
-        public AIState State
+        public bool AttackIsReady
         {
-            get {return _state;}
-            set {_state = value;}
+            get {return _attackIsReady;}
+            set {_attackIsReady = value;}
         }
     }
 }

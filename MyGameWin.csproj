@@ -40,11 +40,12 @@
     <Folder Include="src\Components\" />
     <Folder Include="src\Components\Tags\" />
     <Folder Include="src\Systems\" />
+    <Folder Include="src\Systems\Collision Systems\" />
+    <Folder Include="src\Systems\Rendering Systems\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\GameMain.cs" />
     <Compile Include="src\Components\Component.cs" />
-    <Compile Include="src\Systems\RenderingSystem.cs" />
     <Compile Include="src\Systems\System.cs" />
     <Compile Include="src\Entity.cs" />
     <Compile Include="src\EntityFactory.cs" />
@@ -52,7 +53,6 @@
     <Compile Include="src\World.cs" />
     <Compile Include="src\Components\CRenderable.cs" />
     <Compile Include="src\Components\CPosition.cs" />
-    <Compile Include="src\Components\Tags\CPlayer.cs" />
     <Compile Include="src\Systems\InputSystem.cs" />
     <Compile Include="src\Components\CVelocity.cs" />
     <Compile Include="src\Systems\MovementSystem.cs" />
@@ -62,12 +62,11 @@
     <Compile Include="src\Components\CDamage.cs" />
     <Compile Include="src\Components\AttackType.cs" />
     <Compile Include="src\Components\CAI.cs" />
-    <Compile Include="src\Systems\AISystem.cs" />
-    <Compile Include="src\Components\AIState.cs" />
+    <Compile Include="src\Systems\OldAISystem.cs" />
     <Compile Include="src\Components\CPoison.cs" />
     <Compile Include="src\Systems\PoisonedSystem.cs" />
     <Compile Include="src\Systems\ProjectileSystem.cs" />
-    <Compile Include="src\Systems\ApplyPoisonSystem.cs" />
+    <Compile Include="src\Systems\PoisonZoneCollisionHandlerSystem.cs" />
     <Compile Include="src\Systems\HealthSystem.cs" />
     <Compile Include="src\Systems\FreezingBulletSystem.cs" />
     <Compile Include="src\Components\CFrozen.cs" />
@@ -75,11 +74,29 @@
     <Compile Include="Utils.cs" />
     <Compile Include="src\Components\Tags\CAppliesDebuff.cs" />
     <Compile Include="src\Components\CProjectile.cs" />
-    <Compile Include="src\Systems\BulletSystem.cs" />
-    <Compile Include="src\Components\Tags\CTeam.cs" />
-    <Compile Include="src\Components\Team.cs" />
     <Compile Include="src\Components\CAnimation.cs" />
-    <Compile Include="src\Systems\AnimationRenderingSystem.cs" />
+    <Compile Include="src\Components\CLoot.cs" />
+    <Compile Include="src\Systems\PlayerLootSystem.cs" />
+    <Compile Include="src\Systems\PlayerSystem.cs" />
+    <Compile Include="src\Components\CPlayer.cs" />
+    <Compile Include="src\Systems\EntityHolderSystem.cs" />
+    <Compile Include="src\Components\Tags\CPlayerTeam.cs" />
+    <Compile Include="src\Components\Tags\CEnemyTeam.cs" />
+    <Compile Include="src\Components\CCollidable.cs" />
+    <Compile Include="src\Components\Tags\CCastle.cs" />
+    <Compile Include="src\Systems\EnemyAISystem.cs" />
+    <Compile Include="src\Components\CCollision.cs" />
+    <Compile Include="src\Components\Tags\CExcludeAll.cs" />
+    <Compile Include="src\Components\Tags\CBullet.cs" />
+    <Compile Include="src\Components\Tags\CFreezingBullet.cs" />
+    <Compile Include="src\Systems\Collision Systems\CollisionCheckSystem.cs" />
+    <Compile Include="src\Systems\Collision Systems\CollisionCleanupSystem.cs" />
+    <Compile Include="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" />
+    <Compile Include="src\Systems\Collision Systems\FreezeZoneCollisionHandlerSystem.cs" />
+    <Compile Include="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" />
+    <Compile Include="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" />
+    <Compile Include="src\Systems\Rendering Systems\RenderingSystem.cs" />
+    <Compile Include="src\Systems\Rendering Systems\SpriteRenderingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -88,12 +105,120 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\**\*.*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <WinLibs Include="lib\win32\*.dll" />
     <None Include="Resources\animations\FreezingBulletSplashAnim.txt" />
     <None Include="Resources\bundles\GameResources.txt" />
+    <None Include="Resources\images\swordman.png" />
+    <None Include="Resources\animations\SwordManAnims.txt" />
+    <None Include="Resources\animations\BattingRamAnims.txt" />
+    <None Include="Resources\animations\BatteringRamAnims.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\FreezingBulletSplashAnim.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\startup.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\SwordManAnims.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\bundles\FileDialog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\bundles\GameResources.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\bundles\splash.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\fonts\arial.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\fonts\cour.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\fonts\maven_pro_regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\brickpath.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\fdFile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\fdFolder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\fence.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\FileDialog_Active.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\FileDialog_Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\FileDialog_Inactive.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\FileDialog_Scroll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\FileDialog_ScrollSmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\freezingbulletsplash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\grass.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\minotaur.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\player.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\stonepath.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\Swinburne.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\SwinGameAni.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\swordman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\Thumbs.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\panels\FileDialog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\sounds\error.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\sounds\SwinGameStart.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\level.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SwinGame.icns">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SwinGame.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\test.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\batteringram.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Target Name="CopyLibsToOut">
     <Copy SourceFiles="@(WinLibs)" DestinationFolder="$(OutDir)" />

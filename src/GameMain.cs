@@ -13,20 +13,26 @@ namespace MyGame
 
             World world = new World();
 
-            //Add System sets the world to this - don't need to specify world in System constructor
             world.AddSystem(new InputSystem(world));
+            world.AddSystem(new PlayerSystem(world));
             world.AddSystem(new SpawningSystem(world));
-            world.AddSystem(new AISystem(world));
+            world.AddSystem(new MovementSystem(world));           
+            world.AddSystem(new EnemyAISystem(world));
             world.AddSystem(new ProjectileSystem(world));
-            world.AddSystem(new BulletSystem(world));
             world.AddSystem(new FreezingBulletSystem(world));
             world.AddSystem(new FrozenSystem(world));
-            world.AddSystem(new ApplyPoisonSystem(world));
             world.AddSystem(new PoisonedSystem(world));
+            world.AddSystem(new PlayerLootSystem(world));
+            world.AddSystem(new CollisionCheckSystem(world));
+            world.AddSystem(new BulletCollisionHandlerSystem(world));
+            world.AddSystem(new FreezeZoneCollisionHandlerSystem(world));
+            world.AddSystem(new PoisonZoneCollisionHandlerSystem(world));
             world.AddSystem(new HealthSystem(world));
-            world.AddSystem(new MovementSystem(world));
-            world.AddSystem(new RenderingSystem(world));
             world.AddSystem(new AnimationRenderingSystem(world));
+            world.AddSystem(new RenderingSystem(world));
+            world.AddSystem(new PlayerRenderingSystem(world));
+            world.AddSystem(new CollisionCleanupSystem(world));
+
 
             EntityFactory.CreatePlayer();
 
@@ -37,7 +43,7 @@ namespace MyGame
                 SwinGame.ProcessEvents();
                 
                 //Clear the screen and draw the framerate
-                SwinGame.ClearScreen(Color.White);
+                SwinGame.ClearScreen(Color.SkyBlue);
                 SwinGame.DrawFramerate(300, 10);
                 world.Process();
 

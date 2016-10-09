@@ -17,6 +17,7 @@ namespace MyGame
             {
                 Point2D pt = SwinGame.MousePosition();
                 CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
+                PlayerSystem playerSystem = World.GetSystem(typeof(PlayerSystem)) as PlayerSystem;
 
                 if (SwinGame.MouseClicked(MouseButton.LeftButton))
                 {
@@ -27,18 +28,7 @@ namespace MyGame
                 {
                     float targetX = SwinGame.MouseX();
                     float targetY = SwinGame.MouseY();
-
-                    EntityFactory.CreateFreezingBullet(playerPos.Centre.X, playerPos.Centre.Y, targetX, targetY, 3);
-                }
-
-                if (SwinGame.KeyTyped(KeyCode.WKey))
-                {
-                    EntityFactory.CreateWalker(150, 300, new CTeam(Team.Player));
-                }
-
-                if (SwinGame.KeyTyped(KeyCode.SKey))
-                {
-                    EntityFactory.CreateShooter(150, 300, new CTeam(Team.Player));
+                    EntityFactory.CreateFreezingBullet(playerPos.Centre.X, playerPos.Centre.Y, targetX, targetY, 7);
                 }
             }
         }

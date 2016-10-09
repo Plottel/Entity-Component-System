@@ -33,6 +33,12 @@ namespace MyGame
             }
         }
 
+        public bool EntitiesOnSameTeam(int entOne, int entTwo)
+        {
+            return (EntityHasComponent(entOne, typeof(CPlayerTeam)) && EntityHasComponent(entTwo, typeof(CPlayerTeam))) || 
+                (EntityHasComponent(entOne, typeof(CEnemyTeam)) && EntityHasComponent(entTwo, typeof(CEnemyTeam)));
+        }
+
         public List<int> GetAllEntitiesWithTag(Type t)
         {
             List<int> result = new List<int>();
@@ -176,13 +182,16 @@ namespace MyGame
 
         public void RemoveEntity(int e)
         {
-            //Remove Entity from lookup Dictionaries
-            _entityComponents.Remove(e);
-
             foreach (System s in _systems)
             {
-                s.Remove(e);
+                if (s.HasEntity(e))
+                {
+                    s.Remove(e);
+                }
             }
+
+            //Remove Entity from lookup Dictionaries
+            _entityComponents.Remove(e);
         }
     }
 }

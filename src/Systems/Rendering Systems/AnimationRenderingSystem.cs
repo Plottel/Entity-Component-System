@@ -24,8 +24,6 @@ namespace MyGame
             CPosition animPos;
             List<int> deadAnims = new List<int>();
 
-            Console.WriteLine(Entities.Count);
-
             for (int i = 0; i < Entities.Count; i++)
             {
                 animComp = World.GetComponentOfEntity(Entities[i], typeof(CAnimation)) as CAnimation;
@@ -33,7 +31,10 @@ namespace MyGame
 
                 if (SwinGame.AnimationEnded(animComp.Anim))
                 {
-                    deadAnims.Add(Entities[i]);
+                    if (World.GetAllComponentsOfEntity(Entities[i]).Count == 1) //If Entity is just an animation
+                    {
+                        deadAnims.Add(Entities[i]);
+                    }
                 }
                 else
                 {

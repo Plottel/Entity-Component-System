@@ -6,16 +6,22 @@ namespace MyGame
     public abstract class System : EntityListener
     {
         private List<int> _entities;
-        private List<Type> _inclusionMask;
-        private List<Type> _exclusionMask;
+        private List<Type> _include;
+        private List<Type> _exclude;
         private World _world;
 
-        protected System(List<Type> inclusionMask, List<Type> exclusionMask, World world)
+        protected System(List<Type> include, List<Type> exclude, World world)
         {
             _entities = new List<int>();
-            _inclusionMask = inclusionMask;
-            _exclusionMask = exclusionMask;
+            _include = include;
+            _exclude = exclude;
             _world = world;
+        }
+
+        public World World
+        {
+            get {return _world;}
+            set {_world = value;}
         }
 
         public List<int> Entities
@@ -24,42 +30,28 @@ namespace MyGame
             set {_entities = value;}
         }
 
-        public List<Type> InclusionMask
+        public List<Type> Include
         {
-            get {return _inclusionMask;}
-            set {_inclusionMask = value;}
+            get {return _include;}
+            set {_include= value;}
         }
 
-        public List<Type> ExclusionMask
+        public List<Type> Exclude
         {
-            get {return _exclusionMask;}
-            set {_exclusionMask = value;}
+            get {return _exclude;}
+            set {_exclude = value;}
         }
 
-        protected World World
-        {
-            get {return _world;}
-            set {_world = value;}
-        }
-
-        //Optimise with key - Contains
         public bool HasEntity(int entID)
         {
-            foreach (int e in Entities)
-            {
-                if (e == entID)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return Entities.Contains(entID);
         }
 
         public bool EntityPassesFilter(int entID)
         {
             Dictionary<Type, Component> entMask = World.GetAllComponentsOfEntity(entID);
 
-            foreach (Type t in InclusionMask)
+            foreach (Type t in Include)
             {
                 if (!entMask.ContainsKey(t))
                 {
@@ -67,7 +59,7 @@ namespace MyGame
                 }
             }
 
-            foreach (Type t in ExclusionMask)
+            foreach (Type t in Exclude)
             {
                 if (entMask.ContainsKey(t))
                 {
