@@ -98,7 +98,7 @@ namespace MyGame
 
                     targetPos = World.GetComponentOfEntity(enemyAI.TargetID, typeof(CPosition)) as CPosition;
 
-                    EntityFactory.CreateBullet(enemyPos.Centre.X, enemyPos.Centre.Y, enemyGun.BulletSpeed, enemyGun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
+                    EntityFactory.CreateArrow(enemyPos.Centre.X, enemyPos.Centre.Y, enemyGun.BulletSpeed, enemyGun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
                                                                                                                                                 targetPos.Centre.Y - 5, 
                                                                                                                                                 10, 
                                                                                                                                                 10), "Enemy");

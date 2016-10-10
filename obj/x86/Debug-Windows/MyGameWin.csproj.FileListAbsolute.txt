@@ -39,3 +39,6 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\batteringram.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\ArcherManAnims.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\archerman.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\arrow.png

@@ -17,9 +17,15 @@ namespace MyGame
         private void RenderHealthBar(CHealth entHealth, CPosition entPos)
         {
             int healthBarWidth = entPos.Width - 4;
-            int pixelsPerHP = healthBarWidth / entHealth.Health;
+            int damageBarWidth = (int)(healthBarWidth * ((float)entHealth.Damage / entHealth.Health));
+
             SwinGame.FillRectangle(Color.DarkGreen, entPos.X + 2, entPos.Y + 50, healthBarWidth, 20); //Draw health bar
-            SwinGame.FillRectangle(Color.Red, entPos.X + 2, entPos.Y + 50, (pixelsPerHP * entHealth.Damage), 20); //Draw damage bar
+            SwinGame.FillRectangle(Color.Red, entPos.X + 2, entPos.Y + 50, damageBarWidth, 20); //Draw damage bar
+
+            //SwinGame.DrawText("Health Bar Width: " + healthBarWidth, Color.Black, 200, 240);
+            //SwinGame.DrawText("Damage Bar Width: " + damageBarWidth, Color.Black, 200, 260);
+            //SwinGame.DrawText("Damage: " + entHealth.Damage, Color.Black, 200, 200);
+            //SwinGame.DrawText("Max Health: " + entHealth.Health, Color.Black, 200, 220);
         }
 
         public override void Process()
@@ -34,7 +40,6 @@ namespace MyGame
             RenderHealthBar(playerHealth, playerPos);
             RenderPurchaseOptions(playerComp);
             SwinGame.DrawText("Gold : " + playerComp.Gold, Color.Black, playerPos.X, playerPos.Y + 20);
-            SwinGame.DrawText(playerHealth.Damage.ToString(), Color.Black, 200, 200);
         }
     }
 }

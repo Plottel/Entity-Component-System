@@ -1,9 +1,9 @@
 ﻿using System;
 namespace MyGame
 {
-    public class CBullet : Component
+    public class CArrow : Component
     {
-        public CBullet ()
+        public CArrow ()
         {
         }
     }

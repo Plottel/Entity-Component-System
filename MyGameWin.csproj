@@ -87,7 +87,7 @@
     <Compile Include="src\Systems\EnemyAISystem.cs" />
     <Compile Include="src\Components\CCollision.cs" />
     <Compile Include="src\Components\Tags\CExcludeAll.cs" />
-    <Compile Include="src\Components\Tags\CBullet.cs" />
+    <Compile Include="src\Components\Tags\CArrow.cs" />
     <Compile Include="src\Components\Tags\CFreezingBullet.cs" />
     <Compile Include="src\Systems\Collision Systems\CollisionCheckSystem.cs" />
     <Compile Include="src\Systems\Collision Systems\CollisionCleanupSystem.cs" />
@@ -96,7 +96,6 @@
     <Compile Include="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\RenderingSystem.cs" />
-    <Compile Include="src\Systems\Rendering Systems\SpriteRenderingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -217,6 +216,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\images\batteringram.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\ArcherManAnims.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\archerman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\arrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

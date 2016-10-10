@@ -27,7 +27,7 @@ namespace MyGame
                 _spawnAtY = _random.Next(50, 550);
                 EntityFactory.CreateWalker(_spawnAtX, _spawnAtY);
                 EntityFactory.CreateBatteringRam(_spawnAtX, _spawnAtY + 50);
-                //EntityFactory.CreateShooter(_spawnAtX, _spawnAtY);
+                EntityFactory.CreateShooter(_spawnAtX, _spawnAtY - 50);
             }
         }
     }

@@ -37,7 +37,7 @@ namespace MyGame
             return result;
         }
 
-        public static Bitmap CreateBulletImg()
+        public static Bitmap CreateArrowImg()
         {
             Bitmap result = SwinGame.CreateBitmap(5, 5);
             SwinGame.ClearSurface(result, Color.Black);
@@ -71,7 +71,7 @@ namespace MyGame
             components.Add(new CRenderable(CreatePlayerImg()));
             components.Add(new CPosition(5, 5, 100, 590));
             components.Add(new CPlayer());
-            components.Add(new CHealth(100));
+            components.Add(new CHealth(200));
             components.Add(new CPlayerTeam());
 
             _world.AddEntity(newEntity, components);           
@@ -112,7 +112,6 @@ namespace MyGame
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
-            components.Add(new CRenderable(CreateShooterImg()));
             components.Add(new CPosition(x, y, 30));
             components.Add(new CVelocity(-speed, 0, speed));
             components.Add(new CHealth(3));
@@ -120,6 +119,12 @@ namespace MyGame
             components.Add(new CGun(5, 2));
             components.Add(new CLoot(10));
             components.Add(new CEnemyTeam());
+                
+            Bitmap archerManBmp = SwinGame.BitmapNamed("ArcherMan");
+            Animation archerManAnim = SwinGame.CreateAnimation("Walk", SwinGame.AnimationScriptNamed("ArcherManAnims"));
+            AnimationScript archerManAnimScript = SwinGame.AnimationScriptNamed("ArcherManAnims");
+
+            components.Add(new CAnimation(archerManBmp, archerManAnim, archerManAnimScript));
 
             _world.AddEntity(newEntity, components);
         }
@@ -142,23 +147,23 @@ namespace MyGame
             components.Add(new CLoot(20));
             components.Add(new CEnemyTeam());
 
-            Bitmap walkerBmp = SwinGame.BitmapNamed("BatteringRam");
-            Animation walkerAnim = SwinGame.CreateAnimation("Walk", SwinGame.AnimationScriptNamed("BatteringRamAnims"));
-            AnimationScript walkerAnimScript = SwinGame.AnimationScriptNamed("BatteringRamAnims");
+            Bitmap batteringRamBmp = SwinGame.BitmapNamed("BatteringRam");
+            Animation batteringRamAnim = SwinGame.CreateAnimation("Walk", SwinGame.AnimationScriptNamed("BatteringRamAnims"));
+            AnimationScript batteringRamAnimScript = SwinGame.AnimationScriptNamed("BatteringRamAnims");
 
-            components.Add(new CAnimation(walkerBmp, walkerAnim, walkerAnimScript));
+            components.Add(new CAnimation(batteringRamBmp, batteringRamAnim, batteringRamAnimScript));
 
             _world.AddEntity(newEntity, components);
         }
 
-        public static void CreateBullet(float x, float y, int speed, int damage, CPosition target, string team)
+        public static void CreateArrow(float x, float y, int speed, int damage, CPosition target, string team)
         {
             //Create Entity and add to world
             Entity newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
-            components.Add(new CRenderable(CreateBulletImg()));
+            components.Add(new CRenderable(SwinGame.BitmapNamed("Arrow")));
 
             float xOffset = (target.X - x);
             float yOffset = (target.Y - y);

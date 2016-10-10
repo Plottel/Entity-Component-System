@@ -4,6 +4,7 @@ using SwinGameSDK;
 
 namespace MyGame
 {
+    //Fix this shit up
     public class RenderingSystem: System
     {
         public RenderingSystem(World world) : base(new List<Type> {typeof(CRenderable), typeof(CPosition)}, new List<Type> {typeof(CPlayer)}, world)

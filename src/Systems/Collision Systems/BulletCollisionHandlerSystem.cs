@@ -7,7 +7,7 @@ namespace MyGame
     //They will apply damage to what they have collided with if it has a health component.
     public class BulletCollisionHandlerSystem : System
     {
-        public BulletCollisionHandlerSystem (World world) : base(new List<Type> {typeof(CBullet), typeof(CDamage), typeof(CCollision)}, new List<Type> {}, world)
+        public BulletCollisionHandlerSystem (World world) : base(new List<Type> {typeof(CArrow), typeof(CDamage), typeof(CCollision)}, new List<Type> {}, world)
         {
         }
 

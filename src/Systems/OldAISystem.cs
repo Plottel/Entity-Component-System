@@ -191,7 +191,7 @@ namespace MyGame
 
                     CPosition targetPos = World.GetComponentOfEntity(entAIComp.TargetID, typeof(CPosition)) as CPosition;
 
-                    EntityFactory.CreateBullet(entPos.X, entPos.Y, entGunComp.BulletSpeed, entGunComp.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
+                    EntityFactory.CreateArrow(entPos.X, entPos.Y, entGunComp.BulletSpeed, entGunComp.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
                                                                                                                               targetPos.Centre.Y - 5, 
                                                                                                                               10, 
                                                                                                                               10), team);
