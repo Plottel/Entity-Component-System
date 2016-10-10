@@ -13,22 +13,31 @@ namespace MyGame
 
         public override void Process()
         {
-            if (Entities.Count != 0)
-            {
-                Point2D pt = SwinGame.MousePosition();
-                CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
-                PlayerSystem playerSystem = World.GetSystem(typeof(PlayerSystem)) as PlayerSystem;
+            Point2D pt = SwinGame.MousePosition();
+            CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
+            CPlayer player = World.GetComponentOfEntity(Entities[0], typeof(CPlayer)) as CPlayer;
+            PlayerGoldSystem shop = World.GetSystem(typeof(PlayerGoldSystem)) as PlayerGoldSystem;
 
-                if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            if (SwinGame.KeyTyped(KeyCode.WKey))
+            {
+                shop.BuyWizard(player);
+            }
+
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            {
+                if (PlayerCooldownSystem.AbilityIsReady(World.GameTime, player.UsedLastPoisonZoneAt, player.PoisonZoneCooldown))
                 {
                     EntityFactory.CreatePoisonPool(pt.X, pt.Y);
+                    player.UsedLastPoisonZoneAt = World.GameTime;
                 }
+            }
 
-                if (SwinGame.MouseClicked(MouseButton.RightButton))
+            if (SwinGame.MouseClicked(MouseButton.RightButton))
+            {
+                if (PlayerCooldownSystem.AbilityIsReady(World.GameTime, player.UsedLastFreezingBulletAt, player.FreezingBulletCooldown))
                 {
-                    float targetX = SwinGame.MouseX();
-                    float targetY = SwinGame.MouseY();
-                    EntityFactory.CreateFreezingBullet(playerPos.Centre.X, playerPos.Centre.Y, targetX, targetY, 7);
+                    EntityFactory.CreateFreezingBullet(playerPos.Centre.X, playerPos.Centre.Y, pt.X, pt.Y, 7);
+                    player.UsedLastFreezingBulletAt = World.GameTime;
                 }
             }
         }

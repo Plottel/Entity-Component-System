@@ -11,8 +11,8 @@ namespace MyGame
 
         public override void Remove(int entID)
         {
-            PlayerSystem playerSystem = World.GetSystem(typeof(PlayerSystem)) as PlayerSystem;
-            playerSystem.GiveLoot(World.GetComponentOfEntity(entID, typeof(CLoot)) as CLoot);
+            PlayerGoldSystem goldSystem = World.GetSystem(typeof(PlayerGoldSystem)) as PlayerGoldSystem;
+            goldSystem.GiveLoot(World.GetComponentOfEntity(entID, typeof(CLoot)) as CLoot);
             base.Remove(entID);
         }
 

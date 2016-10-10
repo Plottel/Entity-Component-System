@@ -42,6 +42,7 @@
     <Folder Include="src\Systems\" />
     <Folder Include="src\Systems\Collision Systems\" />
     <Folder Include="src\Systems\Rendering Systems\" />
+    <Folder Include="src\Systems\Player Systems\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\GameMain.cs" />
@@ -77,13 +78,12 @@
     <Compile Include="src\Components\CAnimation.cs" />
     <Compile Include="src\Components\CLoot.cs" />
     <Compile Include="src\Systems\PlayerLootSystem.cs" />
-    <Compile Include="src\Systems\PlayerSystem.cs" />
+    <Compile Include="src\Systems\PlayerPurchaseSystem.cs" />
     <Compile Include="src\Components\CPlayer.cs" />
     <Compile Include="src\Systems\EntityHolderSystem.cs" />
     <Compile Include="src\Components\Tags\CPlayerTeam.cs" />
     <Compile Include="src\Components\Tags\CEnemyTeam.cs" />
     <Compile Include="src\Components\CCollidable.cs" />
-    <Compile Include="src\Components\Tags\CCastle.cs" />
     <Compile Include="src\Systems\EnemyAISystem.cs" />
     <Compile Include="src\Components\CCollision.cs" />
     <Compile Include="src\Components\Tags\CExcludeAll.cs" />
@@ -96,6 +96,8 @@
     <Compile Include="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\RenderingSystem.cs" />
+    <Compile Include="src\Systems\Rendering Systems\HealthRenderingSystem.cs" />
+    <Compile Include="src\Systems\PlayerCooldownSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -225,6 +227,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\images\arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\fonts\Minecraft.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

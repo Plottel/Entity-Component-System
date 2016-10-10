@@ -42,3 +42,4 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\batteri
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\ArcherManAnims.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\archerman.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\arrow.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\Minecraft.ttf

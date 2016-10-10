@@ -8,13 +8,14 @@ namespace MyGame
         public static void Main()
         {
             //Open the game window
-            SwinGame.OpenGraphicsWindow("GameMain", 800, 600);
+            SwinGame.OpenGraphicsWindow("GameMain", 1200, 600);
             SwinGame.LoadResourceBundleNamed("GameResources", "GameResources.txt", false);
 
             World world = new World();
 
             world.AddSystem(new InputSystem(world));
-            world.AddSystem(new PlayerSystem(world));
+            world.AddSystem(new PlayerGoldSystem(world));
+            world.AddSystem(new PlayerCooldownSystem(world));
             world.AddSystem(new SpawningSystem(world));
             world.AddSystem(new MovementSystem(world));           
             world.AddSystem(new EnemyAISystem(world));
@@ -28,6 +29,7 @@ namespace MyGame
             world.AddSystem(new FreezeZoneCollisionHandlerSystem(world));
             world.AddSystem(new PoisonZoneCollisionHandlerSystem(world));
             world.AddSystem(new HealthSystem(world));
+            world.AddSystem(new HealthRenderingSystem(world));
             world.AddSystem(new AnimationRenderingSystem(world));
             world.AddSystem(new RenderingSystem(world));
             world.AddSystem(new PlayerRenderingSystem(world));
@@ -44,7 +46,7 @@ namespace MyGame
                 
                 //Clear the screen and draw the framerate
                 SwinGame.ClearScreen(Color.SkyBlue);
-                SwinGame.DrawFramerate(300, 10);
+                SwinGame.DrawFramerate(200, 570);
                 world.Process();
 
                 SwinGame.RefreshScreen(60);

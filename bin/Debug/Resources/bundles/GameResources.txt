@@ -7,3 +7,6 @@ ANIM,BatteringRamAnims,BatteringRamAnims.txt
 BITMAP,ArcherMan,archerman.png,20,28,13,1,13
 ANIM,ArcherManAnims,ArcherManAnims.txt
 BITMAP,Arrow,arrow.png,10,5,1,1,1
+FONT,GameFont,Minecraft.ttf,16
+FONT,SmallGameFont,Minecraft.ttf,12
+FONT,LargeGameFont,Minecraft.ttf,36
