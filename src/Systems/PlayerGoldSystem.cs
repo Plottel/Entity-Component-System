@@ -9,6 +9,7 @@ namespace MyGame
         private uint _wizardCost;
         private int _minimumFreezingBulletCooldown = 200;
         private int _minimumPoisonZoneCooldown = 2000;
+        private Random _spawnAt = new Random();
 
         public PlayerGoldSystem(World world) : base(new List<Type> {typeof(CPlayer)}, new List<Type> {}, world)
         {   
@@ -41,16 +42,15 @@ namespace MyGame
             }
         }
 
-        /*public void BuyArcher()
+        public void BuyArcher(CPlayer player)
         {
-            CPlayer player = World.GetComponentOfEntity(Entities[0], typeof(CPlayer)) as CPlayer;
-            if (player.Gold >= _shooterCost)
+            if (player.Gold >= _archerCost)
             {
-                
-                EntityFactory.CreateShooter(150, 300);
-                player.Gold -= _shooterCost;
+                EntityFactory.CreatePlayerArcher(50, _spawnAt.Next(20, 550));
+                player.Gold -= _archerCost;
+                player.ArcherCount += 1;
             }
-        }*/
+        }
 
         public override void Process()
         {

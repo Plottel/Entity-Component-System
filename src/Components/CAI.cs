@@ -12,9 +12,16 @@ namespace MyGame
         private AttackType _attackType;
         private bool _isInRange;
         private bool _attackIsReady;
+        private bool _hasTarget;
 
-        public CAI (int range, int cooldown, AttackType attackType) : this (range, cooldown, attackType, 0)
-        {           
+        public CAI (int range, int cooldown, AttackType attackType)
+        {
+            _range = range;
+            _cooldown = cooldown;
+            _attackType = attackType;
+            _isInRange = false;
+            _attackIsReady = false;
+            _hasTarget = false;
         }
 
         public CAI(int range, int cooldown, AttackType attackType, int targetID)
@@ -24,6 +31,7 @@ namespace MyGame
             _attackType = attackType;
             _isInRange = false;
             _attackIsReady = false;
+            _hasTarget = true;
             _targetID = targetID;
         }
 
@@ -66,6 +74,12 @@ namespace MyGame
         {
             get {return _attackIsReady;}
             set {_attackIsReady = value;}
+        }
+
+        public bool HasTarget
+        {
+            get {return _hasTarget;}
+            set {_hasTarget = value;}
         }
     }
 }

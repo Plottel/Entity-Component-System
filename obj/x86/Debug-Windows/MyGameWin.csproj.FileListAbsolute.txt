@@ -43,3 +43,5 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\Arc
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\archerman.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\arrow.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\Minecraft.ttf
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\playerarcher.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\playerarrow.png

@@ -24,6 +24,11 @@ namespace MyGame
                 if (!enemyAI.IsInRange)
                 {
                     CheckRange(Entities[i], enemyAI, enemyPos);
+
+                    if (enemyAI.IsInRange)
+                    {
+                        World.RemoveComponentFromEntity(Entities[i], typeof(CVelocity));          
+                    }
                 }
                 else if (!enemyAI.AttackIsReady)
                 {
@@ -35,27 +40,22 @@ namespace MyGame
 
                     if (SwinGame.AnimationEnded(enemyAnim.Anim)) //Attack at end of Attack Animation so it visually makes sense
                     {
-                        Attack(Entities[i]);
+                        Attack(Entities[i], "Enemy");
                         SwinGame.AssignAnimation(enemyAnim.Anim, "Still", enemyAnim.AnimScript);
                     }
                 }
             }
         }
 
-        private void CheckRange(int entID, CAI enemyAI, CPosition enemyPos)
+        protected void CheckRange(int entID, CAI enemyAI, CPosition enemyPos)
         {
             Circle enemyAttackRadius = SwinGame.CreateCircle(enemyPos.Centre.X, enemyPos.Centre.Y, enemyAI.Range + (enemyPos.Width / 2));
             CPosition targetPos = World.GetComponentOfEntity(enemyAI.TargetID, typeof(CPosition)) as CPosition;
 
             enemyAI.IsInRange = SwinGame.CircleRectCollision(enemyAttackRadius, targetPos.Rect);
-
-            if (enemyAI.IsInRange)
-            {
-                World.RemoveComponentFromEntity(entID, typeof(CVelocity));
-            }
         }
 
-        private void CheckCooldown(int entID)
+        protected void CheckCooldown(int entID)
         {
             CAI enemyAI = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
 
@@ -68,7 +68,7 @@ namespace MyGame
             }
         }
 
-        private void Attack(int entID)
+        protected void Attack(int entID, string team)
         {
             CAI enemyAI = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
             CDamage enemyDamage; 
@@ -101,7 +101,7 @@ namespace MyGame
                     EntityFactory.CreateArrow(enemyPos.Centre.X, enemyPos.Centre.Y, enemyGun.BulletSpeed, enemyGun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
                                                                                                                                                 targetPos.Centre.Y - 5, 
                                                                                                                                                 10, 
-                                                                                                                                                10), "Enemy");
+                                                                                                                                                10), team);
                     break;
                 }
             }

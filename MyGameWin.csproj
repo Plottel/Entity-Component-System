@@ -78,7 +78,7 @@
     <Compile Include="src\Components\CAnimation.cs" />
     <Compile Include="src\Components\CLoot.cs" />
     <Compile Include="src\Systems\PlayerLootSystem.cs" />
-    <Compile Include="src\Systems\PlayerPurchaseSystem.cs" />
+    <Compile Include="src\Systems\PlayerGoldSystem.cs" />
     <Compile Include="src\Components\CPlayer.cs" />
     <Compile Include="src\Systems\EntityHolderSystem.cs" />
     <Compile Include="src\Components\Tags\CPlayerTeam.cs" />
@@ -98,6 +98,7 @@
     <Compile Include="src\Systems\Rendering Systems\RenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\HealthRenderingSystem.cs" />
     <Compile Include="src\Systems\PlayerCooldownSystem.cs" />
+    <Compile Include="src\Systems\PlayerAISystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -230,6 +231,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\fonts\Minecraft.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\playerarcher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\playerarrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

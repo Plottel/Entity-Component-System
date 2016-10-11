@@ -23,11 +23,16 @@ namespace MyGame
                 shop.BuyWizard(player);
             }
 
+            if (SwinGame.KeyDown(KeyCode.AKey))
+            {
+                shop.BuyArcher(player);
+            }
+
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
                 if (PlayerCooldownSystem.AbilityIsReady(World.GameTime, player.UsedLastPoisonZoneAt, player.PoisonZoneCooldown))
                 {
-                    EntityFactory.CreatePoisonPool(pt.X, pt.Y);
+                    EntityFactory.CreatePoisonZone(pt.X, pt.Y);
                     player.UsedLastPoisonZoneAt = World.GameTime;
                 }
             }

@@ -17,7 +17,8 @@ namespace MyGame
             world.AddSystem(new PlayerGoldSystem(world));
             world.AddSystem(new PlayerCooldownSystem(world));
             world.AddSystem(new SpawningSystem(world));
-            world.AddSystem(new MovementSystem(world));           
+            world.AddSystem(new MovementSystem(world));
+            world.AddSystem(new PlayerAISystem(world));
             world.AddSystem(new EnemyAISystem(world));
             world.AddSystem(new ProjectileSystem(world));
             world.AddSystem(new FreezingBulletSystem(world));
@@ -35,7 +36,7 @@ namespace MyGame
             world.AddSystem(new PlayerRenderingSystem(world));
             world.AddSystem(new CollisionCleanupSystem(world));
 
-
+            EntityFactory.World = world;
             EntityFactory.CreatePlayer();
 
             //Run the game loop

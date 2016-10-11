@@ -29,8 +29,6 @@ namespace MyGame
             //For each Freeze Zone
             for (int i = 0; i < Entities.Count; i++)
             {
-                Console.WriteLine("Freeze handling stuff");
-
                 freezeEffect = World.GetComponentOfEntity(Entities[i], typeof(CFrozen)) as CFrozen;
                 collision = World.GetComponentOfEntity(Entities[i], typeof(CCollision)) as CCollision;
 

@@ -15,7 +15,7 @@ namespace MyGame
         public SpawningSystem (World world) : base(new List<Type> {}, new List<Type> {}, world)
         {
             _random = new Random();
-            _spawnInterval = 2000;
+            _spawnInterval = 500;
         }
 
         public override void Process()
@@ -25,9 +25,9 @@ namespace MyGame
                 _lastSpawn = World.GameTime;
 
                 _spawnAtY = _random.Next(50, 550);
-                EntityFactory.CreateWalker(_spawnAtX, _spawnAtY);
+                EntityFactory.CreateSwordMan(_spawnAtX, _spawnAtY);
                 EntityFactory.CreateBatteringRam(_spawnAtX, _spawnAtY + 50);
-                EntityFactory.CreateShooter(_spawnAtX, _spawnAtY - 50);
+                EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
             }
         }
     }
