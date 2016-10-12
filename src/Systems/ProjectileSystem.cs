@@ -48,7 +48,7 @@ namespace MyGame
 
         /// <summary>
         /// Uses the projectile and position components of each Entity to determine whether 
-        /// or not the Entity has reached its target.
+        /// or not the Entity has reached its target. If it has, the Entity is removed from the world.
         /// </summary>
         public override void Process()
         {
