@@ -4,10 +4,17 @@ using SwinGameSDK;
 
 namespace MyGame
 {
+    /// <summary>
+    /// Represents the class responsible for handling Freezing Bullets. Checks if each Freezing Bullet 
+    /// has reached its destination. If it has, it is removed from the World and a Freeze Zone is created.
+    /// </summary>
     public class FreezingBulletSystem : ProjectileSystem
     {
         public FreezingBulletSystem (World world) : base(world)
         {
+            /// <summary>
+            /// The F
+            /// </summary>
             Include.Add(typeof(CFreezingBullet));
             Exclude.Remove(typeof(CFreezingBullet));
         }

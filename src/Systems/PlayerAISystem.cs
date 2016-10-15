@@ -141,7 +141,10 @@ namespace MyGame
 
         /// <summary>
         /// Represents the decision making process for Player AI. AI operates with the following procedure:
-        /// - If I don't have a 
+        /// - If I don't have a target, get a target.
+        /// - If I have a target, check if I'm in range to attack.
+        /// - If I'm in range to attack, check if I can attack.
+        /// - If I'm in range to attack, attack.
         /// </summary>
         public override void Process()
         {
@@ -149,8 +152,15 @@ namespace MyGame
             CPosition playerPos;
             CAnimation playerAnim;
 
+            /// <summary>
+            /// Populates the dictionary of Enemy positions only once per frame.
+            /// Each AI uses these positions to evaluate their targets.
+            /// </summary>
             GetEnemyPositions();
 
+            /// <summary>
+            /// For each Player Entity.
+            /// </summary>
             for (int i = 0; i < Entities.Count; i++)
             {
                 playerAI = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
@@ -170,6 +180,10 @@ namespace MyGame
                 }
                 else
                 {
+                    /// <summary>
+                    /// If ready to attack, start the attack animation. The attack will be carried out
+                    /// when the attack animation has finished.
+                    /// </summary>
                     playerAnim = World.GetComponentOfEntity(Entities[i], typeof(CAnimation)) as CAnimation;
 
                     if (SwinGame.AnimationEnded(playerAnim.Anim)) //Attack at end of Attack animation

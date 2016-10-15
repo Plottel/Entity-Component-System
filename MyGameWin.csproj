@@ -63,7 +63,6 @@
     <Compile Include="src\Components\CDamage.cs" />
     <Compile Include="src\Components\AttackType.cs" />
     <Compile Include="src\Components\CAI.cs" />
-    <Compile Include="src\Systems\OldAISystem.cs" />
     <Compile Include="src\Components\CPoison.cs" />
     <Compile Include="src\Systems\PoisonedSystem.cs" />
     <Compile Include="src\Systems\ProjectileSystem.cs" />

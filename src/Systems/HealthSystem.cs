@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace MyGame
 {
+    /// <summary>
+    /// Represents the System responsible for determing if an Entity is out of health.
+    /// Any entity which has run out of health is removed from the World.
+    /// </summary>
     public class HealthSystem : System
     {
         public HealthSystem (World world) : base (new List<Type> {typeof(CHealth)}, new List<Type> {}, world)
