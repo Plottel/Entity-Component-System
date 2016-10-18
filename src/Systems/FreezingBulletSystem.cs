@@ -13,12 +13,18 @@ namespace MyGame
         public FreezingBulletSystem (World world) : base(world)
         {
             /// <summary>
-            /// The F
+            /// The Freezing Bullet System's Component Masks are:
+            /// Include - CProjectile, CPosition, CVelocity, CFreezingBullet
+            /// Exclude - null
             /// </summary>
             Include.Add(typeof(CFreezingBullet));
             Exclude.Remove(typeof(CFreezingBullet));
         }
 
+        /// <summary>
+        /// Loops through all Freezing Bullet entities and checks if they've reached their destination.
+        /// If they have, the Bullet is removed and a Freeze Zone is created at the bullet's location.
+        /// </summary>
         public override void Process()
         {
             CProjectile bulletProj;

@@ -4,16 +4,18 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\FreezingBulletSystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\EnemyAISystem.cs">
     <Files>
-      <File FileName="src\Systems\PlayerAISystem.cs" Line="182" Column="18" />
-      <File FileName="src\Systems\EnemyAISystem.cs" Line="1" Column="1" />
+      <File FileName="src\Systems\PlayerAISystem.cs" Line="115" Column="1" />
+      <File FileName="src\Systems\EnemyAISystem.cs" Line="8" Column="6" />
       <File FileName="src\Systems\MovementSystem.cs" Line="13" Column="56" />
       <File FileName="src\World.cs" Line="174" Column="14" />
       <File FileName="src\Systems\InputSystem.cs" Line="8" Column="74" />
       <File FileName="src\Systems\HealthSystem.cs" Line="4" Column="17" />
       <File FileName="src\Systems\FrozenSystem.cs" Line="9" Column="19" />
-      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="13" Column="64" />
+      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="23" Column="9" />
+      <File FileName="src\Systems\ProjectileSystem.cs" Line="18" Column="6" />
+      <File FileName="src\Systems\EntityHolderSystem.cs" Line="17" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />
