@@ -32,6 +32,11 @@ namespace MyGame
             return SwinGame.RectanglesIntersect(entTarget.Target.Rect, entPos.Rect);
         }
 
+        protected bool ProjectileOnScreen(CPosition entPos)
+        {
+            return SwinGame.RectOnScreen(entPos.Rect);
+        }
+
         /// <summary>
         /// Removes all projectiles which have reached their target from the World.
         /// This is done after the Process method in a separate list in order to prevent issues
@@ -61,7 +66,7 @@ namespace MyGame
                 entProjectile = World.GetComponentOfEntity(Entities[i], typeof(CProjectile)) as CProjectile;
                 entPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
 
-                if (ReachedTarget(entProjectile, entPos))
+                if (ReachedTarget(entProjectile, entPos) || !ProjectileOnScreen(entPos))
                 {
                     deadProjectiles.Add(Entities[i]);
                 }

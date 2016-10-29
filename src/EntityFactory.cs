@@ -151,7 +151,7 @@ namespace MyGame
             Entity newEntity = _world.CreateEntity();
            
             //Used by Velocity Component.
-            int speed = 1;
+            int speed = 5;
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();

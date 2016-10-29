@@ -63,9 +63,13 @@ namespace MyGame
             {
                 _lastSpawn = World.GameTime;
 
-                _spawnAtY = _seed.Next(50, 550);
-                EntityFactory.CreateSwordMan(_spawnAtX, _spawnAtY);
-                EntityFactory.CreateBatteringRam(_spawnAtX, _spawnAtY + 50);
+                _spawnAtY = _seed.Next(100, 500);
+                //EntityFactory.CreateSwordMan(_spawnAtX, _spawnAtY);
+                //EntityFactory.CreateBatteringRam(_spawnAtX, _spawnAtY + 50);
+                EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
+                EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
+                EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
+                EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
                 EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
             }
         }

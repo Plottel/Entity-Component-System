@@ -38,7 +38,7 @@ namespace MyGame
                 bulletProj = World.GetComponentOfEntity(Entities[i], typeof(CProjectile)) as CProjectile;
                 bulletPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
                 
-                if (ReachedTarget(bulletProj, bulletPos))
+                if (ReachedTarget(bulletProj, bulletPos) || !ProjectileOnScreen(bulletPos))
                 {
                     deadFreezingBullets.Add(Entities[i]);
                     EntityFactory.CreateFreezeZone(bulletPos);

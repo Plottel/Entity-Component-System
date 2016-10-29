@@ -1,3 +1,4 @@
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\BatteringRamAnims.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\FreezingBulletSplashAnim.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\startup.txt
@@ -33,11 +34,6 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\level.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\SwinGame.icns
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\SwinGame.ico
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\test.txt
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\batteringram.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\ArcherManAnims.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\archerman.png
@@ -45,3 +41,7 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\arrow.p
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\Minecraft.ttf
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\playerarcher.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\playerarrow.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb

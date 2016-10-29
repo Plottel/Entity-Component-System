@@ -9,7 +9,6 @@
     <SuppressXamMacMigration>True</SuppressXamMacMigration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <OutputType>WinExe</OutputType>
     <ApplicationIcon>Resources\SwinGame.ico</ApplicationIcon>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -98,6 +97,7 @@
     <Compile Include="src\Systems\Rendering Systems\HealthRenderingSystem.cs" />
     <Compile Include="src\Systems\PlayerCooldownSystem.cs" />
     <Compile Include="src\Systems\PlayerAISystem.cs" />
+    <Compile Include="src\Systems\Collision Systems\BucketTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">

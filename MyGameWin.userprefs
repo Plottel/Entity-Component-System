@@ -1,21 +1,16 @@
-﻿<Properties StartupItem="MyGameWin.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Windows|x86" />
+﻿<Properties StartupConfiguration="{A9DCAC72-BC77-4C33-BE70-BBFD31D7C798}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Windows|x86" ActiveRuntime="MS.NET" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\EnemyAISystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\Collision Systems\BucketTest.cs">
     <Files>
-      <File FileName="src\Systems\PlayerAISystem.cs" Line="115" Column="1" />
-      <File FileName="src\Systems\EnemyAISystem.cs" Line="8" Column="6" />
-      <File FileName="src\Systems\MovementSystem.cs" Line="13" Column="56" />
-      <File FileName="src\World.cs" Line="174" Column="14" />
-      <File FileName="src\Systems\InputSystem.cs" Line="8" Column="74" />
-      <File FileName="src\Systems\HealthSystem.cs" Line="4" Column="17" />
-      <File FileName="src\Systems\FrozenSystem.cs" Line="9" Column="19" />
-      <File FileName="src\Systems\FreezingBulletSystem.cs" Line="23" Column="9" />
-      <File FileName="src\Systems\ProjectileSystem.cs" Line="18" Column="6" />
-      <File FileName="src\Systems\EntityHolderSystem.cs" Line="17" Column="9" />
+      <File FileName="src\Entity.cs" Line="11" Column="10" />
+      <File FileName="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" Line="19" Column="34" />
+      <File FileName="src\Systems\PlayerAISystem.cs" Line="54" Column="14" />
+      <File FileName="src\Systems\Collision Systems\CollisionCheckSystem.cs" Line="6" Column="2" />
+      <File FileName="src\Systems\Collision Systems\BucketTest.cs" Line="8" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />
