@@ -146,10 +146,7 @@ namespace MyGame
         /// <param name="entID">The Entity to be removed.</param>
         public virtual void Remove(int entID)
         {
-            if (HasEntity(entID))
-            {
-                Entities.Remove(entID);
-            }
+            Entities.Remove(entID);
         }
     }
 }

@@ -1,71 +1,112 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
-using System.Collections;
 using SwinGameSDK;
 
 namespace MyGame
 {
-    public class BucketTest
+    public class CollisionCheckSystem : System
     {
         private int _numCells;
         private int _cols;
         private int _rows;
         private int _cellSize;
-        private Dictionary<int, List<CPosition>> _cells;
+        private Dictionary<int, List<int>> _playerCells = new Dictionary<int, List<int>>(); //Maps cell numbers to list of entity IDs
+        private Dictionary<int, List<int>> _enemyCells = new Dictionary<int, List<int>>();
 
-        public BucketTest ()
-        {
-            _cells = new Dictionary<int, List<CPosition>>();
-        }
+        private System _playerEnts;
+        private System _enemyEnts;
+        private int collisionsChecked;
+        private int maxCollisionsChecked;
 
-        public void DoCollisions()
+        public CollisionCheckSystem (World world) : base (new List<Type> {}, new List<Type> {typeof(CExcludeAll)}, world)
         {
-            foreach (List<CPosition> entitiesInCell in _cells.Values)
-            {
-                foreach (CPosition pos in entitiesInCell)
-                {
-                    //Do Collision checking;
-                }
-            }
-        }
+            _playerEnts = new EntityHolderSystem(new List<Type> {typeof(CPlayerTeam)}, new List<Type> {}, world);
+            _enemyEnts = new EntityHolderSystem(new List<Type> {typeof(CEnemyTeam)}, new List<Type> {}, world);
 
-        public void Setup()
-        {
-            _cellSize = 50;
+            world.AddSystem(_playerEnts);
+            world.AddSystem(_enemyEnts);
+
+            _cellSize = 100;
 
             _cols = (int)Math.Floor((double)SwinGame.ScreenWidth() / _cellSize);
             _rows = (int)Math.Floor((double)SwinGame.ScreenHeight() / _cellSize);
 
             _numCells = _cols * _rows;
 
-            //Index each bucket and initialise the list
             for (int i = 0; i < _numCells; i++)
-                _cells.Add(i, new List<CPosition>());
+            {
+                _playerCells.Add(i, new List<int>());
+                _enemyCells.Add(i, new List<int>());
+            }
         }
 
-        private void ClearBuckets()
+        private bool AreColliding(CPosition p1, CPosition p2)
+        {
+            return SwinGame.RectanglesIntersect(p1.Rect, p2.Rect);
+        }
+
+        private void ClearCells()
         {
             //Empty the buckets and lists
-            _cells.Clear();
+            /*_playerCells.Clear();
+            _enemyCells.Clear();
 
-            //Re-initialise the buckets
             for (int i = 0; i < _numCells; i++)
-                _cells.Add(i, new List<CPosition>());
+            {
+                _playerCells.Add(i, new List<int>());
+                _enemyCells.Add(i, new List<int>());
+            }//This should be commented out here
+
+            foreach (List<int> list in _playerCells.Values)
+                list.Clear();
+
+            foreach (List<int> list in _enemyCells.Values)
+                list.Clear();
         }
 
-        //Adds the entity to each bucket it is in
-        private void AddEntityToBuckets(CPosition pos)
+        private void PopulateCells()
         {
+            for (int i = 0; i < _playerEnts.Entities.Count; i++)
+            {
+                AddEntityToPlayerCells(_playerEnts.Entities[i]);
+            }
+
+            for (int i = 0; i < _enemyEnts.Entities.Count; i++)
+            {
+                AddEntityToEnemyCells(_enemyEnts.Entities[i]);
+            }
+        }
+
+        private void AddEntityToPlayerCells(int ent)
+        {
+            CPosition pos = World.GetComponentOfEntity(ent, typeof(CPosition)) as CPosition;
             List<int> cellsEntityIsIn = GetCellsEntityIsIn(pos);
 
             foreach (int i in cellsEntityIsIn)
             {
-                if (!_cells[i].Contains(pos))
-                    _cells[i].Add(pos);
+                if (i >= 0 && i <= _numCells)
+                {
+                    if (!_playerCells[i].Contains(ent))
+                        _playerCells[i].Add(ent);
+                }               
             }
         }
 
-        //Calculates corresponding bucket for each entity corner
+        private void AddEntityToEnemyCells(int ent)
+        {
+            CPosition pos = World.GetComponentOfEntity(ent, typeof(CPosition)) as CPosition;
+            List<int> cellsEntityIsIn = GetCellsEntityIsIn(pos);
+
+            foreach (int i in cellsEntityIsIn)
+            {
+                if (i >= 0 && i <= _numCells)
+                {
+                    if (!_enemyCells[i].Contains(ent))
+                        _enemyCells[i].Add(ent);
+                }               
+            }
+        }
+
         private List<int> GetCellsEntityIsIn(CPosition pos)
         {
             List<int> result = new List<int>();
@@ -85,6 +126,62 @@ namespace MyGame
 
             return row * _cols + col;
         }
-    }
-}
 
+        public override void Process()
+        {
+            ClearCells();
+            PopulateCells();
+
+            CPosition playerPos;
+            CPosition enemyPos;
+
+            CCollision playerCollision;
+            CCollision enemyCollision;
+
+            collisionsChecked = 0;
+
+            for (int i = 0; i < _numCells; i++)
+            {
+                foreach (int playerEnt in _playerCells[i])
+                {
+                    playerPos = World.GetComponentOfEntity(playerEnt, typeof(CPosition)) as CPosition;
+
+                    foreach (int enemyEnt in _enemyCells[i])
+                    {
+                        collisionsChecked++;
+
+                        enemyPos = World.GetComponentOfEntity(enemyEnt, typeof(CPosition)) as CPosition;     
+
+                        if (AreColliding(playerPos, enemyPos))
+                        {
+                            if (!World.EntityHasComponent(playerEnt, typeof(CCollision)))
+                            {
+                                World.AddComponentToEntity(playerEnt, new CCollision(enemyEnt));
+                            }
+                            else
+                            {
+                                playerCollision = World.GetComponentOfEntity(playerEnt, typeof(CCollision)) as CCollision;
+                                playerCollision.CollidedWith.Add(enemyEnt);
+                            }
+
+                            if (!World.EntityHasComponent(enemyEnt, typeof(CCollision)))
+                            {
+                                World.AddComponentToEntity(enemyEnt, new CCollision(playerEnt));
+                            }
+                            else
+                            {
+                                enemyCollision = World.GetComponentOfEntity(enemyEnt, typeof(CCollision)) as CCollision;
+                                enemyCollision.CollidedWith.Add(playerEnt);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (collisionsChecked > maxCollisionsChecked)
+                maxCollisionsChecked = collisionsChecked;
+
+            SwinGame.DrawText("Collisions Checked: " + maxCollisionsChecked, Color.Black, 100, 200);
+        }
+    }
+}*/

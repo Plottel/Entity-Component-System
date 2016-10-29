@@ -43,27 +43,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Checks if the Entity to be removed is a target of any AI. If it is, the AI is set to determine a new target.
-        /// </summary>
-        /// <param name="entID">The Entity to remove.</param>
-        public override void Remove(int entID)
-        {
-            CAI playerAI;
-
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                playerAI = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
-
-                if (playerAI.TargetID == entID)
-                {
-                    playerAI.HasTarget = false;
-                    playerAI.IsInRange = false;
-                }
-            }
-            base.Remove(entID);
-        }
-
-        /// <summary>
         /// Populates the Enemy Positions dictionary with the current positions of each Enemy Entity.
         /// </summary>
         /// <returns>The enemy positions.</returns>
@@ -165,6 +144,9 @@ namespace MyGame
             {
                 playerAI = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
                 playerPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+
+                if (!World.HasEntity(playerAI.TargetID))
+                    playerAI.HasTarget = false;
 
                 if (!playerAI.HasTarget)
                 {

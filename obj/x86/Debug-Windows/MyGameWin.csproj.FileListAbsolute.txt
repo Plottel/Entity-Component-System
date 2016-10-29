@@ -41,7 +41,7 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\arrow.p
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\fonts\Minecraft.ttf
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\playerarcher.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\playerarrow.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb

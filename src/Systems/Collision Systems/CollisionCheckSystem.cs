@@ -12,11 +12,9 @@ namespace MyGame
         private int _cellSize;
         private Dictionary<int, List<int>> _playerCells = new Dictionary<int, List<int>>(); //Maps cell numbers to list of entity IDs
         private Dictionary<int, List<int>> _enemyCells = new Dictionary<int, List<int>>();
-        
+
         private System _playerEnts;
         private System _enemyEnts;
-        private int collisionsChecked;
-        private int maxCollisionsChecked;
 
         public CollisionCheckSystem (World world) : base (new List<Type> {}, new List<Type> {typeof(CExcludeAll)}, world)
         {
@@ -47,21 +45,11 @@ namespace MyGame
 
         private void ClearCells()
         {
-            //Empty the buckets and lists
-            /*_playerCells.Clear();
-            _enemyCells.Clear();
-
             for (int i = 0; i < _numCells; i++)
             {
-                _playerCells.Add(i, new List<int>());
-                _enemyCells.Add(i, new List<int>());
-            }*/
-
-            foreach (List<int> list in _playerCells.Values)
-                list.Clear();
-
-            foreach (List<int> list in _enemyCells.Values)
-                list.Clear();
+                _playerCells[i].Clear();
+                _enemyCells[i].Clear();
+            }
         }
 
         private void PopulateCells()
@@ -99,7 +87,7 @@ namespace MyGame
 
             foreach (int i in cellsEntityIsIn)
             {
-                if (i >= 0 && i <= _numCells)
+                if (i >= 0 && i <= _numCells - 1)
                 {
                     if (!_enemyCells[i].Contains(ent))
                         _enemyCells[i].Add(ent);
@@ -138,8 +126,6 @@ namespace MyGame
             CCollision playerCollision;
             CCollision enemyCollision;
 
-            collisionsChecked = 0;
-
             for (int i = 0; i < _numCells; i++)
             {
                 foreach (int playerEnt in _playerCells[i])
@@ -148,8 +134,6 @@ namespace MyGame
 
                     foreach (int enemyEnt in _enemyCells[i])
                     {
-                        collisionsChecked++;
-
                         enemyPos = World.GetComponentOfEntity(enemyEnt, typeof(CPosition)) as CPosition;     
 
                         if (AreColliding(playerPos, enemyPos))
@@ -177,11 +161,6 @@ namespace MyGame
                     }
                 }
             }
-
-            if (collisionsChecked > maxCollisionsChecked)
-                maxCollisionsChecked = collisionsChecked;
-            
-            SwinGame.DrawText("Collisions Checked: " + maxCollisionsChecked, Color.Black, 100, 200);
         }
     }
 }
