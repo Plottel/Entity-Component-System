@@ -1,5 +1,12 @@
 BITMAP,FreezingBulletSplash,freezingbulletsplash.png,100,100,4,1,4
 ANIM,FreezingBulletSplashAnim,FreezingBulletSplashAnim.txt
+BITMAP,PoisonZone,poisonzone.png,100,100,3,1,3
+ANIM,PoisonZoneAnim,PoisonZoneAnim.txt
+BITMAP,SmallPoisonCloud,smallpoisoncloud.png,21,12,3,1,3
+BITMAP,BigPoisonCloud,bigpoisoncloud.png,42,24,3,1,3
+BITMAP,BigPoisonCloud,bigpoisoncloud.png,42,24,3,1,3
+BITMAP,SmallIceSpike,smallicespike.png,27,20,3,1,3
+BITMAP,BigIceSpike,bigicespike.png,54,40,3,1,3
 BITMAP,SwordMan,swordman.png,21,30,13,1,13
 ANIM,SwordManAnims,SwordManAnims.txt
 BITMAP,BatteringRam,batteringram.png,64,58,9,1,9

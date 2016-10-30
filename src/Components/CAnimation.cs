@@ -7,7 +7,7 @@ namespace MyGame
     {
         private Bitmap _img;
         private Animation _anim;
-        AnimationScript _animScript;
+        private AnimationScript _animScript;
 
         public CAnimation (Bitmap img, Animation anim, AnimationScript animScript)
         {

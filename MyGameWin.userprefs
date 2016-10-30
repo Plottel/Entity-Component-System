@@ -4,22 +4,23 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\Rendering Systems\AnimationRenderingSystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\Rendering Systems\PlayerRenderingSystem.cs">
     <Files>
-      <File FileName="src\Entity.cs" Line="11" Column="10" />
-      <File FileName="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" Line="34" Column="1" />
-      <File FileName="src\Systems\PlayerAISystem.cs" Line="40" Column="13" />
-      <File FileName="src\Systems\Collision Systems\CollisionCheckSystem.cs" Line="95" Column="14" />
-      <File FileName="src\Systems\Collision Systems\BucketTest.cs" Line="9" Column="31" />
-      <File FileName="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" Line="75" Column="10" />
-      <File FileName="src\Systems\SpawningSystem.cs" Line="8" Column="102" />
-      <File FileName="src\GameMain.cs" Line="1" Column="1" />
-      <File FileName="src\Systems\EnemyAISystem.cs" Line="12" Column="37" />
-      <File FileName="src\Systems\System.cs" Line="136" Column="35" />
-      <File FileName="src\Systems\PlayerLootSystem.cs" Line="22" Column="30" />
-      <File FileName="src\Systems\Rendering Systems\HealthRenderingSystem.cs" Line="12" Column="9" />
-      <File FileName="src\Systems\Rendering Systems\RenderingSystem.cs" Line="7" Column="23" />
-      <File FileName="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" Line="15" Column="44" />
+      <File FileName="src\Components\Tags\CGotStatusEffect.cs" Line="8" Column="10" />
+      <File FileName="src\Systems\GotStatusEffectSystem.cs" Line="56" Column="35" />
+      <File FileName="src\Systems\PoisonZoneCollisionHandlerSystem.cs" Line="48" Column="34" />
+      <File FileName="src\Systems\PoisonedSystem.cs" Line="40" Column="10" />
+      <File FileName="src\Components\CPosition.cs" Line="22" Column="30" />
+      <File FileName="src\EntityFactory.cs" Line="71" Column="61" />
+      <File FileName="src\GameMain.cs" Line="51" Column="56" />
+      <File FileName="src\Systems\System.cs" Line="40" Column="19" />
+      <File FileName="src\Systems\Rendering Systems\StatusAnimationRenderingSystem.cs" Line="39" Column="52" />
+      <File FileName="src\Components\CStatusAnimations.cs" Line="19" Column="34" />
+      <File FileName="src\Components\CAnimation.cs" Line="15" Column="26" />
+      <File FileName="Resources\images\CStatusAnimation.cs" Line="14" Column="24" />
+      <File FileName="src\Components\CCollision.cs" Line="1" Column="1" />
+      <File FileName="src\Systems\Collision Systems\FreezeZoneCollisionHandlerSystem.cs" Line="38" Column="76" />
+      <File FileName="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" Line="104" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />

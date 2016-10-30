@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SwinGameSDK;
@@ -53,7 +53,7 @@ namespace MyGame
 
             foreach (int enemyID in _enemies.Entities)
             {
-                enemyPos = World.GetComponentOfEntity(enemyID, typeof(CPosition)) as CPosition;
+                enemyPos = World.GetComponent<CPosition>(enemyID);
                 _enemyPositions.Add(enemyID, SwinGame.PointAt(enemyPos.Centre.X, enemyPos.Centre.Y));
             }
         }
@@ -142,8 +142,8 @@ namespace MyGame
             /// </summary>
             for (int i = 0; i < Entities.Count; i++)
             {
-                playerAI = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
-                playerPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                playerAI = World.GetComponent<CAI>(Entities[i]);
+                playerPos = World.GetComponent<CPosition>(Entities[i]);
 
                 if (!World.HasEntity(playerAI.TargetID))
                     playerAI.HasTarget = false;
@@ -166,7 +166,7 @@ namespace MyGame
                     /// If ready to attack, start the attack animation. The attack will be carried out
                     /// when the attack animation has finished.
                     /// </summary>
-                    playerAnim = World.GetComponentOfEntity(Entities[i], typeof(CAnimation)) as CAnimation;
+                    playerAnim = World.GetComponent<CAnimation>(Entities[i]);
 
                     if (SwinGame.AnimationEnded(playerAnim.Anim)) //Attack at end of Attack animation
                     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SwinGameSDK;
@@ -24,7 +24,13 @@ namespace MyGame
         private List<System> _systems;
 
         /// <summary>
-        /// Represents the next unique ID to be given to an Entity.
+        /// Represents the Entity IDs from dead Entities which can be recycled.
+        /// </summary>
+        private List<int> _recycledIDs;
+
+        /// <summary>
+        /// Represents the next unique ID to be given to an Entity. If there are no
+        /// recycled IDs available, this ID will be given to the next Entity.
         /// </summary>
         private int _nextID;
 
@@ -44,6 +50,7 @@ namespace MyGame
             _entityComponents = new Dictionary<int, Dictionary<Type, Component>>();
             _systems = new List<System>();
             _nextID = 1;
+            _recycledIDs = new List<int>();
             _gameTime = new Timer();
 
             /// <summary>
@@ -68,8 +75,13 @@ namespace MyGame
         /// </summary>
         public bool EntitiesOnSameTeam(int entOne, int entTwo)
         {
-            return (EntityHasComponent(entOne, typeof(CPlayerTeam)) && EntityHasComponent(entTwo, typeof(CPlayerTeam))) 
-                || (EntityHasComponent(entOne, typeof(CEnemyTeam)) && EntityHasComponent(entTwo, typeof(CEnemyTeam)));
+            if (EntityHasComponent(entOne, typeof(CPlayerTeam)) && EntityHasComponent(entTwo, typeof(CPlayerTeam)))
+                return true;
+
+            if (EntityHasComponent(entOne, typeof(CEnemyTeam)) && EntityHasComponent(entTwo, typeof(CEnemyTeam)))
+                return true;
+
+            return false;
         }
 
         /// <summary>
@@ -128,7 +140,7 @@ namespace MyGame
         /// </summary>
         /// <param name="entID">The Entity to add the Component to.</param>
         /// <param name="c">The Component to add.</param>
-        public void AddComponentToEntity(int entID, Component c)
+        public void AddComponent(int entID, Component c)
         {
             _entityComponents[entID].Add(c.GetType(), c);
 
@@ -153,10 +165,10 @@ namespace MyGame
         /// for each System and tells each System to add / remove the Entity accordingly.
         /// </summary>
         /// <param name="entID">The Entity to remove the Component from.</param>
-        /// <param name="t">The Component Type to be removed.</param>
-        public void RemoveComponentFromEntity(int entID, Type t)
+        /// <typeparam name="T">The Component Type to be removed.</typeparam>
+        public void RemoveComponent<T>(int entID) where T : Component
         {
-            _entityComponents[entID].Remove(t);
+            _entityComponents[entID].Remove(typeof(T));
 
             foreach (System s in _systems)
             {
@@ -175,15 +187,14 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Returns a passed in Component Type belonging to the passed in Entity.
+        /// Returns a pssed in Component Type belonging to the passed in Entity.
         /// </summary>
-        /// <param name="entID">The Entity to fetch the Component from.</param>
-        /// <param name="t">The Component Type to be fetched.</param>
-        public Component GetComponentOfEntity(int entID, Type t)
+        /// <param name="entID">The Entity to fetch the Component for.</param>
+        /// <typeparam name="T">The Component Type to be fetched.</typeparam>
+        public T GetComponent<T>(int entID) where T : Component
         {
-            return _entityComponents[entID][t];
+            return (T)_entityComponents[entID][typeof(T)];
         }
-        //Return a list of components associated with the specified Entity ID
 
         /// <summary>
         /// Returns a Dictionary containing all Components belonging to a specified Entity.
@@ -191,7 +202,7 @@ namespace MyGame
         /// </summary>
         /// <param name="entID">The Entity to get all Components of.</param>
         public Dictionary<Type, Component> GetAllComponentsOfEntity(int entID)
-        {
+        {   
             return _entityComponents[entID];
         }
 
@@ -199,14 +210,16 @@ namespace MyGame
         /// Returns a System from the World of a specified Type. This is used by other Systems to quickly 
         /// fetch data that is already grouped, rather than asking the World to fetch it from the master list.
         /// </summary>
-        /// <param name="t">The System Type to fetch.</param>
-        public System GetSystem(Type t)
+        /// <typeparam name="T">The System Type to fetch.</typeparam>
+        public T GetSystem<T>() where T : System
         {
+            Type t = typeof(T);
+
             foreach (System s in _systems)
             {
                 if (s.GetType() == t)
                 {
-                    return s;
+                    return s as T;
                 }
             }
             return null;
@@ -222,13 +235,25 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Returns an Entity with the next unique ID. Also increments the unique ID counter.
+        /// Returns an Entity. If there are any IDs which can be recycled, the new
+        /// Entity's ID will be the last recyclable ID. Otherwise, it will be the next unique ID.
         /// </summary>
         public Entity CreateEntity()
         {
-            Entity result = new Entity(_nextID);
-            _nextID++;
-            return result;
+            Entity newEntity;
+
+            if (_recycledIDs.Any())
+            {
+                newEntity = new Entity(_recycledIDs[_recycledIDs.Count - 1]);
+                _recycledIDs.RemoveAt(_recycledIDs.Count - 1);
+            }
+            else
+            {
+                newEntity = new Entity(_nextID);
+                _nextID++;
+            }
+
+            return newEntity;
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace MyGame
         {
             _gold = 5000;
             _freezingBulletCooldown = 1000;
-            _poisonZoneCooldown = 5000;
+            _poisonZoneCooldown = 10;
             _archerCount = 0;
             _wizardCount = 0;
         }

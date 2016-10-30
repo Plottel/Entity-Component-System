@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -19,11 +19,11 @@ namespace MyGame
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entFrozen = World.GetComponentOfEntity(Entities[i], typeof(CFrozen)) as CFrozen;
+                entFrozen = World.GetComponent<CFrozen>(Entities[i]);
 
                 if (Utils.EffectHasEnded(World.GameTime, entFrozen.TimeApplied, entFrozen.Duration))
                 {
-                    World.RemoveComponentFromEntity(Entities[i], typeof(CFrozen));
+                    World.RemoveComponent<CFrozen>(Entities[i]);
                 }
             }
         }

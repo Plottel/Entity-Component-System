@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -40,7 +40,7 @@ namespace MyGame
         /// <param name="lootComp">The Loot to be given to the Player.</param>
         public void GiveLoot(CLoot lootComp)
         {
-            CPlayer player = World.GetComponentOfEntity(Entities[0], typeof(CPlayer)) as CPlayer;
+            CPlayer player = World.GetComponent<CPlayer>(Entities[0]);
             player.Gold += lootComp.Value;
         }
 

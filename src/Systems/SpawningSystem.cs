@@ -42,7 +42,7 @@ namespace MyGame
         /// <param name="world">The World the System belongs to.</param>
         public SpawningSystem (World world) : base(new List<Type> {}, new List<Type> {}, world)
         {
-            _spawnInterval = 500;
+            _spawnInterval = 3000;
         }
 
         /// <summary>

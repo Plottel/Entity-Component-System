@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -19,8 +19,8 @@ namespace MyGame
             //Use components of each entity to draw their bitmaps
             for (int i = 0; i < Entities.Count; i++)
             {
-                entRend = World.GetComponentOfEntity(Entities[i], typeof(CRenderable)) as CRenderable;
-                entPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                entRend = World.GetComponent<CRenderable>(Entities[i]);
+                entPos = World.GetComponent<CPosition>(Entities[i]);
 
                 SwinGame.DrawBitmap(entRend.Img, entPos.X, entPos.Y);
             }

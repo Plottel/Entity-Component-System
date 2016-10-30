@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -27,8 +27,8 @@ namespace MyGame
             /// <returns>The range.</returns>
             for (int i = 0; i < Entities.Count; i++)
             {
-                enemyAI = World.GetComponentOfEntity(Entities[i], typeof(CAI)) as CAI;
-                enemyPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                enemyAI = World.GetComponent<CAI>(Entities[i]);
+                enemyPos = World.GetComponent<CPosition>(Entities[i]);
 
                 if (!enemyAI.IsInRange)
                 {
@@ -38,7 +38,7 @@ namespace MyGame
                     /// If the AI is now in range, stop moving and begin attacking.
                     /// </summary>
                     if (enemyAI.IsInRange)
-                        World.RemoveComponentFromEntity(Entities[i], typeof(CVelocity));          
+                        World.RemoveComponent<CVelocity>(Entities[i]);
                 }
                 else if (!enemyAI.AttackIsReady)
                 {
@@ -46,7 +46,7 @@ namespace MyGame
                 }
                 else
                 {
-                    enemyAnim = World.GetComponentOfEntity(Entities[i], typeof(CAnimation)) as CAnimation;
+                    enemyAnim = World.GetComponent<CAnimation>(Entities[i]);
 
                     /// <summary>
                     /// Attack will be carried out when the Attack animation has ended.
@@ -77,7 +77,7 @@ namespace MyGame
         protected void CheckRange(int entID, CAI enemyAI, CPosition enemyPos)
         {
             Circle enemyAttackRadius = SwinGame.CreateCircle(enemyPos.Centre.X, enemyPos.Centre.Y, enemyAI.Range + (enemyPos.Width / 2));
-            CPosition targetPos = World.GetComponentOfEntity(enemyAI.TargetID, typeof(CPosition)) as CPosition;
+            CPosition targetPos = World.GetComponent<CPosition>(enemyAI.TargetID);
 
             enemyAI.IsInRange = SwinGame.CircleRectCollision(enemyAttackRadius, targetPos.Rect);
         }
@@ -90,7 +90,7 @@ namespace MyGame
         /// <param name="entID">Ent identifier.</param>
         protected void CheckCooldown(int entID)
         {
-            CAI enemyAI = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+            CAI enemyAI = World.GetComponent<CAI>(entID);
 
             enemyAI.AttackIsReady = World.GameTime - enemyAI.LastAttackTime >= enemyAI.Cooldown;
 
@@ -99,19 +99,19 @@ namespace MyGame
                 /// <summary>
                 /// Begin the Attack animation for the AI
                 /// </summary>
-                CAnimation enemyAnim = World.GetComponentOfEntity(entID, typeof(CAnimation)) as CAnimation;
+                CAnimation enemyAnim = World.GetComponent<CAnimation>(entID);
                 SwinGame.AssignAnimation(enemyAnim.Anim, "Attack", enemyAnim.AnimScript);
             }
         }
 
         protected void Attack(int entID, string team)
         {
-            CAI enemyAI = World.GetComponentOfEntity(entID, typeof(CAI)) as CAI;
+            CAI enemyAI = World.GetComponent<CAI>(entID);
             CDamage enemyDamage; 
             CGun enemyGun;
             CPosition enemyPos;
 
-            CHealth targetHealth = World.GetComponentOfEntity(enemyAI.TargetID, typeof(CHealth)) as CHealth;
+            CHealth targetHealth = World.GetComponent<CHealth>(enemyAI.TargetID);
             CPosition targetPos;
 
             enemyAI.LastAttackTime = World.GameTime;
@@ -121,7 +121,7 @@ namespace MyGame
             {
                 case AttackType.Melee:
                 {
-                    enemyDamage = World.GetComponentOfEntity(entID, typeof(CDamage)) as CDamage;
+                    enemyDamage = World.GetComponent<CDamage>(entID);
 
                     targetHealth.Damage += enemyDamage.Damage;
                     break;
@@ -129,10 +129,10 @@ namespace MyGame
 
                 case AttackType.Gun:
                 {
-                    enemyPos = World.GetComponentOfEntity(entID, typeof(CPosition)) as CPosition;
-                    enemyGun = World.GetComponentOfEntity(entID, typeof(CGun)) as CGun;
+                    enemyPos = World.GetComponent<CPosition>(entID);
+                    enemyGun = World.GetComponent<CGun>(entID);
 
-                    targetPos = World.GetComponentOfEntity(enemyAI.TargetID, typeof(CPosition)) as CPosition;
+                    targetPos = World.GetComponent<CPosition>(enemyAI.TargetID);
 
                     EntityFactory.CreateArrow(enemyPos.Centre.X, enemyPos.Centre.Y, enemyGun.BulletSpeed, enemyGun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
                                                                                                                                                 targetPos.Centre.Y - 5, 

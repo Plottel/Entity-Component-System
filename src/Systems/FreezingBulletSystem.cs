@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -35,8 +35,8 @@ namespace MyGame
             //For each Freezing Bullet
             for (int i = 0; i < Entities.Count; i++)
             {
-                bulletProj = World.GetComponentOfEntity(Entities[i], typeof(CProjectile)) as CProjectile;
-                bulletPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                bulletProj = World.GetComponent<CProjectile>(Entities[i]);
+                bulletPos = World.GetComponent<CPosition>(Entities[i]);
                 
                 if (ReachedTarget(bulletProj, bulletPos) || !ProjectileOnScreen(bulletPos))
                 {

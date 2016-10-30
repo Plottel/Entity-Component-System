@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using SwinGameSDK;
 
 namespace MyGame
 {
@@ -53,8 +54,8 @@ namespace MyGame
             /// </summary>
             for (int i = 0; i < Entities.Count; i++)
             {
-                poisonEffect = World.GetComponentOfEntity(Entities[i], typeof(CPoison)) as CPoison;
-                collision = World.GetComponentOfEntity(Entities[i], typeof(CCollision)) as CCollision;
+                poisonEffect = World.GetComponent<CPoison>(Entities[i]);
+                collision = World.GetComponent<CCollision>(Entities[i]);
 
                 if (Utils.EffectHasEnded(World.GameTime, poisonEffect.TimeApplied, poisonEffect.Duration))
                 {
@@ -69,11 +70,14 @@ namespace MyGame
                     {
                         if (!World.EntityHasComponent(target, typeof(CPoison)))
                         {
-                            World.AddComponentToEntity(target, new CPoison(poisonEffect.Strength, poisonEffect.Duration, World.GameTime));
+                            World.AddComponent(target, new CPoison(poisonEffect.Strength, poisonEffect.Duration, World.GameTime));
+
+                            if (!World.EntityHasComponent(target, typeof(CGotStatusEffect)))
+                                World.AddComponent(target, new CGotStatusEffect());
                         }
-                        else //If entity already has a Poison Compoent, refresh its duration.
+                        else //If entity already has a Poison Component, refresh its duration.
                         {
-                            targetPoisonEffect = World.GetComponentOfEntity(target, typeof(CPoison)) as CPoison;
+                            targetPoisonEffect = World.GetComponent<CPoison>(target);
                             targetPoisonEffect.TimeApplied = World.GameTime;
                         }
                     }

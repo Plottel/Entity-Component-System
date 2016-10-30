@@ -105,19 +105,16 @@ namespace MyGame
             foreach (Type t in Include)
             {
                 if (!entComponents.ContainsKey(t))
-                {
                     return false;
-                }
             }
 
             //Check Entity does NOT have any components the System will NOT operate on.
             foreach (Type t in Exclude)
             {
                 if (entComponents.ContainsKey(t))
-                {
                     return false;
-                }
             }
+
             //The Entity meets the requirements and will be added to the System.
             return true;
         }

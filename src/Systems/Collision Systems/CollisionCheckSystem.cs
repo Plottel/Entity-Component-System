@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -54,25 +54,31 @@ namespace MyGame
 
         private void PopulateCells()
         {
+            AddCastleToPlayerCells();
+
             for (int i = 0; i < _playerEnts.Entities.Count; i++)
-            {
                 AddEntityToPlayerCells(_playerEnts.Entities[i]);
-            }
 
             for (int i = 0; i < _enemyEnts.Entities.Count; i++)
-            {
                 AddEntityToEnemyCells(_enemyEnts.Entities[i]);
-            }
+        }
+
+        //Manually add Castle to cells because a corner check won't work because it's too big.
+        //Castle is first object created to ID will always be 1
+        private void AddCastleToPlayerCells()
+        {
+            for (int i = 0; i < _numCells; i += _cols)
+                _playerCells[i].Add(1);
         }
 
         private void AddEntityToPlayerCells(int ent)
         {
-            CPosition pos = World.GetComponentOfEntity(ent, typeof(CPosition)) as CPosition;
+            CPosition pos = World.GetComponent<CPosition>(ent);
             List<int> cellsEntityIsIn = GetCellsEntityIsIn(pos);
 
             foreach (int i in cellsEntityIsIn)
             {
-                if (i >= 0 && i <= _numCells)
+                if (i >= 0 && i < _numCells)
                 {
                     if (!_playerCells[i].Contains(ent))
                         _playerCells[i].Add(ent);
@@ -82,7 +88,7 @@ namespace MyGame
 
         private void AddEntityToEnemyCells(int ent)
         {
-            CPosition pos = World.GetComponentOfEntity(ent, typeof(CPosition)) as CPosition;
+            CPosition pos = World.GetComponent<CPosition>(ent);
             List<int> cellsEntityIsIn = GetCellsEntityIsIn(pos);
 
             foreach (int i in cellsEntityIsIn)
@@ -130,31 +136,31 @@ namespace MyGame
             {
                 foreach (int playerEnt in _playerCells[i])
                 {
-                    playerPos = World.GetComponentOfEntity(playerEnt, typeof(CPosition)) as CPosition;
+                    playerPos = World.GetComponent<CPosition>(playerEnt);
 
                     foreach (int enemyEnt in _enemyCells[i])
                     {
-                        enemyPos = World.GetComponentOfEntity(enemyEnt, typeof(CPosition)) as CPosition;     
+                        enemyPos = World.GetComponent<CPosition>(enemyEnt);
 
                         if (AreColliding(playerPos, enemyPos))
                         {
                             if (!World.EntityHasComponent(playerEnt, typeof(CCollision)))
                             {
-                                World.AddComponentToEntity(playerEnt, new CCollision(enemyEnt));
+                                World.AddComponent(playerEnt, new CCollision(enemyEnt));
                             }
                             else
                             {
-                                playerCollision = World.GetComponentOfEntity(playerEnt, typeof(CCollision)) as CCollision;
+                                playerCollision = World.GetComponent<CCollision>(playerEnt);
                                 playerCollision.CollidedWith.Add(enemyEnt);
                             }
 
                             if (!World.EntityHasComponent(enemyEnt, typeof(CCollision)))
                             {
-                                World.AddComponentToEntity(enemyEnt, new CCollision(playerEnt));
+                                World.AddComponent(enemyEnt, new CCollision(playerEnt));
                             }
                             else
                             {
-                                enemyCollision = World.GetComponentOfEntity(enemyEnt, typeof(CCollision)) as CCollision;
+                                enemyCollision = World.GetComponent<CCollision>(enemyEnt);
                                 enemyCollision.CollidedWith.Add(playerEnt);
                             }
                         }

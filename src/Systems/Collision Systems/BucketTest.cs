@@ -1,4 +1,4 @@
-﻿/*using System;
+/*using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -79,7 +79,7 @@ namespace MyGame
 
         private void AddEntityToPlayerCells(int ent)
         {
-            CPosition pos = World.GetComponentOfEntity(ent, typeof(CPosition)) as CPosition;
+            CPosition pos = World.GetComponent(ent, typeof(CPosition)) as CPosition;
             List<int> cellsEntityIsIn = GetCellsEntityIsIn(pos);
 
             foreach (int i in cellsEntityIsIn)
@@ -94,7 +94,7 @@ namespace MyGame
 
         private void AddEntityToEnemyCells(int ent)
         {
-            CPosition pos = World.GetComponentOfEntity(ent, typeof(CPosition)) as CPosition;
+            CPosition pos = World.GetComponent(ent, typeof(CPosition)) as CPosition;
             List<int> cellsEntityIsIn = GetCellsEntityIsIn(pos);
 
             foreach (int i in cellsEntityIsIn)
@@ -144,33 +144,33 @@ namespace MyGame
             {
                 foreach (int playerEnt in _playerCells[i])
                 {
-                    playerPos = World.GetComponentOfEntity(playerEnt, typeof(CPosition)) as CPosition;
+                    playerPos = World.GetComponent(playerEnt, typeof(CPosition)) as CPosition;
 
                     foreach (int enemyEnt in _enemyCells[i])
                     {
                         collisionsChecked++;
 
-                        enemyPos = World.GetComponentOfEntity(enemyEnt, typeof(CPosition)) as CPosition;     
+                        enemyPos = World.GetComponent(enemyEnt, typeof(CPosition)) as CPosition;     
 
                         if (AreColliding(playerPos, enemyPos))
                         {
                             if (!World.EntityHasComponent(playerEnt, typeof(CCollision)))
                             {
-                                World.AddComponentToEntity(playerEnt, new CCollision(enemyEnt));
+                                World.AddComponent(playerEnt, new CCollision(enemyEnt));
                             }
                             else
                             {
-                                playerCollision = World.GetComponentOfEntity(playerEnt, typeof(CCollision)) as CCollision;
+                                playerCollision = World.GetComponent(playerEnt, typeof(CCollision)) as CCollision;
                                 playerCollision.CollidedWith.Add(enemyEnt);
                             }
 
                             if (!World.EntityHasComponent(enemyEnt, typeof(CCollision)))
                             {
-                                World.AddComponentToEntity(enemyEnt, new CCollision(playerEnt));
+                                World.AddComponent(enemyEnt, new CCollision(playerEnt));
                             }
                             else
                             {
-                                enemyCollision = World.GetComponentOfEntity(enemyEnt, typeof(CCollision)) as CCollision;
+                                enemyCollision = World.GetComponent(enemyEnt, typeof(CCollision)) as CCollision;
                                 enemyCollision.CollidedWith.Add(playerEnt);
                             }
                         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -24,8 +24,8 @@ namespace MyGame
             if (HasEntity(entID))
             {
                 //Player Gold System is responsible for managing the Player's resources.
-                PlayerGoldSystem goldSystem = World.GetSystem(typeof(PlayerGoldSystem)) as PlayerGoldSystem;
-                goldSystem.GiveLoot(World.GetComponentOfEntity(entID, typeof(CLoot)) as CLoot);
+                PlayerGoldSystem goldSystem = World.GetSystem<PlayerGoldSystem>();
+                goldSystem.GiveLoot(World.GetComponent<CLoot>(entID));
             }
             base.Remove(entID);
         }

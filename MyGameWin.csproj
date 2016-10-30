@@ -98,6 +98,11 @@
     <Compile Include="src\Systems\PlayerCooldownSystem.cs" />
     <Compile Include="src\Systems\PlayerAISystem.cs" />
     <Compile Include="src\Systems\Collision Systems\BucketTest.cs" />
+    <Compile Include="src\Components\CStatusAnimations.cs" />
+    <Compile Include="src\Systems\Rendering Systems\StatusAnimationRenderingSystem.cs" />
+    <Compile Include="src\Components\Tags\CGotStatusEffect.cs" />
+    <Compile Include="src\Systems\GotStatusEffectSystem.cs" />
+    <Compile Include="Resources\images\CStatusAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -238,6 +243,25 @@
     <None Include="Resources\images\playerarrow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\images\poisonzone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\PoisonZoneAnim.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\smallpoisoncloud.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\bigpoisoncloud.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\bigicespike.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\smallicespike.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\IceSpikeAnim.txt" />
   </ItemGroup>
   <Target Name="CopyLibsToOut">
     <Copy SourceFiles="@(WinLibs)" DestinationFolder="$(OutDir)" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -29,19 +29,24 @@ namespace MyGame
             //For each Freeze Zone
             for (int i = 0; i < Entities.Count; i++)
             {
-                freezeEffect = World.GetComponentOfEntity(Entities[i], typeof(CFrozen)) as CFrozen;
-                collision = World.GetComponentOfEntity(Entities[i], typeof(CCollision)) as CCollision;
+                freezeEffect = World.GetComponent<CFrozen>(Entities[i]);
+                collision = World.GetComponent<CCollision>(Entities[i]);
 
                 foreach (int target in collision.CollidedWith)
                 {
                     //If already frozen, don't add another Frozen component just refresh duration
                     if (!World.EntityHasComponent(target, typeof(CFrozen)))
                     {
-                        World.AddComponentToEntity(target, new CFrozen(freezeEffect.Duration, World.GameTime));
+                        //Don't freeze projectiles
+                        if (!World.EntityHasComponent(target, typeof(CProjectile)))
+                            World.AddComponent(target, new CFrozen(freezeEffect.Duration, World.GameTime));
+
+                        if (!World.EntityHasComponent(target, typeof(CGotStatusEffect)))
+                            World.AddComponent(target, new CGotStatusEffect());
                     }
                     else
                     {
-                        targetFreezeEffect = World.GetComponentOfEntity(target, typeof(CFrozen)) as CFrozen;
+                        targetFreezeEffect = World.GetComponent<CFrozen>(target);
                         targetFreezeEffect.TimeApplied = World.GameTime;
                     }
                 }

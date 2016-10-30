@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -21,9 +21,9 @@ namespace MyGame
             /// </summary>
             Point2D pt = SwinGame.MousePosition();
 
-            CPosition playerPos = World.GetComponentOfEntity(Entities[0], typeof(CPosition)) as CPosition;
-            CPlayer player = World.GetComponentOfEntity(Entities[0], typeof(CPlayer)) as CPlayer;
-            PlayerGoldSystem shop = World.GetSystem(typeof(PlayerGoldSystem)) as PlayerGoldSystem;
+            CPosition playerPos = World.GetComponent<CPosition>(Entities[0]);
+            CPlayer player = World.GetComponent<CPlayer>(Entities[0]);
+            PlayerGoldSystem shop = World.GetSystem<PlayerGoldSystem>();
 
             if (SwinGame.KeyTyped(KeyCode.WKey))
             {

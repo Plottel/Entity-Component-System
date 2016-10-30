@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -19,7 +19,7 @@ namespace MyGame
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entHealth = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
+                entHealth = World.GetComponent<CHealth>(Entities[i]);
 
                 if (entHealth.OutOfHealth)
                 {

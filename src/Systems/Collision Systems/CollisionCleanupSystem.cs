@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -28,7 +28,7 @@ namespace MyGame
             PopulateCollisionComponentList(toRemove);
             foreach (int entID in toRemove)
             {
-                World.RemoveComponentFromEntity(entID, typeof(CCollision));
+                World.RemoveComponent<CCollision>(entID);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -63,8 +63,8 @@ namespace MyGame
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entProjectile = World.GetComponentOfEntity(Entities[i], typeof(CProjectile)) as CProjectile;
-                entPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                entProjectile = World.GetComponent<CProjectile>(Entities[i]);
+                entPos = World.GetComponent<CPosition>(Entities[i]);
 
                 if (ReachedTarget(entProjectile, entPos) || !ProjectileOnScreen(entPos))
                 {

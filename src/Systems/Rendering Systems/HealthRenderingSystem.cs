@@ -1,9 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
 namespace MyGame
 {
+    /// <summary>
+    /// Represents the System responsible for drawing Health Bars. Draws two rectangles representing
+    /// current Health of each Entity.
+    /// </summary>
     public class HealthRenderingSystem : System
     {
         public HealthRenderingSystem (World world) : base(new List<Type> {typeof(CHealth), typeof(CPosition)}, new List<Type> {typeof(CPlayer)}, world)
@@ -17,8 +21,8 @@ namespace MyGame
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entHealth = World.GetComponentOfEntity(Entities[i], typeof(CHealth)) as CHealth;
-                entPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
+                entHealth = World.GetComponent<CHealth>(Entities[i]);
+                entPos = World.GetComponent<CPosition>(Entities[i]);
 
                 int pixelsPerHP = entPos.Width / entHealth.Health;
 

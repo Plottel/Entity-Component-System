@@ -20,20 +20,22 @@ namespace MyGame
             world.AddSystem(new MovementSystem(world));
             world.AddSystem(new PlayerAISystem(world));
             world.AddSystem(new EnemyAISystem(world));
-            world.AddSystem(new ProjectileSystem(world));
-            world.AddSystem(new FreezingBulletSystem(world));
+            world.AddSystem(new ProjectileSystem(world)); //
+            world.AddSystem(new FreezingBulletSystem(world)); //
             world.AddSystem(new FrozenSystem(world));
             world.AddSystem(new PoisonedSystem(world));
             world.AddSystem(new PlayerLootSystem(world));
             world.AddSystem(new CollisionCheckSystem(world));
-            world.AddSystem(new BulletCollisionHandlerSystem(world));
             world.AddSystem(new FreezeZoneCollisionHandlerSystem(world));
-            world.AddSystem(new PoisonZoneCollisionHandlerSystem(world));
-            world.AddSystem(new HealthSystem(world));
+            world.AddSystem(new PoisonZoneCollisionHandlerSystem(world)); //
+            world.AddSystem(new BulletCollisionHandlerSystem(world)); //
+            world.AddSystem(new HealthSystem(world)); //
+            world.AddSystem(new GotStatusEffectSystem(world));
             world.AddSystem(new HealthRenderingSystem(world));
             world.AddSystem(new AnimationRenderingSystem(world));
             world.AddSystem(new RenderingSystem(world));
             world.AddSystem(new PlayerRenderingSystem(world));
+            world.AddSystem(new StatusAnimationRenderingSystem(world));
             world.AddSystem(new CollisionCleanupSystem(world));
 
             EntityFactory.World = world;
@@ -43,10 +45,10 @@ namespace MyGame
             while(false == SwinGame.WindowCloseRequested() && SwinGame.KeyTyped(KeyCode.EscapeKey) == false)
             {
                 //Fetch the next batch of UI interaction
-                SwinGame.ProcessEvents();
+                SwinGame.ProcessEvents();             
                 
                 //Clear the screen and draw the framerate
-                SwinGame.ClearScreen(Color.SkyBlue);
+                SwinGame.ClearScreen(Color.SandyBrown);
                 SwinGame.DrawFramerate(200, 570);
                 world.Process();
 

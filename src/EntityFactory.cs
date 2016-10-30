@@ -49,18 +49,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Returns a Bitmap representing a Poison Zone;
-        /// </summary>
-        /// <returns>The poison pool image.</returns>
-        public static Bitmap CreatePoisonZoneImg()
-        {
-            Bitmap result = SwinGame.CreateBitmap(100, 100);
-            SwinGame.ClearSurface(result, SwinGame.RGBAColor(148, 0, 211, 100));
-
-            return result;
-        }
-
-        /// <summary>
         /// Creates an Entity with all Components of a Player and adds it to the World.
         /// </summary>
         public static void CreatePlayer()
@@ -71,7 +59,7 @@ namespace MyGame
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
             components.Add(new CRenderable(CreateCastleImg()));
-            components.Add(new CPosition(5, 5, 100, 590));
+            components.Add(new CPosition(0, 5, 100, 590));
             components.Add(new CPlayer());
             components.Add(new CHealth(200));
             components.Add(new CPlayerTeam());
@@ -102,6 +90,7 @@ namespace MyGame
             components.Add(new CDamage(1));
             components.Add(new CLoot(5));
             components.Add(new CEnemyTeam());
+            components.Add(new CStatusAnimations());
 
             Bitmap bmp = SwinGame.BitmapNamed("SwordMan");
             Animation anim = SwinGame.CreateAnimation("Walk", SwinGame.AnimationScriptNamed("SwordManAnims"));
@@ -162,6 +151,7 @@ namespace MyGame
             components.Add(new CGun(5, 2));
             components.Add(new CLoot(10));
             components.Add(new CEnemyTeam());
+            components.Add(new CStatusAnimations());
                 
             Bitmap bmp = SwinGame.BitmapNamed("ArcherMan");
             Animation anim = SwinGame.CreateAnimation("Walk", SwinGame.AnimationScriptNamed("ArcherManAnims"));
@@ -195,6 +185,7 @@ namespace MyGame
             components.Add(new CDamage(5));
             components.Add(new CLoot(20));
             components.Add(new CEnemyTeam());
+            components.Add(new CStatusAnimations());
 
             Bitmap bmp = SwinGame.BitmapNamed("BatteringRam");
             Animation anim = SwinGame.CreateAnimation("Walk", SwinGame.AnimationScriptNamed("BatteringRamAnims"));
@@ -328,16 +319,20 @@ namespace MyGame
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
-            components.Add(new CRenderable(CreatePoisonZoneImg()));
             components.Add(new CPosition(x - 50, y - 50, 100));
             components.Add(new CPoison(1, 5000, _world.GameTime));
             components.Add(new CAppliesDebuff());
             components.Add(new CPlayerTeam());
             components.Add(new CCollidable());
 
+            Bitmap bmp = SwinGame.BitmapNamed("PoisonZone");
+            Animation anim = SwinGame.CreateAnimation("Poison", SwinGame.AnimationScriptNamed("PoisonZoneAnim"));
+            AnimationScript animScript = SwinGame.AnimationScriptNamed("PoisonZoneAnim");
+
+            components.Add(new CAnimation(bmp, anim, animScript));
+
             _world.AddEntity(newEntity, components);
         }
-
 
         /// <summary>
         /// Creates an Entity with an Animation component and adds it to the world. 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -22,17 +22,20 @@ namespace MyGame
                 CCollision collision;
                 CHealth targetHealth;
 
-                collision = World.GetComponentOfEntity(Entities[i], typeof(CCollision)) as CCollision;
+                collision = World.GetComponent<CCollision>(Entities[i]);
 
-                if (World.EntityHasComponent(collision.CollidedWith[0], typeof(CHealth)))
+                if (World.HasEntity(collision.CollidedWith[0]))
                 {
-                    targetHealth = World.GetComponentOfEntity(collision.CollidedWith[0], typeof(CHealth)) as CHealth;
-                    bulletDamage = World.GetComponentOfEntity(Entities[i], typeof(CDamage)) as CDamage;
+                    if (World.EntityHasComponent(collision.CollidedWith[0], typeof(CHealth)))
+                    {
+                        targetHealth = World.GetComponent<CHealth>(collision.CollidedWith[0]);
+                        bulletDamage = World.GetComponent<CDamage>(Entities[i]);
 
-                    targetHealth.Damage += bulletDamage.Damage;
+                        targetHealth.Damage += bulletDamage.Damage;
 
-                    _deadBullets.Add(Entities[i]);
-                }
+                        _deadBullets.Add(Entities[i]);
+                    }
+                }                
             }
 
             //Bullets are destroyed once they've collided - so the Entity list is emptied after being processed

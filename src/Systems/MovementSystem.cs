@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -21,8 +21,8 @@ namespace MyGame
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entPos = World.GetComponentOfEntity(Entities[i], typeof(CPosition)) as CPosition;
-                entVel = World.GetComponentOfEntity(Entities[i], typeof(CVelocity)) as CVelocity;
+                entPos = World.GetComponent<CPosition>(Entities[i]);
+                entVel = World.GetComponent<CVelocity>(Entities[i]);
 
                 entPos.X += entVel.DX;
                 entPos.Y += entVel.DY;
