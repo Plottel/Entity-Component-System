@@ -115,7 +115,7 @@ namespace MyGame
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
             components.Add(new CPosition(x, y, 20, 28));
-            components.Add(new CAI(700, 2000, AttackType.Gun));
+            components.Add(new CAI(700, 50, AttackType.Gun));
             components.Add(new CGun(25, 2));
             components.Add(new CPlayerTeam());
 

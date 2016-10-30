@@ -38,6 +38,16 @@ namespace MyGame
             }
         }
 
+        public Dictionary<int, List<int>> PlayerCells
+        {
+            get {return _playerCells;}
+        }
+
+        public Dictionary<int, List<int>> EnemyCells
+        {
+            get {return _enemyCells;}
+        }
+
         private bool AreColliding(CPosition p1, CPosition p2)
         {
             return SwinGame.RectanglesIntersect(p1.Rect, p2.Rect);

@@ -146,7 +146,14 @@ namespace MyGame
                 playerPos = World.GetComponent<CPosition>(Entities[i]);
 
                 if (!World.HasEntity(playerAI.TargetID))
+                {
                     playerAI.HasTarget = false;
+
+                    //This is needed to prevent AI from disappearing, but is buggy.
+                    //CAnimation anim = World.GetComponent<CAnimation>(Entities[i]);
+                    //SwinGame.AssignAnimation(anim.Anim, "Still", anim.AnimScript);
+                }
+                    
 
                 if (!playerAI.HasTarget)
                 {

@@ -16,11 +16,6 @@ namespace MyGame
         private const int _spawnAtX = 1200;
 
         /// <summary>
-        /// The y coordinate where units will be spawned.
-        /// </summary>
-        private int _spawnAtY;
-
-        /// <summary>
         /// Seed used to randomise y coordinate spawn locations.
         /// </summary>
         private Random _seed = new Random();
@@ -42,7 +37,7 @@ namespace MyGame
         /// <param name="world">The World the System belongs to.</param>
         public SpawningSystem (World world) : base(new List<Type> {}, new List<Type> {}, world)
         {
-            _spawnInterval = 3000;
+            _spawnInterval = 500;
         }
 
         /// <summary>
@@ -63,10 +58,9 @@ namespace MyGame
             {
                 _lastSpawn = World.GameTime;
 
-                _spawnAtY = _seed.Next(100, 500);
-                EntityFactory.CreateSwordMan(_spawnAtX, _spawnAtY);
-                EntityFactory.CreateBatteringRam(_spawnAtX, _spawnAtY + 50);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, _spawnAtY - 50);
+                EntityFactory.CreateSwordMan(_spawnAtX, _seed.Next(100, 500));
+                EntityFactory.CreateBatteringRam(_spawnAtX, _seed.Next(100, 500));
+                EntityFactory.CreateEnemyArcher(_spawnAtX, _seed.Next(100, 500));
             }
         }
     }

@@ -35,6 +35,24 @@ namespace MyGame
                 shop.BuyArcher(player);
             }
 
+            ///
+            /// Starting point for Bomb man
+            ///
+            if (SwinGame.KeyTyped(KeyCode.BKey))
+            {
+                CollisionCheckSystem collisions = World.GetSystem<CollisionCheckSystem>();
+                List<int> targets = collisions.EnemyCells[0];
+
+                for (int i = 1; i < collisions.EnemyCells.Count; i++)
+                {
+                    if (collisions.EnemyCells[i].Count > targets.Count)
+                        targets = collisions.EnemyCells[i];
+                }
+
+                foreach (int ent in targets)
+                    World.RemoveEntity(ent);
+            }
+
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
                 if (PlayerCooldownSystem.AbilityIsReady(World.GameTime, player.UsedLastPoisonZoneAt, player.PoisonZoneCooldown))
