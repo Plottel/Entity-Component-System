@@ -57,7 +57,7 @@
     <Compile Include="src\Systems\MovementSystem.cs" />
     <Compile Include="src\Systems\SpawningSystem.cs" />
     <Compile Include="src\Components\CHealth.cs" />
-    <Compile Include="src\Components\CGun.cs" />
+    <Compile Include="src\Components\CBow.cs" />
     <Compile Include="src\Components\CDamage.cs" />
     <Compile Include="src\Components\AttackType.cs" />
     <Compile Include="src\Components\CAI.cs" />

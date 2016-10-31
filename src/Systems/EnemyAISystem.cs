@@ -110,7 +110,7 @@ namespace MyGame
         {
             CAI AI = World.GetComponent<CAI>(entID);
             CDamage damage; 
-            CGun gun;
+            CBow gun;
             CPosition pos;
 
             CHealth targetHealth = World.GetComponent<CHealth>(AI.TargetID);
@@ -136,14 +136,14 @@ namespace MyGame
                     break;
                 }
 
-                case AttackType.Gun:
+                case AttackType.Bow:
                 {
                     pos = World.GetComponent<CPosition>(entID);
-                    gun = World.GetComponent<CGun>(entID);
+                    gun = World.GetComponent<CBow>(entID);
 
                     targetPos = World.GetComponent<CPosition>(AI.TargetID);
 
-                    EntityFactory.CreateArrow(pos.Centre.X, pos.Centre.Y, gun.BulletSpeed, gun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
+                    EntityFactory.CreateArrow(pos.Centre.X, pos.Centre.Y, gun.ArrowSpeed, gun.ArrowDamage, new CPosition(targetPos.Centre.X - 5, 
                                                                                                                                                 targetPos.Centre.Y - 5, 
                                                                                                                                                 10, 
                                                                                                                                                 10), team);

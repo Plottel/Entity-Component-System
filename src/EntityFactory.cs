@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SwinGameSDK;
 
@@ -116,8 +116,8 @@ namespace MyGame
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
             components.Add(new CPosition(x, y, 20, 28));
-            components.Add(new CAI(700, 50, AttackType.Gun));
-            components.Add(new CGun(25, 2));
+            components.Add(new CAI(700, 50, AttackType.Bow));
+            components.Add(new CBow(25, 2));
             components.Add(new CPlayerTeam());
 
             Bitmap bmp = SwinGame.BitmapNamed("PlayerArcher");
@@ -148,8 +148,8 @@ namespace MyGame
             components.Add(new CPosition(x, y, 20, 28));
             components.Add(new CVelocity(-speed, 0, speed)); //Is created moving towards the castle.
             components.Add(new CHealth(3));
-            components.Add(new CAI(100, 2000, AttackType.Gun, 1)); //Belongs to the Enemy team - attacks the Castle by default.
-            components.Add(new CGun(5, 2));
+            components.Add(new CAI(100, 2000, AttackType.Bow, 1)); //Belongs to the Enemy team - attacks the Castle by default.
+            components.Add(new CBow(5, 2));
             components.Add(new CLoot(10));
             components.Add(new CEnemyTeam());
             components.Add(new CStatusAnimations());

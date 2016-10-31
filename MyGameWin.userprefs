@@ -4,17 +4,19 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\PoisonZoneCollisionHandlerSystem.cs">
     <Files>
-      <File FileName="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" Line="103" Column="39" />
-      <File FileName="src\Systems\Rendering Systems\HealthRenderingSystem.cs" Line="13" Column="6" />
-      <File FileName="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" Line="14" Column="10" />
-      <File FileName="src\Systems\Collision Systems\FreezeZoneCollisionHandlerSystem.cs" Line="44" Column="17" />
-      <File FileName="src\Systems\Collision Systems\CollisionCleanupSystem.cs" Line="31" Column="9" />
-      <File FileName="src\Systems\Collision Systems\CollisionCheckSystem.cs" Line="278" Column="59" />
-      <File FileName="src\Systems\PlayerAISystem.cs" Line="17" Column="23" />
-      <File FileName="src\Components\CCollision.cs" Line="10" Column="16" />
-      <File FileName="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" Line="10" Column="42" />
+      <File FileName="src\Components\AttackType.cs" Line="8" Column="27" />
+      <File FileName="src\Components\Tags\CPlayerTeam.cs" Line="10" Column="2" />
+      <File FileName="src\Components\Tags\CGotStatusEffect.cs" Line="10" Column="6" />
+      <File FileName="src\Components\Tags\CFreezingBullet.cs" Line="11" Column="2" />
+      <File FileName="src\Components\Tags\CExcludeAll.cs" Line="11" Column="2" />
+      <File FileName="src\Components\Tags\CEnemyTeam.cs" Line="8" Column="6" />
+      <File FileName="src\Components\Tags\CArrow.cs" Line="11" Column="2" />
+      <File FileName="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" Line="49" Column="1" />
+      <File FileName="src\Components\Tags\CAppliesDebuff.cs" Line="6" Column="64" />
+      <File FileName="src\Systems\PoisonedSystem.cs" Line="45" Column="18" />
+      <File FileName="src\Systems\PoisonZoneCollisionHandlerSystem.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />
