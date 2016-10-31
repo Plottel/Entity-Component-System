@@ -29,6 +29,18 @@ namespace MyGame
         /// <param name="entPos">Ent position.</param>
         protected bool ReachedTarget(CProjectile entTarget, CPosition entPos)
         {
+            /*if (entTarget.Target.X > 100) //it's a player dude targetting an enemy dude
+            {
+                float x, y, width, height;
+                x = entTarget.Target.X;
+                y = entTarget.Target.Y;
+                width = entTarget.Target.Width;
+                height = entTarget.Target.Height;
+
+                Rectangle newRect = SwinGame.CreateRectangle(x, y, width, height);
+                return SwinGame.RectanglesIntersect(newRect, entPos.Rect);
+            }*/
+                
             return SwinGame.RectanglesIntersect(entTarget.Target.Rect, entPos.Rect);
         }
 
@@ -43,20 +55,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Removes all projectiles which have reached their target from the World.
-        /// This is done after the Process method in a separate list in order to prevent issues
-        /// that arise when modifying a list while looping through it.
-        /// </summary>
-        /// <param name="toRemove">The list of projectiles to remove.</param>
-        protected void RemoveDeadProjectiles(List<int> toRemove)
-        {
-            foreach (int projectile in toRemove)
-            {
-                World.RemoveEntity(projectile);
-            }
-        }
-
-        /// <summary>
         /// Uses the projectile and position components of each Entity to determine whether 
         /// or not the Entity has reached its target. If it has, the Entity is removed from the world.
         /// </summary>
@@ -66,17 +64,17 @@ namespace MyGame
             CProjectile projectile;
             CPosition pos;
 
-            for (int i = 0; i < Entities.Count; i++)
+            /// <summary>
+            /// Backwards loop to allow Entities to be removed from the World while looping.
+            /// </summary>
+            for (int i = Entities.Count - 1; i >= 0; i--)
             {
                 projectile = World.GetComponent<CProjectile>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
 
                 if (ReachedTarget(projectile, pos) || !ProjectileOnScreen(pos))
-                {
-                    deadProjectiles.Add(Entities[i]);
-                }
+                    World.RemoveEntity(Entities[i]);
             }
-            RemoveDeadProjectiles(deadProjectiles);
         }
     }
 }

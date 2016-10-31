@@ -2,21 +2,24 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug-Windows|x86" ActiveRuntime="MS.NET" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Matt\Desktop\Entity Component System\src\Systems\PlayerAISystem.cs" line="116" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\PoisonZoneCollisionHandlerSystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\EnemyAISystem.cs">
     <Files>
-      <File FileName="src\Components\AttackType.cs" Line="8" Column="27" />
-      <File FileName="src\Components\Tags\CPlayerTeam.cs" Line="10" Column="2" />
-      <File FileName="src\Components\Tags\CGotStatusEffect.cs" Line="10" Column="6" />
-      <File FileName="src\Components\Tags\CFreezingBullet.cs" Line="11" Column="2" />
-      <File FileName="src\Components\Tags\CExcludeAll.cs" Line="11" Column="2" />
-      <File FileName="src\Components\Tags\CEnemyTeam.cs" Line="8" Column="6" />
-      <File FileName="src\Components\Tags\CArrow.cs" Line="11" Column="2" />
-      <File FileName="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" Line="49" Column="1" />
-      <File FileName="src\Components\Tags\CAppliesDebuff.cs" Line="6" Column="64" />
-      <File FileName="src\Systems\PoisonedSystem.cs" Line="45" Column="18" />
-      <File FileName="src\Systems\PoisonZoneCollisionHandlerSystem.cs" Line="1" Column="1" />
+      <File FileName="src\Systems\PlayerAISystem.cs" Line="182" Column="29" />
+      <File FileName="src\World.cs" Line="244" Column="35" />
+      <File FileName="src\EntityFactory.cs" Line="227" Column="96" />
+      <File FileName="src\Systems\PlayerGoldSystem.cs" Line="50" Column="23" />
+      <File FileName="src\Systems\Collision Systems\CollisionCleanupSystem.cs" Line="14" Column="39" />
+      <File FileName="src\Systems\Collision Systems\ArrowCollisionHandlerSystem.cs" Line="2" Column="21" />
+      <File FileName="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" Line="105" Column="1" />
+      <File FileName="src\GameMain.cs" Line="21" Column="56" />
+      <File FileName="src\Systems\SpawningSystem.cs" Line="62" Column="85" />
+      <File FileName="src\Systems\ProjectileSystem.cs" Line="32" Column="37" />
+      <File FileName="src\Components\CProjectile.cs" Line="22" Column="16" />
+      <File FileName="src\Systems\EnemyAISystem.cs" Line="109" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />

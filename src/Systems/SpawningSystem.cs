@@ -61,6 +61,12 @@ namespace MyGame
                 EntityFactory.CreateSwordMan(_spawnAtX, _seed.Next(100, 500));
                 EntityFactory.CreateBatteringRam(_spawnAtX, _seed.Next(100, 500));
                 EntityFactory.CreateEnemyArcher(_spawnAtX, _seed.Next(100, 500));
+
+                //EntityFactory.CreateEnemyArcher(_spawnAtX, 100);
+                //EntityFactory.CreateEnemyArcher(_spawnAtX, 200);
+                //EntityFactory.CreateEnemyArcher(_spawnAtX, 300);
+                //EntityFactory.CreateEnemyArcher(_spawnAtX, 400);
+                //EntityFactory.CreateEnemyArcher(_spawnAtX, 500);
             }
         }
     }

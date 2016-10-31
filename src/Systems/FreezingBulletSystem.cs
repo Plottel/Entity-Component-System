@@ -34,21 +34,21 @@ namespace MyGame
             CProjectile projectile;
             CPosition pos;   
 
-            List<int> deadFreezingBullets = new List<int>();
-
-            //For each Freezing Bullet
-            for (int i = 0; i < Entities.Count; i++)
+            /// <summary>
+            /// This loop represents each Freezing Bullet.
+            /// Backwards loop to allow Enities to be removed from the World while looping.
+            /// </summary>
+            for (int i = Entities.Count - 1; i >= 0; i--)
             {
                 projectile = World.GetComponent<CProjectile>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
                 
                 if (ReachedTarget(projectile, pos) || !ProjectileOnScreen(pos))
                 {
-                    deadFreezingBullets.Add(Entities[i]);
                     EntityFactory.CreateFreezeZone(pos);
+                    World.RemoveEntity(Entities[i]);
                 }
             }
-            RemoveDeadProjectiles(deadFreezingBullets);
         }
     }
 }

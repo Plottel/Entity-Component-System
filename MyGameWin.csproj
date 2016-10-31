@@ -88,7 +88,7 @@
     <Compile Include="src\Components\Tags\CFreezingBullet.cs" />
     <Compile Include="src\Systems\Collision Systems\CollisionCheckSystem.cs" />
     <Compile Include="src\Systems\Collision Systems\CollisionCleanupSystem.cs" />
-    <Compile Include="src\Systems\Collision Systems\BulletCollisionHandlerSystem.cs" />
+    <Compile Include="src\Systems\Collision Systems\ArrowCollisionHandlerSystem.cs" />
     <Compile Include="src\Systems\Collision Systems\FreezeZoneCollisionHandlerSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" />
@@ -107,6 +107,12 @@
       <HintPath>lib\SwinGame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="CliParse">
+      <HintPath>packages\CliParse.0.4.4.0\lib\net45\CliParse.dll</HintPath>
+    </Reference>
+    <Reference Include="locr">
+      <HintPath>packages\locr.0.2.0.0\lib\net45\locr.exe</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <WinLibs Include="lib\win32\*.dll" />
@@ -260,6 +266,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\animations\IceSpikeAnim.txt" />
+    <None Include="packages.config" />
+    <None Include="Properties\AssemblyInfo.Template.txt" />
   </ItemGroup>
   <Target Name="CopyLibsToOut">
     <Copy SourceFiles="@(WinLibs)" DestinationFolder="$(OutDir)" />

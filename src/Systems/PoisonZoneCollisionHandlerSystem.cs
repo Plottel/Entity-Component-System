@@ -23,20 +23,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Represents a list of Poison Zones which have expired and need to be removed from the World.
-        /// They are stored in a separate list and removed at the end of the Process method in order to
-        /// prevent issues which arise when modifying lists while looping over them.
-        /// </summary>
-        /// <param name="toRemove">The list of Poison Zones to remove from the world.</param>
-        private void RemoveDeadPoisonZones(List<int> toRemove)
-        {
-            foreach (int ent in toRemove)
-            {
-                World.RemoveEntity(ent);
-            }
-        }
-
-        /// <summary>
         /// Loops through each Poison Zone and checks if it has expired. If it has, it is added to the
         /// list of dead Poison Zones. If it hasn't, each Entity that is colliding with the Poison Zone
         /// is given a Poison Component. If the Entity already has a Poison Component, its duration is refreshed.
@@ -46,20 +32,19 @@ namespace MyGame
             CPoison poisonEffect;
             CPoison targetPoisonEffect;
             CCollision collision;
-
-            List<int> deadPoisonZones = new List<int>();
             
             /// <summary>
             /// This loop represents each Poison Zone.
+            /// Backwards loop to allow Entities to be removed from the World while looping.
             /// </summary>
-            for (int i = 0; i < Entities.Count; i++)
+            for (int i = Entities.Count - 1; i >= 0; i--)
             {
                 poisonEffect = World.GetComponent<CPoison>(Entities[i]);
                 collision = World.GetComponent<CCollision>(Entities[i]);
 
                 if (Utils.EffectHasEnded(World.GameTime, poisonEffect.TimeApplied, poisonEffect.Duration))
                 {
-                    deadPoisonZones.Add(Entities[i]);
+                    World.RemoveEntity(Entities[i]);
                 }
                 else
                 {
@@ -83,7 +68,6 @@ namespace MyGame
                     }
                 }
             }
-            RemoveDeadPoisonZones(deadPoisonZones);
         }
     }
 }

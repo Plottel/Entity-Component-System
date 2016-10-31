@@ -14,42 +14,36 @@ namespace MyGame
         {
         }
 
-        private void DeleteDeadAnims(List<int> toDelete)
-        {
-            foreach (int entID in toDelete)
-            {
-                World.RemoveEntity(entID);
-            }
-        }
-
+        /// <summary>
+        /// Loops through each animation, updating and drawing them.
+        /// If an animation has ended, the Animation Component is removed from the Entity.
+        /// If the Entity has no other Components, it is removed from the World.
+        /// </summary>
         public override void Process()
         {
-            CAnimation animComp;
-            CPosition animPos;
-            List<int> deadAnims = new List<int>();
+            CAnimation anim;
+            CPosition pos;
 
-            for (int i = 0; i < Entities.Count; i++)
+            /// <summary>
+            /// This loop represents each Entity with an Animation Component.
+            /// Backwards loop to allow Entities to be removed from the World while looping.
+            /// </summary>
+            for (int i = Entities.Count - 1; i >= 0; i--)
             {
-                animComp = World.GetComponent<CAnimation>(Entities[i]);
-                animPos = World.GetComponent<CPosition>(Entities[i]);
+                anim = World.GetComponent<CAnimation>(Entities[i]);
+                pos = World.GetComponent<CPosition>(Entities[i]);
 
-                /// <summary>
-                /// If Entity has no Components other than the finished animation, remove it from the World.
-                /// </summary>
-                if (SwinGame.AnimationEnded(animComp.Anim))
+                if (SwinGame.AnimationEnded(anim.Anim))
                 {
-                    if (World.GetAllComponentsOfEntity(Entities[i]).Count == 1) //If Entity is just an animation
-                    {
-                        deadAnims.Add(Entities[i]);
-                    }
+                    if (World.GetAllComponentsOfEntity(Entities[i]).Count == 1)
+                        World.RemoveEntity(Entities[i]);
                 }
                 else
                 {
-                    SwinGame.DrawAnimation(animComp.Anim, animComp.Img, animPos.X, animPos.Y);
-                    SwinGame.UpdateAnimation(animComp.Anim);
+                    SwinGame.DrawAnimation(anim.Anim, anim.Img, pos.X, pos.Y);
+                    SwinGame.UpdateAnimation(anim.Anim);
                 }
             }
-            DeleteDeadAnims(deadAnims);
         }
     }
 }

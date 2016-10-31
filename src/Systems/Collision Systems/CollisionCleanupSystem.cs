@@ -18,25 +18,14 @@ namespace MyGame
         {
         }
 
-        //Can't loop through Entities and remove them from the world - it removes them from the list
-        //Which leads to for loop collection looping problems
-        private List<int> PopulateCollisionComponentList(List<int> toRemove)
-        {
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                toRemove.Add(Entities[i]);
-            }
-            return toRemove;
-        }
-
         public override void Process()
         {
-            List<int> toRemove = new List<int>();
-            PopulateCollisionComponentList(toRemove);
-            foreach (int entID in toRemove)
-            {
-                World.RemoveComponent<CCollision>(entID);
-            }
+            /// <summary>
+            /// This loop represents each Entity with a Collision Component.
+            /// Backwards loop to allow Entities to be removed from the World while looping.
+            /// </summary>
+            for (int i = Entities.Count - 1; i >= 0; i--)
+                World.RemoveComponent<CCollision>(Entities[i]);
         }
     }
 }

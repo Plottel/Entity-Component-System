@@ -47,7 +47,14 @@ namespace MyGame
         /// <summary>
         /// Indicates if the attack is ready to be used.
         /// </summary>
-        private bool _attackIsReady;        
+        private bool _attackIsReady;      
+
+        /// <summary>
+        /// An AI Component can be created with or without a TargetID.
+        /// </summary>
+        public CAI (int range, int cooldown, AttackType attackType) : this (range, cooldown, attackType, 0)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.CAI"/> class.
@@ -69,13 +76,6 @@ namespace MyGame
             /// </summary>
             _hasTarget = targetID != 0;
             _targetID = targetID;
-        }
-
-        /// <summary>
-        /// An AI Component can be created with or without a TargetID.
-        /// </summary>
-        public CAI (int range, int cooldown, AttackType attackType) : this (range, cooldown, attackType, 0)
-        {
         }
 
         /// <summary>

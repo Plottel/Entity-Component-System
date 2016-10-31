@@ -109,7 +109,12 @@ namespace MyGame
                 /// <summary>
                 /// Returns the corresponding key for the smallest value in the dictionary.
                 /// </summary>
-                closestTarget = closestTarget = _targetDistances.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+                closestTarget = _targetDistances.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
+
+                if (World.EntityHasComponent(closestTarget, typeof(CPlayerTeam)))
+                {
+                    
+                }
 
                 playerAI.TargetID = closestTarget;
                 playerAI.HasTarget = true;

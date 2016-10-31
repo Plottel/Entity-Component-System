@@ -12,15 +12,12 @@ namespace MyGame
     /// </summary>
     public class StatusAnimationRenderingSystem : System
     {
-        private List<CStatusAnimation> _deadAnims;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.StatusAnimationRenderingSystem"/> class.
         /// </summary>
         /// <param name="world">The World the System belongs to.</param>
         public StatusAnimationRenderingSystem (World world) : base (new List<Type> {typeof(CStatusAnimations), typeof(CPosition)}, new List<Type> {}, world)
         {
-            _deadAnims = new List<CStatusAnimation>();
         }
 
         /// <summary>
@@ -30,32 +27,39 @@ namespace MyGame
         /// </summary>
         public override void Process ()
         {
-            _deadAnims.Clear();
-
             CStatusAnimations statusAnims;
+            CStatusAnimation anim;
             CPosition pos;
 
+            /// <summary>
+            /// This loop represents each Entity with a Status Animations Component.
+            /// </summary>
             for (int i = 0; i < Entities.Count; i++)
             {
                 statusAnims = World.GetComponent<CStatusAnimations>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
 
-                foreach (CStatusAnimation statusAnim in statusAnims.Anims)
+                /// <summary>
+                /// This loop represents each Status Animation inside the Status Animations Component.
+                /// Backwards loop to allow Status Animations to be removed while looping.
+                /// </summary>
+                for (int j = statusAnims.Anims.Count - 1; j >= 0; j--)
                 {
-                    //Whole point is that these animatinos will loop until status is over
-                    if (World.EntityHasComponent(Entities[i], statusAnim.Key))
+                    anim = statusAnims.Anims[j];
+
+                    if (World.EntityHasComponent(Entities[i], anim.Key))
                     {
-                        SwinGame.DrawAnimation(statusAnim.Anim, statusAnim.Img, pos.X + statusAnim.XOffset, pos.Y + statusAnim.YOffset);
-                        SwinGame.UpdateAnimation(statusAnim.Anim);
+                        float x = pos.X + anim.XOffset;
+                        float y = pos.Y + anim.YOffset;
+
+                        SwinGame.DrawAnimation(anim.Anim, anim.Img, x, y);
+                        SwinGame.UpdateAnimation(anim.Anim);
                     }
                     else
                     {
-                        _deadAnims.Add(statusAnim);
+                        statusAnims.Anims.RemoveAt(j);
                     }
                 }
-
-                foreach (CStatusAnimation anim in _deadAnims)
-                    statusAnims.Anims.Remove(anim);
             }
         }
     }

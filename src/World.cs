@@ -24,13 +24,7 @@ namespace MyGame
         private readonly List<System> _systems;
 
         /// <summary>
-        /// Represents the Entity IDs from dead Entities which can be recycled.
-        /// </summary>
-        private List<int> _recycledIDs;
-
-        /// <summary>
-        /// Represents the next unique ID to be given to an Entity. If there are no
-        /// recycled IDs available, this ID will be given to the next Entity.
+        /// Represents the next unique ID to be given to an Entity. 
         /// </summary>
         private int _nextID;
 
@@ -39,7 +33,6 @@ namespace MyGame
         /// All time-based code will utilise this timer.
         /// </summary>
         private Timer _gameTime;
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.World"/> class.
@@ -50,7 +43,6 @@ namespace MyGame
             _entityComponents = new Dictionary<int, Dictionary<Type, Component>>();
             _systems = new List<System>();
             _nextID = 1;
-            _recycledIDs = new List<int>();
             _gameTime = new Timer();
 
             /// <summary>
@@ -64,10 +56,7 @@ namespace MyGame
         /// </summary>
         public uint GameTime
         {
-            get
-            {
-                return SwinGame.TimerTicks(_gameTime);
-            }
+            get {return SwinGame.TimerTicks(_gameTime);}
         }
 
         /// <summary>
@@ -223,26 +212,13 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Returns an Entity. If there are any IDs which can be recycled, the new
-        /// Entity's ID will be the last recyclable ID. Otherwise, it will be the next unique ID.
+        /// Creates an Entity with the next available unique ID.
         /// <returns>An int representing the Entity's unique ID.</returns>
         /// </summary>
         public int CreateEntity()
         {
-            int newEntity;
-
-            if (_recycledIDs.Any())
-            {
-                newEntity = _recycledIDs[_recycledIDs.Count - 1];
-                _recycledIDs.RemoveAt(_recycledIDs.Count - 1);
-            }
-            else
-            {
-                newEntity = _nextID;
-                _nextID++;
-            }
-
-            return newEntity;
+            _nextID++;
+            return _nextID - 1;
         }
 
         /// <summary>
@@ -280,6 +256,7 @@ namespace MyGame
             {
                 s.Remove(entID);
             }
+
             _entityComponents.Remove(entID);
         }
     }

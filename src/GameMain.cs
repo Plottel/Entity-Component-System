@@ -28,7 +28,7 @@ namespace MyGame
             world.AddSystem(new CollisionCheckSystem(world));
             world.AddSystem(new FreezeZoneCollisionHandlerSystem(world));
             world.AddSystem(new PoisonZoneCollisionHandlerSystem(world)); //
-            world.AddSystem(new BulletCollisionHandlerSystem(world)); //
+            world.AddSystem(new ArrowCollisionHandlerSystem(world)); //
             world.AddSystem(new HealthSystem(world)); //
             world.AddSystem(new GotStatusEffectSystem(world));
             world.AddSystem(new HealthRenderingSystem(world));

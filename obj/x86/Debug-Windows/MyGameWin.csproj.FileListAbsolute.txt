@@ -51,3 +51,6 @@ C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\bigicespike.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\smallicespike.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\CliParse.dll
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\locr.exe
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\CliParse.xml

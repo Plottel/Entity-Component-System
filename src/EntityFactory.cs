@@ -116,7 +116,7 @@ namespace MyGame
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
             components.Add(new CPosition(x, y, 20, 28));
-            components.Add(new CAI(700, 50, AttackType.Bow));
+            components.Add(new CAI(700, 2000, AttackType.Bow));
             components.Add(new CBow(25, 2));
             components.Add(new CPlayerTeam());
 
@@ -224,7 +224,6 @@ namespace MyGame
             float yVel = (yOffset / vectorLength) * speed;
 
             components.Add(new CVelocity(xVel, yVel, speed));
-            components.Add(new CProjectile(new CPosition(target.X - 5, target.Y - 5, 10, 10)));
             components.Add(new CPosition(x, y, 15));
             components.Add(new CDamage(damage));
             components.Add(new CCollidable());
@@ -234,11 +233,13 @@ namespace MyGame
             {
                 components.Add(new CPlayerTeam());
                 components.Add(new CRenderable(SwinGame.BitmapNamed("PlayerArrow")));
+                components.Add(new CProjectile(new CPosition(target.X + target.Width, target.Y, target.Width - 10, target.Height)));
             }
             else
             {
                 components.Add(new CEnemyTeam());
                 components.Add(new CRenderable(SwinGame.BitmapNamed("Arrow")));
+                components.Add(new CProjectile(new CPosition(target.X, target.Y, target.Width, target.Height)));
             }
 
             _world.AddEntity(newEntity, components);

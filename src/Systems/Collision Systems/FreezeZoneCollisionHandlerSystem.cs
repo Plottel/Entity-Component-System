@@ -7,8 +7,8 @@ namespace MyGame
     /// <summary>
     /// Represents the System responsible for handling collisions with Freeze Zones. Each Entity
     /// this System operates on is a Freeze Zone. It checks each Entity each Freeze Zone has collided
-    /// with and applies Frozen and GotStatusEffect Components to them. This System is also responsible
-    /// for removing expired Freeze Zones.
+    /// with and applies Frozen and GotStatusEffect Components to them. Once its collisions have been
+    /// processed, each Freeze Zone is removed from the World.
     /// </summary>
     public class FreezeZoneCollisionHandlerSystem : System
     {
@@ -20,14 +20,6 @@ namespace MyGame
         {
         }
 
-        private void RemoveDeadFreezeEffects(List<int> toRemove)
-        {
-            foreach (int ent in toRemove)
-            {
-                World.RemoveEntity(ent);
-            }
-        }
-
         public override void Process()
         {
             CCollision collision;
@@ -36,15 +28,21 @@ namespace MyGame
 
             List<int> deadFreezeEffects = new List<int>();
 
-            //For each Freeze Zone
-            for (int i = 0; i < Entities.Count; i++)
+            /// <summary>
+            /// This loop represents each Freeze Zone.
+            /// Backwards loop to allow Entities to be removed while looping.
+            /// </summary>
+            for (int i = Entities.Count - 1; i >= 0; i--)
             {
                 freezeZoneFrozen = World.GetComponent<CFrozen>(Entities[i]);
                 collision = World.GetComponent<CCollision>(Entities[i]);
 
+                /// <summary>
+                /// This loop represents each Entity colliding with the Freeze Zone.
+                /// </summary>
                 foreach (int target in collision.CollidedWith)
                 {
-                    //If already frozen, don't add another Frozen component just refresh duration
+                    //If not already Frozen, add a Frozen Component.
                     if (!World.EntityHasComponent(target, typeof(CFrozen)))
                     {
                         //Don't freeze projectiles
@@ -54,15 +52,19 @@ namespace MyGame
                         if (!World.EntityHasComponent(target, typeof(CGotStatusEffect)))
                             World.AddComponent(target, new CGotStatusEffect());
                     }
-                    else
+                    else //If already Frozen, refresh the duration.
                     {
                         collidedFrozen = World.GetComponent<CFrozen>(target);
                         collidedFrozen.TimeApplied = World.GameTime;
                     }
                 }
-                deadFreezeEffects.Add(Entities[i]);
+
+                /// <summary>
+                /// Freeze Zone only lasts for one frame to apply Frozen Components.
+                /// Each Freeze Zone is removed from the World once its collisions are processed.
+                /// </summary>
+                World.RemoveEntity(Entities[i]);
             }
-            RemoveDeadFreezeEffects(deadFreezeEffects);
         }
     }
 }
