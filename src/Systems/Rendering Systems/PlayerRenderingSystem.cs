@@ -4,33 +4,34 @@ using SwinGameSDK;
 
 namespace MyGame
 {
+    /// <summary>
+    /// Represents the System responsible for drawing everything related to the Player. This includes all UI elements
+    /// such as Gold, Unit Counts, Ability Cooldowns etc.
+    /// </summary>
     public class PlayerRenderingSystem : System
     {
-        private Bitmap _readyText;
-        private Bitmap _freezingBulletText;
-        private Bitmap _poisonZoneText;
-        private Bitmap _goldText;
-        private Bitmap _archersText;
-        private Bitmap _wizardsText;
-        private Bitmap _buyWizardText;
-        private Bitmap _buyArcherText;
-        private Bitmap _tenGoldText;
-        private Bitmap _twentyGoldText;
-        private Bitmap _hpText;
+        /// <summary>
+        /// Rendering Text to the screen is a slow operation. Text which does not change is first drawn to a Bitmap and
+        /// then that Bitmap is drawn to the screen rather than drawing the text every frame.
+        /// </summary>
+        private Bitmap _readyText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "READY", Color.White, Color.Transparent);
+        private Bitmap _freezingBulletText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Freezing Bullet: ", Color.Black, Color.Transparent);
+        private Bitmap _poisonZoneText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Poison Zone: ", Color.Black, Color.Transparent);
+        private Bitmap _goldText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Gold: ", Color.Black, Color.Transparent);
+        private Bitmap _archersText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Archers: ", Color.Black, Color.Transparent);
+        private Bitmap _wizardsText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Wizards: ", Color.Black, Color.Transparent);
+        private Bitmap _buyWizardText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Buy Wizard (W)", Color.Black, Color.Transparent);
+        private Bitmap _buyArcherText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Buy Archer (A)", Color.Black, Color.Transparent);
+        private Bitmap _tenGoldText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("SmallGameFont"), "10 Gold", Color.Black, Color.Transparent);
+        private Bitmap _twentyGoldText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("SmallGameFont"), "20 Gold", Color.Black, Color.Transparent);
+        private Bitmap _hpText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "HP", Color.Black, Color.Transparent);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.PlayerRenderingSystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to.</param>
         public PlayerRenderingSystem (World world) : base(new List<Type> {typeof(CPlayer)}, new List<Type> {}, world) 
-        {
-            _readyText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "READY", Color.White, Color.Transparent);
-            _freezingBulletText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Freezing Bullet: ", Color.Black, Color.Transparent);
-            _poisonZoneText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Poison Zone: ", Color.Black, Color.Transparent);
-            _goldText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Gold: ", Color.Black, Color.Transparent);
-            _archersText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Archers: ", Color.Black, Color.Transparent);
-            _wizardsText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Wizards: ", Color.Black, Color.Transparent);
-            _buyWizardText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Buy Wizard (W)", Color.Black, Color.Transparent);
-            _buyArcherText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "Buy Archer (A)", Color.Black, Color.Transparent);
-            _tenGoldText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("SmallGameFont"), "10 Gold", Color.Black, Color.Transparent);
-            _twentyGoldText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("SmallGameFont"), "20 Gold", Color.Black, Color.Transparent);
-            _hpText = SwinGame.DrawTextToBitmap(SwinGame.FontNamed("GameFont"), "HP", Color.Black, Color.Transparent);
+        {           
         }
 
         private int TimeSinceUsed(uint usedAt)

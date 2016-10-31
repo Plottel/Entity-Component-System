@@ -28,6 +28,7 @@ namespace MyGame
         /// <summary>
         /// Returns a Bitmap representing the Castle to be used in the game.
         /// </summary>
+        /// <returns>The Castle Bitmap.</returns>
         public static Bitmap CreateCastleImg()
         {
             Bitmap result = SwinGame.CreateBitmap(100, 590);
@@ -39,7 +40,7 @@ namespace MyGame
         /// <summary>
         /// Returns a Bitmap representing a Freezing Bullet.
         /// </summary>
-        /// <returns>The freezing bullet image.</returns>
+        /// <returns>The freezing bullet Bitmap.</returns>
         public static Bitmap CreateFreezingBulletImg()
         {
             Bitmap result = SwinGame.CreateBitmap(15, 15);
@@ -54,7 +55,7 @@ namespace MyGame
         public static void CreatePlayer()
         {
             //Create Entity and add to world
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
@@ -76,7 +77,7 @@ namespace MyGame
         public static void CreateSwordMan(float x, float y)
         {
             //Create Entity and add to world
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Used by Velocity Component
             int speed = 2;
@@ -109,8 +110,8 @@ namespace MyGame
         /// <param name="y">The y coordinate where the Entity will be created.</param>
         public static void CreatePlayerArcher(float x, float y)
         {
-            //CreateEntity and add to world
-            Entity newEntity = _world.CreateEntity();
+            //Create Entity and add to world
+            int newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
@@ -137,7 +138,7 @@ namespace MyGame
         public static void CreateEnemyArcher(float x, float y)
         {
             //Create Entity and add to world.
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
            
             //Used by Velocity Component.
             int speed = 5;
@@ -171,7 +172,7 @@ namespace MyGame
         public static void CreateBatteringRam(float x, float y)
         {
             //Create Entity and add to world.
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Used by Velocity Component.
             int speed = 5;
@@ -209,7 +210,7 @@ namespace MyGame
         public static void CreateArrow(float x, float y, int speed, int damage, CPosition target, string team)
         {
             //Create Entity and add to world
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
@@ -255,7 +256,7 @@ namespace MyGame
         public static void CreateFreezingBullet(float x, float y, float targetX, float targetY, int speed)
         {
             //Create Entity and add to world
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
@@ -293,7 +294,7 @@ namespace MyGame
                             SwinGame.BitmapNamed("FreezingBulletSplash"), SwinGame.AnimationScriptNamed("FreezingBulletSplashAnim"));
 
             //Create Entity and add to world.
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
@@ -315,7 +316,7 @@ namespace MyGame
         public static void CreatePoisonZone(float x, float y)
         {
             //Create Entity and add to world
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             //Create components and pass to world to send to Systems
             List<Component> components = new List<Component>();
@@ -347,7 +348,7 @@ namespace MyGame
         public static void CreateAnimation(float x, float y, Animation anim, Bitmap img, AnimationScript animScript)
         {
             //Create Entity and add to world
-            Entity newEntity = _world.CreateEntity();
+            int newEntity = _world.CreateEntity();
 
             int width = SwinGame.BitmapWidth(img);
             int height = SwinGame.BitmapHeight(img);

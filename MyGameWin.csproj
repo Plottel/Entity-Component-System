@@ -47,7 +47,6 @@
     <Compile Include="src\GameMain.cs" />
     <Compile Include="src\Components\Component.cs" />
     <Compile Include="src\Systems\System.cs" />
-    <Compile Include="src\Entity.cs" />
     <Compile Include="src\EntityFactory.cs" />
     <Compile Include="src\EntityListener.cs" />
     <Compile Include="src\World.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="src\Systems\Rendering Systems\HealthRenderingSystem.cs" />
     <Compile Include="src\Systems\PlayerCooldownSystem.cs" />
     <Compile Include="src\Systems\PlayerAISystem.cs" />
-    <Compile Include="src\Systems\Collision Systems\BucketTest.cs" />
     <Compile Include="src\Components\CStatusAnimations.cs" />
     <Compile Include="src\Systems\Rendering Systems\StatusAnimationRenderingSystem.cs" />
     <Compile Include="src\Components\Tags\CGotStatusEffect.cs" />

@@ -45,7 +45,6 @@ namespace MyGame
         /// <summary>
         /// Populates the Enemy Positions dictionary with the current positions of each Enemy Entity.
         /// </summary>
-        /// <returns>The enemy positions.</returns>
         private void GetEnemyPositions()
         {
             _enemyPositions.Clear();
@@ -62,7 +61,6 @@ namespace MyGame
         /// Evaluates the Player AI's current position against the positions of each Enemy Entity.
         /// The Enemy which is closest to the Player AI becomes the Player AI's target.
         /// </summary>
-        /// <returns>The closest target.</returns>
         /// <param name="playerAI">The Player AI Entity's AI Component.</param>
         /// <param name="playerPos">The Player AI Entity's Position Component.</param>
         private void GetClosestTarget(CAI playerAI, CPosition playerPos)
@@ -153,7 +151,6 @@ namespace MyGame
                     //CAnimation anim = World.GetComponent<CAnimation>(Entities[i]);
                     //SwinGame.AssignAnimation(anim.Anim, "Still", anim.AnimScript);
                 }
-                    
 
                 if (!playerAI.HasTarget)
                 {

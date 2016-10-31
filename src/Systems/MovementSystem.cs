@@ -10,22 +10,29 @@ namespace MyGame
     /// </summary>
     public class MovementSystem : System
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.MovementSystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to.</param>
         public MovementSystem(World world) : base(new List<Type> {typeof(CPosition), typeof(CVelocity)}, new List<Type> {typeof(CFrozen)}, world)
         {
         }
 
+        /// <summary>
+        /// Updates the Position Components of each Entity according to the speeds in their Velocity Components.
+        /// </summary>
         public override void Process()
         {
-            CPosition entPos;
-            CVelocity entVel;
+            CPosition pos;
+            CVelocity vel;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entPos = World.GetComponent<CPosition>(Entities[i]);
-                entVel = World.GetComponent<CVelocity>(Entities[i]);
+                pos = World.GetComponent<CPosition>(Entities[i]);
+                vel = World.GetComponent<CVelocity>(Entities[i]);
 
-                entPos.X += entVel.DX;
-                entPos.Y += entVel.DY;
+                pos.X += vel.DX;
+                pos.Y += vel.DY;
             }
         }
     }

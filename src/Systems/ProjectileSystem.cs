@@ -24,7 +24,7 @@ namespace MyGame
         /// <summary>
         /// Specifies whether or not the projectile has reached its target.
         /// </summary>
-        /// <returns>The target.</returns>
+        /// <returns><c>true</c> if the projectile has reached its target, <c>false</c> otherwise.</returns>
         /// <param name="entTarget">Ent projectile.</param>
         /// <param name="entPos">Ent position.</param>
         protected bool ReachedTarget(CProjectile entTarget, CPosition entPos)
@@ -32,9 +32,14 @@ namespace MyGame
             return SwinGame.RectanglesIntersect(entTarget.Target.Rect, entPos.Rect);
         }
 
-        protected bool ProjectileOnScreen(CPosition entPos)
+        /// <summary>
+        /// Specifies whether or not the projectile is within the boundaries of the screen.
+        /// </summary>
+        /// <returns><c>true</c>, if the projectile is on the screen, <c>false</c> otherwise.</returns>
+        /// <param name="pos">The projectile's position.</param>
+        protected bool ProjectileOnScreen(CPosition pos)
         {
-            return SwinGame.RectOnScreen(entPos.Rect);
+            return SwinGame.RectOnScreen(pos.Rect);
         }
 
         /// <summary>
@@ -58,15 +63,15 @@ namespace MyGame
         public override void Process()
         {
             List<int> deadProjectiles = new List<int>();
-            CProjectile entProjectile;
-            CPosition entPos;
+            CProjectile projectile;
+            CPosition pos;
 
             for (int i = 0; i < Entities.Count; i++)
             {
-                entProjectile = World.GetComponent<CProjectile>(Entities[i]);
-                entPos = World.GetComponent<CPosition>(Entities[i]);
+                projectile = World.GetComponent<CProjectile>(Entities[i]);
+                pos = World.GetComponent<CPosition>(Entities[i]);
 
-                if (ReachedTarget(entProjectile, entPos) || !ProjectileOnScreen(entPos))
+                if (ReachedTarget(projectile, pos) || !ProjectileOnScreen(pos))
                 {
                     deadProjectiles.Add(Entities[i]);
                 }

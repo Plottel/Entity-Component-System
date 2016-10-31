@@ -10,6 +10,10 @@ namespace MyGame
     /// </summary>
     public class FreezingBulletSystem : ProjectileSystem
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.FreezingBulletSystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to .</param>
         public FreezingBulletSystem (World world) : base(world)
         {
             /// <summary>
@@ -27,21 +31,21 @@ namespace MyGame
         /// </summary>
         public override void Process()
         {
-            CProjectile bulletProj;
-            CPosition bulletPos;   
+            CProjectile projectile;
+            CPosition pos;   
 
             List<int> deadFreezingBullets = new List<int>();
 
             //For each Freezing Bullet
             for (int i = 0; i < Entities.Count; i++)
             {
-                bulletProj = World.GetComponent<CProjectile>(Entities[i]);
-                bulletPos = World.GetComponent<CPosition>(Entities[i]);
+                projectile = World.GetComponent<CProjectile>(Entities[i]);
+                pos = World.GetComponent<CPosition>(Entities[i]);
                 
-                if (ReachedTarget(bulletProj, bulletPos) || !ProjectileOnScreen(bulletPos))
+                if (ReachedTarget(projectile, pos) || !ProjectileOnScreen(pos))
                 {
                     deadFreezingBullets.Add(Entities[i]);
-                    EntityFactory.CreateFreezeZone(bulletPos);
+                    EntityFactory.CreateFreezeZone(pos);
                 }
             }
             RemoveDeadProjectiles(deadFreezingBullets);

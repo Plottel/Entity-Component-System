@@ -11,47 +11,50 @@ namespace MyGame
     /// </summary>
     public class EnemyAISystem : System
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.EnemyAISystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to.</param>
         public EnemyAISystem (World world) : base (new List<Type> {typeof(CAI), typeof(CEnemyTeam)}, new List<Type> {}, world)
         {
         }      
 
         public override void Process()
         {
-            CAI enemyAI;
-            CPosition enemyPos;
-            CAnimation enemyAnim;
+            CAI AI;
+            CPosition pos;
+            CAnimation anim;
 
             /// <summary>
             /// For each Enemy AI Entity.
             /// </summary>
-            /// <returns>The range.</returns>
             for (int i = 0; i < Entities.Count; i++)
             {
-                enemyAI = World.GetComponent<CAI>(Entities[i]);
-                enemyPos = World.GetComponent<CPosition>(Entities[i]);
+                AI = World.GetComponent<CAI>(Entities[i]);
+                pos = World.GetComponent<CPosition>(Entities[i]);
 
-                if (!enemyAI.IsInRange)
+                if (!AI.IsInRange)
                 {
-                    CheckRange(Entities[i], enemyAI, enemyPos);
+                    CheckRange(Entities[i], AI, pos);
 
                     /// <summary>
                     /// If the AI is now in range, stop moving and begin attacking.
                     /// </summary>
-                    if (enemyAI.IsInRange)
+                    if (AI.IsInRange)
                         World.RemoveComponent<CVelocity>(Entities[i]);
                 }
-                else if (!enemyAI.AttackIsReady)
+                else if (!AI.AttackIsReady)
                 {
                     CheckCooldown(Entities[i]);
                 }
                 else
                 {
-                    enemyAnim = World.GetComponent<CAnimation>(Entities[i]);
+                    anim = World.GetComponent<CAnimation>(Entities[i]);
 
                     /// <summary>
                     /// Attack will be carried out when the Attack animation has ended.
                     /// </summary>
-                    if (SwinGame.AnimationEnded(enemyAnim.Anim))
+                    if (SwinGame.AnimationEnded(anim.Anim))
                     {
                         /// <summary>
                         /// Carry out the attack.
@@ -61,7 +64,7 @@ namespace MyGame
                         /// <summary>
                         /// If Attacking, stand still during the cooldown period.
                         /// </summary>
-                        SwinGame.AssignAnimation(enemyAnim.Anim, "Still", enemyAnim.AnimScript);
+                        SwinGame.AssignAnimation(anim.Anim, "Still", anim.AnimScript);
                     }
                 }
             }
@@ -72,69 +75,75 @@ namespace MyGame
         /// AI's target is within this Circle, then the AI is in range.
         /// </summary>
         /// <param name="entID">The Entity to check range for.</param>
-        /// <param name="enemyAI">AI component of the Entity to check range for.</param>
-        /// <param name="enemyPos">Position component of the Entity to check range for.</param>
-        protected void CheckRange(int entID, CAI enemyAI, CPosition enemyPos)
+        /// <param name="AI">AI component of the Entity to check range for.</param>
+        /// <param name="pos">Position component of the Entity to check range for.</param>
+        protected void CheckRange(int entID, CAI AI, CPosition pos)
         {
-            Circle enemyAttackRadius = SwinGame.CreateCircle(enemyPos.Centre.X, enemyPos.Centre.Y, enemyAI.Range + (enemyPos.Width / 2));
-            CPosition targetPos = World.GetComponent<CPosition>(enemyAI.TargetID);
+            Circle attackRadius = SwinGame.CreateCircle(pos.Centre.X, pos.Centre.Y, AI.Range + (pos.Width / 2));
+            CPosition targetPos = World.GetComponent<CPosition>(AI.TargetID);
 
-            enemyAI.IsInRange = SwinGame.CircleRectCollision(enemyAttackRadius, targetPos.Rect);
+            AI.IsInRange = SwinGame.CircleRectCollision(attackRadius, targetPos.Rect);
         }
 
         /// <summary>
         /// Checks the Game Time against the last time the AI attacked. If the time difference is greater
         /// than the attack cooldown of the AI, then the AI is ready to attack and their Attack animation begins.
         /// </summary>
-        /// <returns>The cooldown.</returns>
         /// <param name="entID">Ent identifier.</param>
         protected void CheckCooldown(int entID)
         {
-            CAI enemyAI = World.GetComponent<CAI>(entID);
+            CAI AI = World.GetComponent<CAI>(entID);
 
-            enemyAI.AttackIsReady = World.GameTime - enemyAI.LastAttackTime >= enemyAI.Cooldown;
+            AI.AttackIsReady = World.GameTime - AI.LastAttackTime >= AI.Cooldown;
 
-            if (enemyAI.AttackIsReady)
+            if (AI.AttackIsReady)
             {
                 /// <summary>
                 /// Begin the Attack animation for the AI
                 /// </summary>
-                CAnimation enemyAnim = World.GetComponent<CAnimation>(entID);
-                SwinGame.AssignAnimation(enemyAnim.Anim, "Attack", enemyAnim.AnimScript);
+                CAnimation anim = World.GetComponent<CAnimation>(entID);
+                SwinGame.AssignAnimation(anim.Anim, "Attack", anim.AnimScript);
             }
         }
 
         protected void Attack(int entID, string team)
         {
-            CAI enemyAI = World.GetComponent<CAI>(entID);
-            CDamage enemyDamage; 
-            CGun enemyGun;
-            CPosition enemyPos;
+            CAI AI = World.GetComponent<CAI>(entID);
+            CDamage damage; 
+            CGun gun;
+            CPosition pos;
 
-            CHealth targetHealth = World.GetComponent<CHealth>(enemyAI.TargetID);
+            CHealth targetHealth = World.GetComponent<CHealth>(AI.TargetID);
             CPosition targetPos;
 
-            enemyAI.LastAttackTime = World.GameTime;
-            enemyAI.AttackIsReady = false;
+            /// <summary>
+            /// The AI has just attacked, so its cooldown is started.
+            /// </summary>
+            AI.LastAttackTime = World.GameTime;
+            AI.AttackIsReady = false;
 
-            switch (enemyAI.AttackType)
+            /// <summary>
+            /// If the Attack Type is Melee, directly apply damage to the Target.
+            /// If the Attack Type is Gun, create a projectile Entity to travel towards the Target.
+            /// </summary>
+            switch (AI.AttackType)
             {
                 case AttackType.Melee:
                 {
-                    enemyDamage = World.GetComponent<CDamage>(entID);
+                    damage = World.GetComponent<CDamage>(entID);
 
-                    targetHealth.Damage += enemyDamage.Damage;
+                    targetHealth.Damage += damage.Damage;
                     break;
                 }
 
                 case AttackType.Gun:
                 {
-                    enemyPos = World.GetComponent<CPosition>(entID);
-                    enemyGun = World.GetComponent<CGun>(entID);
+                    pos = World.GetComponent<CPosition>(entID);
+                    gun = World.GetComponent<CGun>(entID);
 
-                    targetPos = World.GetComponent<CPosition>(enemyAI.TargetID);
+                    targetPos = World.GetComponent<CPosition>(AI.TargetID);
 
-                    EntityFactory.CreateArrow(enemyPos.Centre.X, enemyPos.Centre.Y, enemyGun.BulletSpeed, enemyGun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
+                    EntityFactory.CreateArrow(pos.Centre.X, pos.Centre.Y, gun.BulletSpeed, gun.BulletDamage, new CPosition(targetPos.Centre.X - 5, 
                                                                                                                                                 targetPos.Centre.Y - 5, 
                                                                                                                                                 10, 
                                                                                                                                                 10), team);

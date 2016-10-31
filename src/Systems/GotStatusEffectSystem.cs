@@ -4,14 +4,27 @@ using SwinGameSDK;
 
 namespace MyGame
 {
+    /// <summary>
+    /// Represents the System responsible for dealing with Entities which have just received a 
+    /// status effect. This System will create a Status Effect Animation corresponding to the
+    /// type of status effect the Entity received.
+    /// </summary>
     public class GotStatusEffectSystem : System
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.GotStatusEffectSystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to.</param>
         public GotStatusEffectSystem (World world) : base (new List<Type> {typeof(CGotStatusEffect), typeof(CStatusAnimations), typeof(CPosition)}, 
                                                            new List<Type> {}, 
                                                            world)
         {
         }
 
+        /// <summary>
+        /// Evaluates the Components of each Entity to determine which type of status effect it has received.
+        /// The corresponding Status Animation is then created and the GotStatusEffect Component is removed.
+        /// </summary>
         public override void Process()
         {
             CStatusAnimations statusAnims;
@@ -22,6 +35,9 @@ namespace MyGame
                 statusAnims = World.GetComponent<CStatusAnimations>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
 
+                /// <summary>
+                /// If the Entity has a Frozen Component, then add an Ice Spike Status Animation.
+                /// </summary>
                 if (World.EntityHasComponent(Entities[i], typeof(CFrozen)))
                 {
                     CStatusAnimation newStatusAnim;
@@ -47,6 +63,9 @@ namespace MyGame
                     statusAnims.Anims.Add(newStatusAnim);
                 }
 
+                /// <summary>
+                /// If the Entity has a Poison Component, then add a Poison Cloud Status Animation.
+                /// </summary>
                 if (World.EntityHasComponent(Entities[i], typeof(CPoison)))
                 {
                     CStatusAnimation newStatusAnim;
@@ -73,6 +92,10 @@ namespace MyGame
                 }
             }
 
+            /// <summary>
+            /// Remove GotStatusEffect Components from each Entity.
+            /// Backwards looping is used to avoid errors caused when modifying a collection while looping over it.
+            /// </summary>
             for (int i = Entities.Count - 1; i >= 0; i--)
                 World.RemoveComponent<CGotStatusEffect>(Entities[i]);
         }

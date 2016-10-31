@@ -4,25 +4,35 @@ using SwinGameSDK;
 
 namespace MyGame
 {
-    //Fix this shit up
+    /// <summary>
+    /// Represents the System responsible for Rendering static Bitmaps. This System only handles 
+    /// Bitmaps and will not deal with Animations.
+    /// </summary>
     public class RenderingSystem: System
     {
-        public RenderingSystem(World world) : base(new List<Type> {typeof(CRenderable), typeof(CPosition)}, new List<Type> {typeof(CPlayer)}, world)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.RenderingSystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to.</param>
+        public RenderingSystem(World world) : base(new List<Type> {typeof(CRenderable), typeof(CPosition)}, new List<Type> {typeof(CPlayer), typeof(CAnimation)}, world)
         {
         }
 
+        /// <summary>
+        /// Renders the Bitmap in each Entity's Renderable Component at the x and y coordinates
+        /// in the Entity's Position Component.
+        /// </summary>
         public override void Process()
         {
-            CRenderable entRend;
-            CPosition entPos;
+            CRenderable render;
+            CPosition pos;
 
-            //Use components of each entity to draw their bitmaps
             for (int i = 0; i < Entities.Count; i++)
             {
-                entRend = World.GetComponent<CRenderable>(Entities[i]);
-                entPos = World.GetComponent<CPosition>(Entities[i]);
+                render = World.GetComponent<CRenderable>(Entities[i]);
+                pos = World.GetComponent<CPosition>(Entities[i]);
 
-                SwinGame.DrawBitmap(entRend.Img, entPos.X, entPos.Y);
+                SwinGame.DrawBitmap(render.Img, pos.X, pos.Y);
             }
         }
     }

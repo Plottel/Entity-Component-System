@@ -11,6 +11,12 @@ namespace MyGame
     /// </summary>
     public class EntityHolderSystem : System
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.EntityHolderSystem"/> class.
+        /// </summary>
+        /// <param name="include">The Component Types the System will operate on.</param>
+        /// <param name="exclude">The Component Types the System will NOT operate on.</param>
+        /// <param name="world">The World the System belongs to.</param>
         public EntityHolderSystem (List<Type> include, List<Type> exclude, World world) : base(include, exclude, world)
         {
         }

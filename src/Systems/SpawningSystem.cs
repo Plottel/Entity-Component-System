@@ -23,7 +23,7 @@ namespace MyGame
         /// <summary>
         /// How often the System will spawn units.
         /// </summary>
-        private uint _spawnInterval;
+        private uint _spawnInterval = 500;
 
         /// <summary>
         /// When the System last spawned. Used to determine when the next spawn will occur.
@@ -32,18 +32,18 @@ namespace MyGame
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.SpawningSystem"/> class.
-        /// This System does not contain any Entities, it simply spawns units.
+        /// This System does not contain any Entities, it simply spawns Entities.
         /// </summary>
         /// <param name="world">The World the System belongs to.</param>
         public SpawningSystem (World world) : base(new List<Type> {}, new List<Type> {}, world)
         {
-            _spawnInterval = 500;
         }
 
         /// <summary>
         /// Specifies whether or not the System is ready to spawn units.
         /// This uses the Game Time to see if enough time has passed since the last spawn.
         /// </summary>
+        /// <returns><c>true</c> if the System is ready to spawn, <c>false</c> otherwise.</returns>
         private bool ReadyToSpawn()
         {
             return World.GameTime - _lastSpawn >= _spawnInterval;

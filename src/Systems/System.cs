@@ -48,6 +48,7 @@ namespace MyGame
         /// <summary>
         /// Gets or sets the World the System belongs to.
         /// </summary>
+        /// <value>The World.</value>
         public World World
         {
             get {return _world;}
@@ -57,15 +58,16 @@ namespace MyGame
         /// <summary>
         /// Gets the List of Entities the System knows about. This cannot be overwritten to a new List.
         /// </summary>
-        /// <value>The entities.</value>
+        /// <value>The Entities.</value>
         public List<int> Entities
         {
             get {return _entities;}
         }
 
         /// <summary>
-        /// Gets or sets the List of Components the System will operate on.
+        /// Gets or sets the List of Component Types the System will operate on.
         /// </summary>
+        /// <value>The Component Types.</value>
         public List<Type> Include
         {
             get {return _include;}
@@ -73,8 +75,9 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Gets or sets the List of Components the System will NOT operate on.
+        /// Gets or sets the List of Component Types the System will NOT operate on.
         /// </summary>
+        /// <value>The Component Types.</value>
         public List<Type> Exclude
         {
             get {return _exclude;}
@@ -85,6 +88,7 @@ namespace MyGame
         /// <summary>
         /// Specifies whether or not the System contains the passed in Entity.
         /// </summary>
+        /// <returns><c>true</c> if the System has the Entity, <c>false</c> otherwise.</returns>
         /// <param name="entID">The Entity to check.</param>
         public bool HasEntity(int entID)
         {
@@ -95,6 +99,7 @@ namespace MyGame
         /// Determines whether or not the passed in Entity meets the requirements of the System.
         /// This checks against both the Include and Exclude Type Lists.
         /// </summary>
+        /// <returns><c>true</c> if the Entity passes the filter, <c>false</c> otherwise.</returns>
         /// <param name="entID">The Entity to check.</param>
         public bool EntityPassesFilter(int entID)
         {
@@ -136,9 +141,8 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Removes the passed in Entity from the System's list of Entities ONLY IF the System contains it.
-        /// Child Systems can define their own Remove methods for added functionality. Examples of this
-        /// are the Loot System and the Player AI System.
+        /// Removes the passed in Entity from the System's list of Entities.
+        /// Child Systems can define their own Remove methods for specialised functionality. 
         /// </summary>
         /// <param name="entID">The Entity to be removed.</param>
         public virtual void Remove(int entID)

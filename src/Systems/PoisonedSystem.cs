@@ -13,7 +13,7 @@ namespace MyGame
         /// <summary>
         /// How often the System will operate.
         /// </summary>
-        private uint _tickInterval;
+        private uint _tickInterval = 2000;
 
         /// <summary>
         /// The last time the System operated. This is used to determine the next System tick.
@@ -26,7 +26,6 @@ namespace MyGame
         /// <param name="world">The World the System belongs to.</param>
         public PoisonedSystem (World world) : base(new List<Type> {typeof(CPoison), typeof(CHealth)}, new List<Type> {}, world)
         {
-            _tickInterval = 2000;
         }
 
         /// <summary>
