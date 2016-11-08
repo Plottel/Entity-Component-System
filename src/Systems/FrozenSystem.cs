@@ -29,7 +29,7 @@ namespace MyGame
             {
                 frozen = World.GetComponent<CFrozen>(Entities[i]);
 
-                if (Utils.EffectHasEnded(World.GameTime, frozen.TimeApplied, frozen.Duration))
+                if (Utils.DurationReached(frozen.TimeApplied, frozen.Duration))
                     World.RemoveComponent<CFrozen>(Entities[i]);
             }
         }

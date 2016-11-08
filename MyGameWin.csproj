@@ -41,7 +41,6 @@
     <Folder Include="src\Systems\" />
     <Folder Include="src\Systems\Collision Systems\" />
     <Folder Include="src\Systems\Rendering Systems\" />
-    <Folder Include="src\Systems\Player Systems\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\GameMain.cs" />
@@ -64,18 +63,15 @@
     <Compile Include="src\Components\CPoison.cs" />
     <Compile Include="src\Systems\PoisonedSystem.cs" />
     <Compile Include="src\Systems\ProjectileSystem.cs" />
-    <Compile Include="src\Systems\PoisonZoneCollisionHandlerSystem.cs" />
-    <Compile Include="src\Systems\HealthSystem.cs" />
+    <Compile Include="src\Systems\DamageSystem.cs" />
     <Compile Include="src\Systems\FreezingBulletSystem.cs" />
     <Compile Include="src\Components\CFrozen.cs" />
     <Compile Include="src\Systems\FrozenSystem.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="src\Components\Tags\CAppliesDebuff.cs" />
-    <Compile Include="src\Components\CProjectile.cs" />
     <Compile Include="src\Components\CAnimation.cs" />
     <Compile Include="src\Components\CLoot.cs" />
-    <Compile Include="src\Systems\PlayerLootSystem.cs" />
-    <Compile Include="src\Systems\PlayerGoldSystem.cs" />
+    <Compile Include="src\Systems\LootSystem.cs" />
     <Compile Include="src\Components\CPlayer.cs" />
     <Compile Include="src\Systems\EntityHolderSystem.cs" />
     <Compile Include="src\Components\Tags\CPlayerTeam.cs" />
@@ -84,23 +80,31 @@
     <Compile Include="src\Systems\EnemyAISystem.cs" />
     <Compile Include="src\Components\CCollision.cs" />
     <Compile Include="src\Components\Tags\CExcludeAll.cs" />
-    <Compile Include="src\Components\Tags\CArrow.cs" />
-    <Compile Include="src\Components\Tags\CFreezingBullet.cs" />
     <Compile Include="src\Systems\Collision Systems\CollisionCheckSystem.cs" />
     <Compile Include="src\Systems\Collision Systems\CollisionCleanupSystem.cs" />
-    <Compile Include="src\Systems\Collision Systems\ArrowCollisionHandlerSystem.cs" />
+    <Compile Include="src\Systems\Collision Systems\DamageCollisionHandlerSystem.cs" />
     <Compile Include="src\Systems\Collision Systems\FreezeZoneCollisionHandlerSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\AnimationRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\PlayerRenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\RenderingSystem.cs" />
     <Compile Include="src\Systems\Rendering Systems\HealthRenderingSystem.cs" />
-    <Compile Include="src\Systems\PlayerCooldownSystem.cs" />
     <Compile Include="src\Systems\PlayerAISystem.cs" />
     <Compile Include="src\Components\CStatusAnimations.cs" />
     <Compile Include="src\Systems\Rendering Systems\StatusAnimationRenderingSystem.cs" />
     <Compile Include="src\Components\Tags\CGotStatusEffect.cs" />
     <Compile Include="src\Systems\GotStatusEffectSystem.cs" />
-    <Compile Include="Resources\images\CStatusAnimation.cs" />
+    <Compile Include="src\Components\Tags\CProjectile.cs" />
+    <Compile Include="src\Components\CFreezingBullet.cs" />
+    <Compile Include="src\Components\CLifetime.cs" />
+    <Compile Include="src\Systems\LifetimeSystem.cs" />
+    <Compile Include="src\Components\Tags\CDamagesOnImpact.cs" />
+    <Compile Include="src\Systems\ExplosionManSystem.cs" />
+    <Compile Include="src\Components\CExplosionMan.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="src\Systems\PlayerSystem.cs" />
+    <Compile Include="src\Components\CStatusAnimation.cs" />
+    <Compile Include="src\Systems\Collision Systems\PoisonZoneCollisionHandlerSystem.cs" />
+    <Compile Include="src\Components\Tags\CTeam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
@@ -265,9 +269,20 @@
     <None Include="Resources\images\smallicespike.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\animations\IceSpikeAnim.txt" />
+    <None Include="Resources\animations\IceSpikeAnim.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.Template.txt" />
+    <None Include="Resources\images\explosion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\animations\ExplosionAnim.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\images\explosionman.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Target Name="CopyLibsToOut">
     <Copy SourceFiles="@(WinLibs)" DestinationFolder="$(OutDir)" />

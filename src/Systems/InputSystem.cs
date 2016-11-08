@@ -6,11 +6,15 @@ namespace MyGame
 {
     /// <summary>
     /// Represents the System which handles all user input. This includes spell casts and purchase options.
-    /// The System fetches the Player Gold System to process shop purchases.
+    /// The System fetches the Player System to process shop purchases.
     /// </summary>
     public class InputSystem : System
     {
-        public InputSystem (World world) : base(new List<Type> {typeof(CPlayer)}, new List<Type> {}, world)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MyGame.InputSystem"/> class.
+        /// </summary>
+        /// <param name="world">The World the System belongs to.</param>
+        public InputSystem (World world) : base(new List<Type> {typeof(CExcludeAll)}, new List<Type> {}, world)
         {
         }
 
@@ -21,63 +25,22 @@ namespace MyGame
             /// </summary>
             Point2D pt = SwinGame.MousePosition();
 
-            CPosition playerPos = World.GetComponent<CPosition>(Entities[0]);
-            CPlayer player = World.GetComponent<CPlayer>(Entities[0]);
-            PlayerGoldSystem shop = World.GetSystem<PlayerGoldSystem>();
+            PlayerSystem playerSystem = World.GetSystem<PlayerSystem>();
 
-            if (SwinGame.KeyTyped(KeyCode.WKey))
-            {
-                shop.BuyWizard(player);
-            }
+            if (SwinGame.KeyDown(KeyCode.AKey))            
+                playerSystem.BuyArcher();
+            
 
-            if (SwinGame.KeyDown(KeyCode.AKey))
-            {
-                shop.BuyArcher(player);
-            }
+            if (SwinGame.KeyTyped(KeyCode.EKey))            
+                playerSystem.BuyExplosionMan();
+            
 
-            ///
-            /// Starting point for Bomb man
-            ///
-            if (SwinGame.KeyTyped(KeyCode.BKey))
-            {
-                CollisionCheckSystem collisions = World.GetSystem<CollisionCheckSystem>();
-                List<int> targets = collisions.EnemyCells[0];
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))            
+                playerSystem.CastPoisonZone(pt);
+            
 
-                for (int i = 1; i < collisions.EnemyCells.Count; i++)
-                {
-                    if (collisions.EnemyCells[i].Count > targets.Count)
-                        targets = collisions.EnemyCells[i];
-                }
-
-                foreach (int ent in targets)
-                    World.RemoveEntity(ent);
-            }
-
-            if (SwinGame.MouseClicked(MouseButton.LeftButton))
-            {
-                if (PlayerCooldownSystem.AbilityIsReady(World.GameTime, player.UsedLastPoisonZoneAt, player.PoisonZoneCooldown))
-                {
-                    EntityFactory.CreatePoisonZone(pt.X, pt.Y);
-
-                    /// <summary>
-                    /// Used to determine if ability is ready.
-                    /// </summary>
-                    player.UsedLastPoisonZoneAt = World.GameTime;
-                }
-            }
-
-            if (SwinGame.MouseClicked(MouseButton.RightButton))
-            {
-                if (PlayerCooldownSystem.AbilityIsReady(World.GameTime, player.UsedLastFreezingBulletAt, player.FreezingBulletCooldown))
-                {
-                    EntityFactory.CreateFreezingBullet(playerPos.Centre.X, playerPos.Centre.Y, pt.X, pt.Y, 7);
-
-                    /// <summary>
-                    /// Used to determine if ability is ready.
-                    /// </summary>
-                    player.UsedLastFreezingBulletAt = World.GameTime;
-                }
-            }
+            if (SwinGame.MouseClicked(MouseButton.RightButton))            
+                playerSystem.CastFreezingBullet(pt);
         }
     }
 }

@@ -8,9 +8,13 @@ namespace MyGame
     /// this System overrides the Remove method to extract the Loot component from the Entity and award 
     /// it to the Player.
     /// </summary>
-    public class PlayerLootSystem : System
+    public class LootSystem: System
     {
-        public PlayerLootSystem (World world) : base(new List<Type> {typeof(CLoot), typeof(CEnemyTeam)}, new List<Type> {}, world)
+        public LootSystem(World world) : base(new List<Type> {typeof(CLoot), typeof(CEnemyTeam)}, new List<Type> {}, world)
+        {
+        }
+
+        public override void Process()
         {
         }
 
@@ -19,19 +23,15 @@ namespace MyGame
         /// and its contents sent to the fetched Player Gold System.
         /// </summary>
         /// <param name="entID">The Entity to remove.</param>
-        public override void Remove(int entID)
+        public override void Remove(ulong entID)
         {
             if (HasEntity(entID))
             {
-                //Player Gold System is responsible for managing the Player's resources.
-                PlayerGoldSystem goldSystem = World.GetSystem<PlayerGoldSystem>();
-                goldSystem.GiveLoot(World.GetComponent<CLoot>(entID));
+                CLoot lootToGive = World.GetComponent<CLoot>(entID);
+                PlayerSystem playerSystem = World.GetSystem<PlayerSystem>();
+                playerSystem.GiveLoot(lootToGive);
             }
             base.Remove(entID);
-        }
-
-        public override void Process()
-        {
-        }
+        }      
     }
 }

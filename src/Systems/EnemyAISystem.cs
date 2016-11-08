@@ -37,9 +37,7 @@ namespace MyGame
                 {
                     CheckRange(Entities[i], AI, pos);
 
-                    /// <summary>
                     /// If the AI is now in range, stop moving and begin attacking.
-                    /// </summary>
                     if (AI.IsInRange)
                         World.RemoveComponent<CVelocity>(Entities[i]);
                 }
@@ -56,14 +54,9 @@ namespace MyGame
                     /// </summary>
                     if (SwinGame.AnimationEnded(anim.Anim))
                     {
-                        /// <summary>
-                        /// Carry out the attack.
-                        /// </summary>
-                        Attack(Entities[i], "Enemy");
+                        Attack<CEnemyTeam>(Entities[i]);
 
-                        /// <summary>
-                        /// If Attacking, stand still during the cooldown period.
-                        /// </summary>
+                        ///If the Entity has attacked, stand still during the cooldown period.
                         SwinGame.AssignAnimation(anim.Anim, "Still", anim.AnimScript);
                     }
                 }
@@ -77,7 +70,7 @@ namespace MyGame
         /// <param name="entID">The Entity to check range for.</param>
         /// <param name="AI">AI component of the Entity to check range for.</param>
         /// <param name="pos">Position component of the Entity to check range for.</param>
-        protected void CheckRange(int entID, CAI AI, CPosition pos)
+        protected void CheckRange(ulong entID, CAI AI, CPosition pos)
         {
             Circle attackRadius = SwinGame.CreateCircle(pos.Centre.X, pos.Centre.Y, AI.Range + (pos.Width / 2));
             CPosition targetPos = World.GetComponent<CPosition>(AI.TargetID);
@@ -90,7 +83,7 @@ namespace MyGame
         /// than the attack cooldown of the AI, then the AI is ready to attack and their Attack animation begins.
         /// </summary>
         /// <param name="entID">Ent identifier.</param>
-        protected void CheckCooldown(int entID)
+        protected void CheckCooldown(ulong entID)
         {
             CAI AI = World.GetComponent<CAI>(entID);
 
@@ -106,14 +99,17 @@ namespace MyGame
             }
         }
 
-        protected void Attack(int entID, string team)
+        /// <summary>
+        /// Performs an Attack for the specified Entity. The Entity's
+        /// attack Type is evaluated and the appropriate attack is performed.
+        /// </summary>
+        /// <param name="entID">The Attacking Entity.</param>
+        /// <typeparam name="T">The Team the Entity belongs to.</typeparam>
+        protected void Attack<T>(ulong entID) where T : CTeam
         {
             CAI AI = World.GetComponent<CAI>(entID);
             CDamage damage; 
-            CBow bow;
             CPosition pos;
-
-            CHealth targetHealth = World.GetComponent<CHealth>(AI.TargetID);
             CPosition targetPos;
 
             /// <summary>
@@ -123,27 +119,31 @@ namespace MyGame
             AI.AttackIsReady = false;
 
             /// <summary>
-            /// If the Attack Type is Melee, directly apply damage to the Target.
-            /// If the Attack Type is Gun, create a projectile Entity to travel towards the Target.
+            /// If the Attack Type is Melee, register an attack with the Damage System.
+            /// If the Attack Type is Gun, create an Arrow Entity to travel towards the Target.
             /// </summary>
             switch (AI.AttackType)
             {
                 case AttackType.Melee:
                 {
-                    damage = World.GetComponent<CDamage>(entID);
+                    /// <summary>
+                    /// The System where Attacks are registered.
+                    /// </summary>
+                    DamageSystem damageSystem = World.GetSystem<DamageSystem>();
 
-                    targetHealth.Damage += damage.Damage;
+                    damage = World.GetComponent<CDamage>(entID);
+                    damageSystem.RegisterAttack(AI.TargetID, damage.Damage);
                     break;
                 }
 
                 case AttackType.Bow:
                 {
                     pos = World.GetComponent<CPosition>(entID);
-                    bow = World.GetComponent<CBow>(entID);
+                    CBow bow = World.GetComponent<CBow>(entID);
 
                     targetPos = World.GetComponent<CPosition>(AI.TargetID);
 
-                    EntityFactory.CreateArrow(pos.Centre.X, pos.Centre.Y, bow.ArrowSpeed, bow.ArrowDamage, targetPos, team);
+                    EntityFactory.CreateArrow<T>(pos.Centre.X, pos.Centre.Y, bow, targetPos);
                     break;
                 }
             }

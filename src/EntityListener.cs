@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -10,7 +10,7 @@ namespace MyGame
     /// </summary>
     public interface EntityListener
     {
-        void Add(int entID);
-        void Remove(int entID);
+        void Add(ulong entID);
+        void Remove(ulong entID);
     }
 }

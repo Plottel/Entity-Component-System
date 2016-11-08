@@ -14,7 +14,7 @@ namespace MyGame
         /// Initializes a new instance of the <see cref="T:MyGame.RenderingSystem"/> class.
         /// </summary>
         /// <param name="world">The World the System belongs to.</param>
-        public RenderingSystem(World world) : base(new List<Type> {typeof(CRenderable), typeof(CPosition)}, new List<Type> {typeof(CPlayer), typeof(CAnimation)}, world)
+        public RenderingSystem(World world) : base(new List<Type> {typeof(CRenderable), typeof(CPosition)}, new List<Type> {typeof(CAnimation)}, world)
         {
         }
 

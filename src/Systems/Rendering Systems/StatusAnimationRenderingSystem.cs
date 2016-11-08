@@ -47,7 +47,7 @@ namespace MyGame
                 {
                     anim = statusAnims.Anims[j];
 
-                    if (World.EntityHasComponent(Entities[i], anim.Key))
+                    if (World.EntityHasComponent(Entities[i], anim.LinkedComponent))
                     {
                         float x = pos.X + anim.XOffset;
                         float y = pos.Y + anim.YOffset;

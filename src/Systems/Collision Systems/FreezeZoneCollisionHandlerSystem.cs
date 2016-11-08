@@ -40,7 +40,7 @@ namespace MyGame
                 /// <summary>
                 /// This loop represents each Entity colliding with the Freeze Zone.
                 /// </summary>
-                foreach (int target in collision.CollidedWith)
+                foreach (ulong target in collision.CollidedWith)
                 {
                     //If not already Frozen, add a Frozen Component.
                     if (!World.EntityHasComponent(target, typeof(CFrozen)))
@@ -50,7 +50,15 @@ namespace MyGame
                             World.AddComponent(target, new CFrozen(freezeZoneFrozen.Duration, World.GameTime));
 
                         if (!World.EntityHasComponent(target, typeof(CGotStatusEffect)))
-                            World.AddComponent(target, new CGotStatusEffect());
+                        {
+                            World.AddComponent(target, new CGotStatusEffect(typeof(CFrozen))); 
+                        }
+                        else
+                        {
+                            CGotStatusEffect statusEffects = World.GetComponent<CGotStatusEffect>(target);
+                            statusEffects.AddEffect(typeof(CFrozen));
+                        }
+                            
                     }
                     else //If already Frozen, refresh the duration.
                     {

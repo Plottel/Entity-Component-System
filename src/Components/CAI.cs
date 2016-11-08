@@ -12,7 +12,7 @@ namespace MyGame
         /// <summary>
         /// The target.
         /// </summary>
-        private int _targetID;
+        private ulong _targetID;
 
         /// <summary>
         /// Indicates if the Entity has a target.
@@ -63,7 +63,7 @@ namespace MyGame
         /// <param name="cooldown">Cooldown.</param>
         /// <param name="attackType">Attack type.</param>
         /// <param name="targetID">Target identifier.</param>
-        public CAI(int range, int cooldown, AttackType attackType, int targetID)
+        public CAI(int range, int cooldown, AttackType attackType, ulong targetID)
         {
             _range = range;
             _cooldown = cooldown;
@@ -82,7 +82,7 @@ namespace MyGame
         /// Gets or sets the target.
         /// </summary>
         /// <value>The target.</value>
-        public int TargetID
+        public ulong TargetID
         {
             get {return _targetID;}
             set {_targetID = value;}

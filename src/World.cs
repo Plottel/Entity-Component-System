@@ -16,7 +16,7 @@ namespace MyGame
         /// The master list of Entities the World knows about and all their Components. Maps an Entity ID
         /// to another Dictionary mapping the Component Type to the actual Component.
         /// </summary>
-        private readonly Dictionary<int, Dictionary<Type, Component>> _entityComponents;
+        private readonly Dictionary<ulong, Dictionary<Type, Component>> _entityComponents;
 
         /// <summary>
         /// The master list of all Systems the World knows about.
@@ -26,13 +26,13 @@ namespace MyGame
         /// <summary>
         /// Represents the next unique ID to be given to an Entity. 
         /// </summary>
-        private int _nextID;
+        private ulong _nextID;
 
         /// <summary>
         /// The game time. This is the only timer in the program.
         /// All time-based code will utilise this timer.
         /// </summary>
-        private Timer _gameTime;
+        private static Timer _gameTime;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.World"/> class.
@@ -40,7 +40,7 @@ namespace MyGame
         /// </summary>
         public World ()
         {
-            _entityComponents = new Dictionary<int, Dictionary<Type, Component>>();
+            _entityComponents = new Dictionary<ulong, Dictionary<Type, Component>>();
             _systems = new List<System>();
             _nextID = 1;
             _gameTime = new Timer();
@@ -54,25 +54,19 @@ namespace MyGame
         /// <summary>
         /// Gets the current ticks of the Game Time Timer.
         /// </summary>
-        public uint GameTime
+        public static uint GameTime
         {
             get {return SwinGame.TimerTicks(_gameTime);}
         }
 
         /// <summary>
-        /// Specifies whether or not two Entities are on the same team.
+        /// Gets the next unique Entity ID.
         /// </summary>
-        /// <returns><c>true</c> if Entities are on the same team, <c>false</c> otherwise.</returns>
-        public bool EntitiesOnSameTeam(int entOne, int entTwo)
+        /// <value>The next unique Entity ID.</value>
+        public ulong NextEntityID
         {
-            if (EntityHasComponent(entOne, typeof(CPlayerTeam)) && EntityHasComponent(entTwo, typeof(CPlayerTeam)))
-                return true;
-
-            if (EntityHasComponent(entOne, typeof(CEnemyTeam)) && EntityHasComponent(entTwo, typeof(CEnemyTeam)))
-                return true;
-
-            return false;
-        } 
+            get {return _nextID++;}
+        }
 
         /// <summary>
         /// Tells each System in the World to call their Process method.
@@ -81,31 +75,64 @@ namespace MyGame
         public void Process()
         {
             foreach (System s in _systems)
-            {
                 s.Process();
+        }
+
+        /// <summary>
+        /// Adds the passed in Entity to the World and associates it with the passed in List of Components
+        /// </summary>
+        /// <param name="entID">The Entity to be added.</param>
+        /// <param name="components">The List of Components to be associated with the Entity.</param>
+        public void AddEntity(ulong entID, List<Component> components)
+        {
+            _entityComponents.Add(entID, new Dictionary<Type, Component>());
+
+            //Add Entity's components to its entry in the Dictionary
+            foreach (Component c in components)
+                _entityComponents[entID].Add(c.GetType(), c);
+
+            foreach (System s in _systems)
+            {
+                //If Entity meets the requirements of the System
+                if (s.EntityPassesFilter(entID))
+                    s.Add(entID); 
             }
         }
 
         /// <summary>
-        /// Specifies whether or not an Entity has a passed in Component Type.
+        /// Removes the passed in Entity and all its Components from the World and all Systems.
         /// </summary>
-        /// <returns><c>true</c> if the Entity has the Component Type, <c>false</c> otherwise.</returns>
-        /// <param name="entID">The Entity to check.</param>
-        /// <param name="t">The Component Type to check.</param>
-        public bool EntityHasComponent(int entID, Type t)
+        /// <param name="entID">The Entity to be removed.</param>
+        public void RemoveEntity(ulong entID)
         {
-            return _entityComponents[entID].ContainsKey(t);
+            foreach (System s in _systems)
+            {
+                s.Remove(entID);
+            }
+
+            _entityComponents.Remove(entID);
         }
 
         /// <summary>
-        /// Specifies whether or not the World has a passed in Entity.
-        /// This is primarily used to determine if an Entity is still alive.
+        /// Returns a passed in Component Type belonging to the passed in Entity.
         /// </summary>
-        /// <returns><c>true</c> if the World has the Entity, <c>false</c> otherwise.</returns>
-        /// <param name="entID">The Entity to check.</param>
-        public bool HasEntity(int entID)
+        /// <returns>The Component of the passed in Type for the passed in Entity.</returns>
+        /// <param name="entID">The Entity to fetch the Component for.</param>
+        /// <typeparam name="T">The Component Type to be fetched.</typeparam>
+        public T GetComponent<T>(ulong entID) where T : Component
         {
-            return _entityComponents.ContainsKey(entID);
+            return (T)_entityComponents[entID][typeof(T)];
+        }
+
+        /// <summary>
+        /// Returns a Dictionary containing all Components belonging to a specified Entity.
+        /// The Dictionary maps Component Types to the actual Component. 
+        /// </summary>
+        /// <returns>The Dictionary mapping all Component Types to Components for the specified Entity.</returns>
+        /// <param name="entID">The Entity to get all Components of.</param>
+        public Dictionary<Type, Component> GetAllComponentsOfEntity(ulong entID)
+        {   
+            return _entityComponents[entID];
         }
 
         /// <summary>
@@ -114,7 +141,7 @@ namespace MyGame
         /// </summary>
         /// <param name="entID">The Entity to add the Component to.</param>
         /// <param name="c">The Component to add.</param>
-        public void AddComponent(int entID, Component c)
+        public void AddComponent(ulong entID, Component c)
         {
             _entityComponents[entID].Add(c.GetType(), c);
 
@@ -140,7 +167,7 @@ namespace MyGame
         /// </summary>
         /// <param name="entID">The Entity to remove the Component from.</param>
         /// <typeparam name="T">The Component Type to be removed.</typeparam>
-        public void RemoveComponent<T>(int entID) where T : Component
+        public void RemoveComponent<T>(ulong entID) where T : Component
         {
             _entityComponents[entID].Remove(typeof(T));
 
@@ -161,25 +188,25 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Returns a passed in Component Type belonging to the passed in Entity.
+        /// Specifies whether or not an Entity has a passed in Component Type.
         /// </summary>
-        /// <returns>The Component of the passed in Type for the passed in Entity.</returns>
-        /// <param name="entID">The Entity to fetch the Component for.</param>
-        /// <typeparam name="T">The Component Type to be fetched.</typeparam>
-        public T GetComponent<T>(int entID) where T : Component
+        /// <returns><c>true</c> if the Entity has the Component Type, <c>false</c> otherwise.</returns>
+        /// <param name="entID">The Entity to check.</param>
+        /// <param name="t">The Component Type to check.</param>
+        public bool EntityHasComponent(ulong entID, Type t)
         {
-            return (T)_entityComponents[entID][typeof(T)];
+            return _entityComponents[entID].ContainsKey(t);
         }
 
         /// <summary>
-        /// Returns a Dictionary containing all Components belonging to a specified Entity.
-        /// The Dictionary maps Component Types to the actual Component. 
+        /// Specifies whether or not the World has a passed in Entity.
+        /// This is primarily used to determine if an Entity is still alive.
         /// </summary>
-        /// <returns>The Dictionary mapping all Component Types to Components for the specified Entity.</returns>
-        /// <param name="entID">The Entity to get all Components of.</param>
-        public Dictionary<Type, Component> GetAllComponentsOfEntity(int entID)
-        {   
-            return _entityComponents[entID];
+        /// <returns><c>true</c> if the World has the Entity, <c>false</c> otherwise.</returns>
+        /// <param name="entID">The Entity to check.</param>
+        public bool HasEntity(ulong entID)
+        {
+            return _entityComponents.ContainsKey(entID);
         }
 
         /// <summary>
@@ -209,55 +236,6 @@ namespace MyGame
         public void AddSystem(System s)
         {
             _systems.Add(s);
-        }
-
-        /// <summary>
-        /// Creates an Entity with the next available unique ID.
-        /// <returns>An int representing the Entity's unique ID.</returns>
-        /// </summary>
-        public int CreateEntity()
-        {
-            _nextID++;
-            return _nextID - 1;
-        }
-
-        /// <summary>
-        /// Adds the passed in Entity to the World and associates it with the passed in List of Components
-        /// </summary>
-        /// <param name="entID">The Entity to be added.</param>
-        /// <param name="components">The List of Components to be associated with the Entity.</param>
-        public void AddEntity(int entID, List<Component> components)
-        {
-            _entityComponents.Add(entID, new Dictionary<Type, Component>());
-
-            //Add Entity's components to its entry in the Dictionary
-            foreach (Component c in components)
-            {
-                _entityComponents[entID].Add(c.GetType(), c);
-            }
-
-            foreach (System s in _systems)
-            {
-                //If Entity meets the requirements of the System
-                if (s.EntityPassesFilter(entID))
-                {
-                    s.Add(entID); 
-                }
-            }
-        }
-
-        /// <summary>
-        /// Removes the passed in Entity and all its Components from the World and all Systems.
-        /// </summary>
-        /// <param name="entID">The Entity to be removed.</param>
-        public void RemoveEntity(int entID)
-        {
-            foreach (System s in _systems)
-            {
-                s.Remove(entID);
-            }
-
-            _entityComponents.Remove(entID);
         }
     }
 }

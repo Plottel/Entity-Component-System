@@ -2,6 +2,6 @@ SwinGame Animation #v1
 
 f: 0, 0, 8, 1
 f: 1, 1, 8, 2
-f: 2, 2,
+f: 2, 2, 8,
 
 i:Freeze,0

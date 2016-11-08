@@ -32,7 +32,6 @@ namespace MyGame
             CHealth health;
             CPosition pos;
 
-
             for (int i = 0; i < Entities.Count; i++)
             {
                 health = World.GetComponent<CHealth>(Entities[i]);
@@ -46,9 +45,10 @@ namespace MyGame
                 SwinGame.FillRectangle(Color.DarkGreen, pos.X, pos.Y - 4, pos.Width, 3);
 
                 /// <summary>
-                /// Renders the Red Damage Bar.
+                /// Renders the Red Damage Bar if the Entity has been damaged.
                 /// </summary>
-                SwinGame.FillRectangle(Color.Red, pos.X, pos.Y - 4, (barWidthPerHP * health.Damage), 3); //Draw damage bar
+                if (health.Damage > 0)
+                    SwinGame.FillRectangle(Color.Red, pos.X, pos.Y - 4, (barWidthPerHP * health.Damage), 3); //Draw damage bar
             }
         }
     }

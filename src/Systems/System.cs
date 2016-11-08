@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MyGame
@@ -12,7 +12,7 @@ namespace MyGame
         /// <summary>
         /// The Entities the System will operate on. This cannot be overwritten to a new List.
         /// </summary>
-        private readonly List<int> _entities;
+        private readonly List<ulong> _entities;
 
         /// <summary>
         /// The Component Types the System will operate on.
@@ -39,7 +39,7 @@ namespace MyGame
         /// <param name="world">The World the System belongs to.</param>
         protected System(List<Type> include, List<Type> exclude, World world)
         {
-            _entities = new List<int>();
+            _entities = new List<ulong>();
             _include = include;
             _exclude = exclude;
             _world = world;
@@ -59,7 +59,7 @@ namespace MyGame
         /// Gets the List of Entities the System knows about. This cannot be overwritten to a new List.
         /// </summary>
         /// <value>The Entities.</value>
-        public List<int> Entities
+        public List<ulong> Entities
         {
             get {return _entities;}
         }
@@ -90,7 +90,7 @@ namespace MyGame
         /// </summary>
         /// <returns><c>true</c> if the System has the Entity, <c>false</c> otherwise.</returns>
         /// <param name="entID">The Entity to check.</param>
-        public bool HasEntity(int entID)
+        public bool HasEntity(ulong entID)
         {
             return Entities.Contains(entID);
         }
@@ -101,7 +101,7 @@ namespace MyGame
         /// </summary>
         /// <returns><c>true</c> if the Entity passes the filter, <c>false</c> otherwise.</returns>
         /// <param name="entID">The Entity to check.</param>
-        public bool EntityPassesFilter(int entID)
+        public bool EntityPassesFilter(ulong entID)
         {
             //All the Components of the Entity
             Dictionary<Type, Component> entComponents = World.GetAllComponentsOfEntity(entID);
@@ -135,7 +135,7 @@ namespace MyGame
         /// Adds the passed in Entity to the System's list of Entities.
         /// </summary>
         /// <param name="entID">The Entity to be added.</param>
-        public void Add(int entID)
+        public virtual void Add(ulong entID)
         {
             Entities.Add(entID);
         }
@@ -145,7 +145,7 @@ namespace MyGame
         /// Child Systems can define their own Remove methods for specialised functionality. 
         /// </summary>
         /// <param name="entID">The Entity to be removed.</param>
-        public virtual void Remove(int entID)
+        public virtual void Remove(ulong entID)
         {
             Entities.Remove(entID);
         }

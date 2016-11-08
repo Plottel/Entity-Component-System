@@ -19,7 +19,7 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Updates the Position Components of each Entity according to the speeds in their Velocity Components.
+        /// Updates the Position Components of each Entity according to the velocities in their Velocity Components.
         /// </summary>
         public override void Process()
         {

@@ -7,7 +7,8 @@ namespace MyGame
     /// <summary>
     /// Represents the System responsible for dealing with Entities which have just received a 
     /// status effect. This System will create a Status Effect Animation corresponding to the
-    /// type of status effect the Entity received.
+    /// type of status effect the Entity received. In future development, this System would also 
+    /// be responsible for other applications such as playing sounds.
     /// </summary>
     public class GotStatusEffectSystem : System
     {
@@ -22,74 +23,26 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Evaluates the Components of each Entity to determine which type of status effect it has received.
+        /// Evaluates the GotStatusEffect Components of each Entity to determine which type of status effect it has received.
         /// The corresponding Status Animation is then created and the GotStatusEffect Component is removed.
         /// </summary>
         public override void Process()
         {
+            CGotStatusEffect statusEffects;
             CStatusAnimations statusAnims;
             CPosition pos;
 
             for (int i = 0; i < Entities.Count; i++)
             {
+                statusEffects = World.GetComponent<CGotStatusEffect>(Entities[i]);
                 statusAnims = World.GetComponent<CStatusAnimations>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
 
-                /// <summary>
-                /// If the Entity has a Frozen Component, then add an Ice Spike Status Animation.
-                /// </summary>
-                if (World.EntityHasComponent(Entities[i], typeof(CFrozen)))
-                {
-                    CStatusAnimation newStatusAnim;
-                    Bitmap bmp;
-                    Animation anim;
-                    AnimationScript animScript;
-                    float xOffset;
-                    float yOffset;
+                if (statusEffects.Effects.Contains(typeof(CFrozen)))
+                    HandleFreezeEffect(statusAnims, pos);
 
-                    if (pos.Width <= 21)
-                        bmp = SwinGame.BitmapNamed("SmallIceSpike");
-                    else
-                        bmp = SwinGame.BitmapNamed("BigIceSpike");
-
-                    xOffset = (pos.Width / 2) - (bmp.CellWidth / 2);
-                    yOffset = pos.Height - bmp.CellHeight;
-
-                    anim = SwinGame.CreateAnimation("Freeze", SwinGame.AnimationScriptNamed("IceSpikeAnim"));
-                    animScript = SwinGame.AnimationScriptNamed("IceSpikeAnim");
-
-                    newStatusAnim = new CStatusAnimation(typeof(CFrozen), xOffset, yOffset, bmp, anim, animScript);
-
-                    statusAnims.Anims.Add(newStatusAnim);
-                }
-
-                /// <summary>
-                /// If the Entity has a Poison Component, then add a Poison Cloud Status Animation.
-                /// </summary>
-                if (World.EntityHasComponent(Entities[i], typeof(CPoison)))
-                {
-                    CStatusAnimation newStatusAnim;
-                    Bitmap bmp;
-                    Animation anim;
-                    AnimationScript animScript;
-                    float xOffset;
-                    float yOffset;
-
-                    if (pos.Width <= 21)
-                        bmp = SwinGame.BitmapNamed("SmallPoisonCloud");
-                    else
-                        bmp = SwinGame.BitmapNamed("BigPoisonCloud");
-
-                    xOffset = (pos.Width / 2) - (bmp.CellWidth / 2);
-                    yOffset = 0;
-
-                    anim = SwinGame.CreateAnimation("Poison", SwinGame.AnimationScriptNamed("PoisonZoneAnim"));
-                    animScript = SwinGame.AnimationScriptNamed("PoisonZoneAnim");
-
-                    newStatusAnim = new CStatusAnimation(typeof(CPoison), xOffset, yOffset, bmp, anim, animScript);
-
-                    statusAnims.Anims.Add(newStatusAnim);
-                }
+                if (statusEffects.Effects.Contains(typeof(CPoison)))
+                    HandlePoisonEffect(statusAnims, pos);
             }
 
             /// <summary>
@@ -98,6 +51,66 @@ namespace MyGame
             /// </summary>
             for (int i = Entities.Count - 1; i >= 0; i--)
                 World.RemoveComponent<CGotStatusEffect>(Entities[i]);
+        }
+
+        /// <summary>
+        /// Adds a Poison Cloud status animation linked to the Entity's position.
+        /// </summary>
+        /// <param name="statusAnims">The Entity's list of Status Animations.</param>
+        /// <param name="pos">The Entity's position.</param>
+        private void HandlePoisonEffect(CStatusAnimations statusAnims, CPosition pos)
+        {
+            CStatusAnimation newStatusAnim;
+            Bitmap bmp;
+            Animation anim;
+            AnimationScript animScript;
+            float xOffset;
+            float yOffset;
+
+            if (pos.Width <= 21)
+                bmp = SwinGame.BitmapNamed("SmallPoisonCloud");
+            else
+                bmp = SwinGame.BitmapNamed("BigPoisonCloud");
+
+            xOffset = (pos.Width / 2) - (bmp.CellWidth / 2);
+            yOffset = 0;
+
+            anim = SwinGame.CreateAnimation("Poison", SwinGame.AnimationScriptNamed("PoisonZoneAnim"));
+            animScript = SwinGame.AnimationScriptNamed("PoisonZoneAnim");
+
+            newStatusAnim = new CStatusAnimation(typeof(CPoison), xOffset, yOffset, bmp, anim, animScript);
+
+            statusAnims.Anims.Add(newStatusAnim);
+        }
+
+        /// <summary>
+        /// Adds an Ice Spike status animation linked to the Entity's position.
+        /// </summary>
+        /// <param name="statusAnims">The Entity's list of Status Animations.</param>
+        /// <param name="pos">The Entity's position.</param>
+        private void HandleFreezeEffect(CStatusAnimations statusAnims, CPosition pos)
+        {
+            CStatusAnimation newStatusAnim;
+            Bitmap bmp;
+            Animation anim;
+            AnimationScript animScript;
+            float xOffset;
+            float yOffset;
+
+            if (pos.Width <= 21)
+                bmp = SwinGame.BitmapNamed("SmallIceSpike");
+            else
+                bmp = SwinGame.BitmapNamed("BigIceSpike");
+
+            xOffset = (pos.Width / 2) - (bmp.CellWidth / 2);
+            yOffset = pos.Height - bmp.CellHeight;
+
+            anim = SwinGame.CreateAnimation("Freeze", SwinGame.AnimationScriptNamed("IceSpikeAnim"));
+            animScript = SwinGame.AnimationScriptNamed("IceSpikeAnim");
+
+            newStatusAnim = new CStatusAnimation(typeof(CFrozen), xOffset, yOffset, bmp, anim, animScript);
+
+            statusAnims.Anims.Add(newStatusAnim);
         }
     }
 }

@@ -1,65 +1,57 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace MyGame
 {
+    /// <summary>
+    /// Represents the Component which stores "stats" for the Player.
+    /// This includes Gold and the times when abilities were last used. 
+    /// </summary>
     public class CPlayer: Component
     {
-        private uint _gold;
-        private uint _freezingBulletCooldown;
-        private uint _usedLastFreezingBulletAt;
-        private uint _poisonZoneCooldown;
-        private uint _usedlastPoisonZoneAt;
-        private int _archerCount;
-        private int _wizardCount;
+        /// <summary>
+        /// The amount of Gold the Player has. This is ued to purhcase units.
+        /// </summary>
+        private uint _gold = 5000;
 
-        public CPlayer()
-        {
-            _gold = 5000;
-            _freezingBulletCooldown = 1000;
-            _poisonZoneCooldown = 10;
-            _archerCount = 0;
-            _wizardCount = 0;
-        }
+        /// <summary>
+        /// The time when Freezing Bullet was last cast.
+        /// </summary>
+        private uint _timeOfLastFreezingBullet;
 
-        public uint FreezingBulletCooldown
-        {
-            get {return _freezingBulletCooldown;}
-            set {_freezingBulletCooldown = value;}
-        }
+        /// <summary>
+        /// The time when Poison Zone was last cast.
+        /// </summary>
+        private uint _timeOfLastPoisonZone;
 
-        public uint PoisonZoneCooldown
-        {
-            get {return _poisonZoneCooldown;}
-            set {_poisonZoneCooldown = value;}
-        }
-
+        /// <summary>
+        /// Gets or sets the gold.
+        /// </summary>
+        /// <value>The gold.</value>
         public uint Gold
         {
             get {return _gold;}
             set {_gold = value;}
         }
 
-        public int ArcherCount
+        /// <summary>
+        /// Gets or sets the time of the last freezing bullet.
+        /// </summary>
+        /// <value>The time of the last freezing bullet.</value>
+        public uint TimeOfLastFreezingBullet
         {
-            get {return _archerCount;}
-            set {_archerCount = value;}
+            get {return _timeOfLastFreezingBullet;}
+            set {_timeOfLastFreezingBullet = value;}
         }
 
-        public int WizardCount
+        /// <summary>
+        /// Gets or sets the time of last poison zone.
+        /// </summary>
+        /// <value>The time of the last poison zone.</value>
+        public uint TimeOfLastPoisonZone
         {
-            get {return _wizardCount;}
-            set {_wizardCount = value;}
-        }
-
-        public uint UsedLastFreezingBulletAt
-        {
-            get {return _usedLastFreezingBulletAt;}
-            set {_usedLastFreezingBulletAt = value;}
-        }
-
-        public uint UsedLastPoisonZoneAt
-        {
-            get {return _usedlastPoisonZoneAt;}
-            set {_usedlastPoisonZoneAt = value;}
+            get {return _timeOfLastPoisonZone;}
+            set {_timeOfLastPoisonZone = value;}
         }
     }
 }

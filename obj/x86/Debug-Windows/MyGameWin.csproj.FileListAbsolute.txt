@@ -1,3 +1,4 @@
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\BatteringRamAnims.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\FreezingBulletSplashAnim.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\startup.txt
@@ -44,13 +45,16 @@ C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\poisonz
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\PoisonZoneAnim.txt
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\smallpoisoncloud.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\bigpoisoncloud.png
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.exe
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
-C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
-C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\bigicespike.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\smallicespike.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\explosion.png
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\ExplosionAnim.txt
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\images\explosionman.png
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\CliParse.dll
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\locr.exe
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\SwinGame.dll
 C:\Users\Matt\Desktop\Entity Component System\bin\Debug\CliParse.xml
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.exe
+C:\Users\Matt\Desktop\Entity Component System\obj\x86\Debug-Windows\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\MyGame.pdb
+C:\Users\Matt\Desktop\Entity Component System\bin\Debug\Resources\animations\IceSpikeAnim.txt

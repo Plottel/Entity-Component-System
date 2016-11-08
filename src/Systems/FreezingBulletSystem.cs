@@ -22,7 +22,6 @@ namespace MyGame
             /// Exclude - null
             /// </summary>
             Include.Add(typeof(CFreezingBullet));
-            Exclude.Remove(typeof(CFreezingBullet));
         }
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace MyGame
         /// </summary>
         public override void Process()
         {
-            CProjectile projectile;
+            CFreezingBullet freezingBullet;
             CPosition pos;   
 
             /// <summary>
@@ -40,15 +39,26 @@ namespace MyGame
             /// </summary>
             for (int i = Entities.Count - 1; i >= 0; i--)
             {
-                projectile = World.GetComponent<CProjectile>(Entities[i]);
+                freezingBullet = World.GetComponent<CFreezingBullet>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
-                
-                if (ReachedTarget(projectile, pos) || !ProjectileOnScreen(pos))
+
+                if (ReachedTarget(pos, freezingBullet))
                 {
                     EntityFactory.CreateFreezeZone(pos);
                     World.RemoveEntity(Entities[i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// Specifies whether or not the Freezing Bullet has reached its target.
+        /// </summary>
+        /// <returns><c>true</c> if the Freezing Bullet has reached its target, <c>false</c> otherwise.</returns>
+        /// <param name="bulletPos">The position of the Freezing Bullet.</param>
+        /// <param name="bullet">The Freezing Bullet component, contains target coordinates.</param>
+        protected bool ReachedTarget(CPosition bulletPos, CFreezingBullet bullet)
+        {
+            return SwinGame.PointInRect(bullet.TargetX, bullet.TargetY, bulletPos.Rect);
         }
     }
 }

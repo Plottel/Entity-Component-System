@@ -5,7 +5,7 @@ namespace MyGame
 {
     /// <summary>
     /// Represents the System that handles Entities with a Poison Debuff. This System operates on a tick interval
-    /// and will apply Poison Damage to each poisoned Entity each tick. It will also check if the Entity's poison
+    /// and will register an Attack with the Damage System to each poisoned Entity each tick. It will also check if the Entity's poison
     /// component has expired. If it has, it will be removed from the Entity.
     /// </summary>
     public class PoisonedSystem : System
@@ -13,7 +13,7 @@ namespace MyGame
         /// <summary>
         /// How often the System will operate.
         /// </summary>
-        private uint _tickInterval = 2000;
+        private int _tickInterval = 2000;
 
         /// <summary>
         /// The last time the System operated. This is used to determine the next System tick.
@@ -34,28 +34,39 @@ namespace MyGame
         /// </summary>
         public override void Process()
         {
-            if (World.GameTime - _lastTick >= _tickInterval)
+            /// <summary>
+            /// The System where Attacks are registered.
+            /// </summary>
+            DamageSystem damageSystem = World.GetSystem<DamageSystem>();
+
+            if (ReadyToApplyPoison(_lastTick, _tickInterval))
             {
                 _lastTick = World.GameTime;
 
-                CPoison entPoison;
-                CHealth entHealth;
+                CPoison poison;
 
                 for (int i = 0; i < Entities.Count; i++)
                 {
-                    entPoison = World.GetComponent<CPoison>(Entities[i]);
+                    poison = World.GetComponent<CPoison>(Entities[i]);
 
-                    if (!Utils.EffectHasEnded(World.GameTime, entPoison.TimeApplied, entPoison.Duration))
-                    {
-                        entHealth = World.GetComponent<CHealth>(Entities[i]);
-                        entHealth.Damage += entPoison.Strength;
-                    }
+                    if (!Utils.DurationReached(poison.TimeApplied, poison.Duration))
+                        damageSystem.RegisterAttack(Entities[i], poison.Strength);
                     else
-                    {
                         World.RemoveComponent<CPoison>(Entities[i]);
-                    }
                 }
             }
+        }
+
+        /// <summary>
+        /// Specifies whether or not the System is ready to apply poison. This is calculated
+        /// based on the Systen's Tick Interval and the last time poison was applied.
+        /// </summary>
+        /// <returns><c>true</c>, if the System is ready to apply poison, <c>false</c> otherwise.</returns>
+        /// <param name="lastTickTime">Time the System last applied poison.</param>
+        /// <param name="tickInterval">How often the System applies poison.</param>
+        public bool ReadyToApplyPoison(uint lastTickTime, int tickInterval)
+        {
+            return Utils.DurationReached(lastTickTime, tickInterval);
         }
     }
 }

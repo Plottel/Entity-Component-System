@@ -21,7 +21,7 @@ namespace MyGame
         /// Maps Entity IDs to their current coordinates. This is populated once per frame and is used
         /// by Player AI Entities to determine the closest target.
         /// </summary>
-        Dictionary<int, Point2D> _enemyPositions = new Dictionary<int, Point2D>();
+        Dictionary<ulong, Point2D> _enemyPositions = new Dictionary<ulong, Point2D>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.PlayerAISystem"/> class.
@@ -43,6 +43,69 @@ namespace MyGame
         }
 
         /// <summary>
+        /// Represents the decision making process for Player AI. AI operates with the following procedure:
+        /// - If I don't have a target, get a target.
+        /// - If I have a target, check if I'm in range to attack.
+        /// - If I'm in range to attack, check if I can attack.
+        /// - If I'm in range to attack, attack.
+        /// </summary>
+        public override void Process()
+        {
+            CAI playerAI;
+            CPosition playerPos;
+            CAnimation playerAnim;
+
+            /// <summary>
+            /// Populates the dictionary of Enemy positions only once per frame.
+            /// Each AI uses these positions to evaluate their targets.
+            /// </summary>
+            GetEnemyPositions();
+
+            /// <summary>
+            /// For each Player Entity.
+            /// </summary>
+            for (int i = 0; i < Entities.Count; i++)
+            {
+                playerAI = World.GetComponent<CAI>(Entities[i]);
+                playerPos = World.GetComponent<CPosition>(Entities[i]);
+
+                /// <summary>
+                /// If target died, get a new target and stand still.
+                /// </summary>
+                if (!World.HasEntity(playerAI.TargetID))
+                {
+                    playerAI.HasTarget = false;
+
+                    playerAnim = World.GetComponent<CAnimation>(Entities[i]);
+                    SwinGame.AssignAnimation(playerAnim.Anim, "Still", playerAnim.AnimScript);
+                }
+
+                if (!playerAI.HasTarget)
+                    GetClosestTarget(playerAI, playerPos);
+                else if (!playerAI.IsInRange)
+                    CheckRange(Entities[i], playerAI, playerPos);
+                else if (!playerAI.AttackIsReady)
+                    CheckCooldown(Entities[i]);
+                else
+                {
+                    /// <summary>
+                    /// If ready to attack, start the attack animation. The attack will be carried out
+                    /// when the attack animation has finished.
+                    /// </summary>
+                    playerAnim = World.GetComponent<CAnimation>(Entities[i]);
+
+                    if (SwinGame.AnimationEnded(playerAnim.Anim)) //Attack at end of Attack animation
+                    {
+                        Attack<CPlayerTeam>(Entities[i]);
+
+                        //If the Entity has attacked, stand still during the cooldown period.
+                        SwinGame.AssignAnimation(playerAnim.Anim, "Still", playerAnim.AnimScript);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Populates the Enemy Positions dictionary with the current positions of each Enemy Entity.
         /// </summary>
         private void GetEnemyPositions()
@@ -50,7 +113,7 @@ namespace MyGame
             _enemyPositions.Clear();
             CPosition enemyPos;
 
-            foreach (int enemyID in _enemies.Entities)
+            foreach (ulong enemyID in _enemies.Entities)
             {
                 enemyPos = World.GetComponent<CPosition>(enemyID);
                 _enemyPositions.Add(enemyID, SwinGame.PointAt(enemyPos.Centre.X, enemyPos.Centre.Y));
@@ -83,21 +146,21 @@ namespace MyGame
             /// <summary>
             /// The Enemy Entity closest to the Player AI. This will become the AI's target.
             /// </summary>
-            int closestTarget;
+            ulong closestTarget;
 
             /// <summary>
             /// Represents the Entities to be considered as targets and their distance from the Player AI.
             /// </summary>
-            Dictionary<int, float> _targetDistances = new Dictionary<int, float>(); 
+            Dictionary<ulong, float> _targetDistances = new Dictionary<ulong, float>(); 
 
-            foreach (KeyValuePair<int, Point2D> enemy in _enemyPositions)
+            foreach (KeyValuePair<ulong, Point2D> enemy in _enemyPositions)
             {
                 xOffset = enemy.Value.X - playerPos.X;
                 yOffset = enemy.Value.Y - playerPos.Y;
                 distance = (float)Math.Sqrt((xOffset * xOffset) + (yOffset * yOffset));
 
                 //Only consider Entities which are in range for the AI to attack.
-                if (distance <= 800)
+                if (distance <= playerAI.Range)
                 {
                     _targetDistances.Add(enemy.Key, distance);
                 }
@@ -111,78 +174,8 @@ namespace MyGame
                 /// </summary>
                 closestTarget = _targetDistances.Aggregate((l, r) => l.Value < r.Value ? l : r).Key;
 
-                if (World.EntityHasComponent(closestTarget, typeof(CPlayerTeam)))
-                {
-                    
-                }
-
                 playerAI.TargetID = closestTarget;
                 playerAI.HasTarget = true;
-            }
-        }
-
-        /// <summary>
-        /// Represents the decision making process for Player AI. AI operates with the following procedure:
-        /// - If I don't have a target, get a target.
-        /// - If I have a target, check if I'm in range to attack.
-        /// - If I'm in range to attack, check if I can attack.
-        /// - If I'm in range to attack, attack.
-        /// </summary>
-        public override void Process()
-        {
-            CAI playerAI;
-            CPosition playerPos;
-            CAnimation playerAnim;
-
-            /// <summary>
-            /// Populates the dictionary of Enemy positions only once per frame.
-            /// Each AI uses these positions to evaluate their targets.
-            /// </summary>
-            GetEnemyPositions();
-
-            /// <summary>
-            /// For each Player Entity.
-            /// </summary>
-            for (int i = 0; i < Entities.Count; i++)
-            {
-                playerAI = World.GetComponent<CAI>(Entities[i]);
-                playerPos = World.GetComponent<CPosition>(Entities[i]);
-
-                if (!World.HasEntity(playerAI.TargetID))
-                {
-                    playerAI.HasTarget = false;
-
-                    //This is needed to prevent AI from disappearing, but is buggy.
-                    //CAnimation anim = World.GetComponent<CAnimation>(Entities[i]);
-                    //SwinGame.AssignAnimation(anim.Anim, "Still", anim.AnimScript);
-                }
-
-                if (!playerAI.HasTarget)
-                {
-                    GetClosestTarget(playerAI, playerPos);
-                }
-                else if (!playerAI.IsInRange)
-                {
-                    CheckRange(Entities[i], playerAI, playerPos);
-                }
-                else if (!playerAI.AttackIsReady)
-                {
-                    CheckCooldown(Entities[i]);
-                }
-                else
-                {
-                    /// <summary>
-                    /// If ready to attack, start the attack animation. The attack will be carried out
-                    /// when the attack animation has finished.
-                    /// </summary>
-                    playerAnim = World.GetComponent<CAnimation>(Entities[i]);
-
-                    if (SwinGame.AnimationEnded(playerAnim.Anim)) //Attack at end of Attack animation
-                    {
-                        Attack(Entities[i], "Player");
-                        SwinGame.AssignAnimation(playerAnim.Anim, "Still", playerAnim.AnimScript);
-                    }
-                }
             }
         }
     }
