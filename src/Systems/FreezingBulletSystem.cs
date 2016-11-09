@@ -56,7 +56,7 @@ namespace MyGame
         /// <returns><c>true</c> if the Freezing Bullet has reached its target, <c>false</c> otherwise.</returns>
         /// <param name="bulletPos">The position of the Freezing Bullet.</param>
         /// <param name="bullet">The Freezing Bullet component, contains target coordinates.</param>
-        protected bool ReachedTarget(CPosition bulletPos, CFreezingBullet bullet)
+        private bool ReachedTarget(CPosition bulletPos, CFreezingBullet bullet)
         {
             return SwinGame.PointInRect(bullet.TargetX, bullet.TargetY, bulletPos.Rect);
         }

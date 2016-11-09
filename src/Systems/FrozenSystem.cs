@@ -29,9 +29,20 @@ namespace MyGame
             {
                 frozen = World.GetComponent<CFrozen>(Entities[i]);
 
-                if (Utils.DurationReached(frozen.TimeApplied, frozen.Duration))
+                if (FreezeExpired(frozen.TimeApplied, frozen.Duration))
                     World.RemoveComponent<CFrozen>(Entities[i]);
             }
+        }
+
+        /// <summary>
+        /// Specifies whether or not the Freeze Effect has expired.
+        /// </summary>
+        /// <returns><c>true</c>, if the effect has expired, <c>false</c> otherwise.</returns>
+        /// <param name="startTime">The time the Freeze started.</param>
+        /// <param name="duration">The duration of the Freeze .</param>
+        private bool FreezeExpired(uint startTime, int duration)
+        {
+            return Utils.DurationReached(startTime, duration);
         }
     }
 }

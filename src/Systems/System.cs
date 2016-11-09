@@ -7,7 +7,7 @@ namespace MyGame
     /// Represents the core functionality of all Systems. Defines methods for 
     /// adding / removing Entities and checking if an Entity meets the requirements of the System.
     /// </summary>
-    public abstract class System : EntityListener
+    public abstract class System
     {
         /// <summary>
         /// The Entities the System will operate on. This cannot be overwritten to a new List.
@@ -84,15 +84,30 @@ namespace MyGame
             set {_exclude = value;}
         }
 
+        /// <summary>
+        /// Represents the core functionality of the System. The World will call this
+        /// method on each System it knows about. Child Systems will implement their own 
+        /// definition of Process.
+        /// </summary>
+        public abstract void Process();
 
         /// <summary>
-        /// Specifies whether or not the System contains the passed in Entity.
+        /// Adds the passed in Entity to the System's list of Entities.
         /// </summary>
-        /// <returns><c>true</c> if the System has the Entity, <c>false</c> otherwise.</returns>
-        /// <param name="entID">The Entity to check.</param>
-        public bool HasEntity(ulong entID)
+        /// <param name="entID">The Entity to be added.</param>
+        public virtual void Add(ulong entID)
         {
-            return Entities.Contains(entID);
+            Entities.Add(entID);
+        }
+
+        /// <summary>
+        /// Removes the passed in Entity from the System's list of Entities.
+        /// Child Systems can define their own Remove methods for specialised functionality. 
+        /// </summary>
+        /// <param name="entID">The Entity to be removed.</param>
+        public virtual void Remove(ulong entID)
+        {
+            Entities.Remove(entID);
         }
 
         /// <summary>
@@ -125,29 +140,13 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Represents the core functionality of the System. The World will call this
-        /// method on each System it knows about. Child Systems will implement their own 
-        /// definition of Process.
+        /// Specifies whether or not the System contains the passed in Entity.
         /// </summary>
-        public abstract void Process();
-
-        /// <summary>
-        /// Adds the passed in Entity to the System's list of Entities.
-        /// </summary>
-        /// <param name="entID">The Entity to be added.</param>
-        public virtual void Add(ulong entID)
+        /// <returns><c>true</c> if the System has the Entity, <c>false</c> otherwise.</returns>
+        /// <param name="entID">The Entity to check.</param>
+        public bool HasEntity(ulong entID)
         {
-            Entities.Add(entID);
-        }
-
-        /// <summary>
-        /// Removes the passed in Entity from the System's list of Entities.
-        /// Child Systems can define their own Remove methods for specialised functionality. 
-        /// </summary>
-        /// <param name="entID">The Entity to be removed.</param>
-        public virtual void Remove(ulong entID)
-        {
-            Entities.Remove(entID);
+            return Entities.Contains(entID);
         }
     }
 }

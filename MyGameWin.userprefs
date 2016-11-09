@@ -4,21 +4,34 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="src\Systems\EnemyAISystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src\Components\CStatusAnimations.cs">
     <Files>
-      <File FileName="src\Systems\System.cs" Line="75" Column="10" />
-      <File FileName="src\EntityFactory.cs" Line="57" Column="26" />
-      <File FileName="src\Systems\Collision Systems\PoisonZoneCollisionHandlerSystem.cs" Line="45" Column="79" />
-      <File FileName="src\Systems\PlayerSystem.cs" Line="13" Column="29" />
-      <File FileName="src\World.cs" Line="124" Column="1" />
-      <File FileName="src\Components\CAI.cs" Line="85" Column="22" />
-      <File FileName="src\Systems\PoisonedSystem.cs" Line="53" Column="43" />
-      <File FileName="src\Systems\DamageSystem.cs" Line="78" Column="17" />
-      <File FileName="src\Systems\Collision Systems\CollisionCheckSystem.cs" Line="205" Column="65" />
-      <File FileName="src\Systems\PlayerAISystem.cs" Line="163" Column="36" />
-      <File FileName="src\Components\CCollision.cs" Line="25" Column="43" />
-      <File FileName="src\Systems\Collision Systems\FreezeZoneCollisionHandlerSystem.cs" Line="56" Column="29" />
-      <File FileName="src\Systems\EnemyAISystem.cs" Line="134" Column="77" />
+      <File FileName="src\Components\CAI.cs" Line="121" Column="23" />
+      <File FileName="src\Components\CAnimation.cs" Line="65" Column="10" />
+      <File FileName="src\Components\CBow.cs" Line="33" Column="13" />
+      <File FileName="src\Components\CCollision.cs" Line="17" Column="39" />
+      <File FileName="src\Components\CDamage.cs" Line="1" Column="1" />
+      <File FileName="src\Components\CExplosionMan.cs" Line="36" Column="35" />
+      <File FileName="src\Components\CFreezingBullet.cs" Line="37" Column="6" />
+      <File FileName="src\Components\CFrozen.cs" Line="43" Column="25" />
+      <File FileName="src\Components\CHealth.cs" Line="43" Column="25" />
+      <File FileName="src\Components\CLifetime.cs" Line="38" Column="9" />
+      <File FileName="src\Components\CLoot.cs" Line="32" Column="6" />
+      <File FileName="src\Components\CPlayer.cs" Line="54" Column="27" />
+      <File FileName="src\Components\CPoison.cs" Line="59" Column="43" />
+      <File FileName="src\Components\CPosition.cs" Line="103" Column="34" />
+      <File FileName="src\Components\CRenderable.cs" Line="30" Column="10" />
+      <File FileName="src\Components\CStatusAnimation.cs" Line="42" Column="35" />
+      <File FileName="src\Components\CStatusAnimations.cs" Line="20" Column="23" />
+      <File FileName="src\Components\CVelocity.cs" Line="52" Column="10" />
+      <File FileName="src\Components\Tags\CTeam.cs" Line="15" Column="1" />
+      <File FileName="src\Components\Tags\CAppliesDebuff.cs" Line="13" Column="2" />
+      <File FileName="src\Components\Tags\CCollidable.cs" Line="12" Column="2" />
+      <File FileName="src\Components\CDamagesOnImpact.cs" Line="30" Column="10" />
+      <File FileName="src\Components\Tags\CEnemyTeam.cs" Line="10" Column="2" />
+      <File FileName="src\Components\Tags\CExcludeAll.cs" Line="1" Column="1" />
+      <File FileName="src\Components\Tags\CPlayerTeam.cs" Line="10" Column="2" />
+      <File FileName="src\Components\Tags\CProjectile.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />

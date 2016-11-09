@@ -14,45 +14,45 @@ namespace MyGame
             World world = new World();
 
             #region MISC SYSTEMS
-            world.AddSystem(new InputSystem(world));
-            world.AddSystem(new PlayerSystem(world));
-            world.AddSystem(new SpawningSystem(world));
-            world.AddSystem(new MovementSystem(world));
-            world.AddSystem(new LifetimeSystem(world));
+            world.AddSystem(new InputSystem(world)); 
+            world.AddSystem(new PlayerSystem(world)); 
+            world.AddSystem(new SpawningSystem(world)); 
+            world.AddSystem(new MovementSystem(world)); 
+            world.AddSystem(new LifetimeSystem(world)); 
             #endregion MISC SYSTEMS
 
             #region AI SYSTEMS
             world.AddSystem(new PlayerAISystem(world));
-            world.AddSystem(new EnemyAISystem(world));
+            world.AddSystem(new EnemyAISystem(world)); 
             #endregion AI SYSTEMS
 
             #region PROJECTILE SYSTEMS
-            world.AddSystem(new ProjectileSystem(world));
-            world.AddSystem(new FreezingBulletSystem(world));
+            world.AddSystem(new ProjectileSystem(world)); 
+            world.AddSystem(new FreezingBulletSystem(world)); 
             #endregion PROJECTILE SYSTEMS
 
             #region COLLISION SYSTEMS
-            world.AddSystem(new CollisionCheckSystem(world));
-            world.AddSystem(new FreezeZoneCollisionHandlerSystem(world));
-            world.AddSystem(new PoisonZoneCollisionHandlerSystem(world));
-            world.AddSystem(new DamageCollisionHandlerSystem(world));
+            world.AddSystem(new CollisionCheckSystem(world)); 
+            world.AddSystem(new FreezeZoneCollisionHandlerSystem(world)); 
+            world.AddSystem(new PoisonZoneCollisionHandlerSystem(world)); 
+            world.AddSystem(new DamageCollisionHandlerSystem(world)); 
             #endregion COLLISION SYSTEMS
 
             #region STATUS EFFECT SYSTEMS
-            world.AddSystem(new FrozenSystem(world));
-            world.AddSystem(new PoisonedSystem(world));
-            world.AddSystem(new GotStatusEffectSystem(world));
+            world.AddSystem(new FrozenSystem(world)); 
+            world.AddSystem(new PoisonedSystem(world)); 
+            world.AddSystem(new GotStatusEffectSystem(world)); 
             #endregion STATUS EFFECT SYSTEMS
 
             world.AddSystem(new DamageSystem(world));
-            world.AddSystem(new ExplosionManSystem(world));
+            world.AddSystem(new ExplosionManSystem(world)); 
 
             #region RENDERING SYSTEMS
-            world.AddSystem(new HealthRenderingSystem(world));
-            world.AddSystem(new AnimationRenderingSystem(world));
-            world.AddSystem(new RenderingSystem(world));
-            world.AddSystem(new PlayerRenderingSystem(world));
-            world.AddSystem(new StatusAnimationRenderingSystem(world));
+            world.AddSystem(new HealthRenderingSystem(world)); 
+            world.AddSystem(new AnimationRenderingSystem(world)); 
+            world.AddSystem(new RenderingSystem(world)); 
+            world.AddSystem(new PlayerRenderingSystem(world)); 
+            world.AddSystem(new StatusAnimationRenderingSystem(world)); 
             #endregion RENDERING SYSTEMS
 
             world.AddSystem(new CollisionCleanupSystem(world));

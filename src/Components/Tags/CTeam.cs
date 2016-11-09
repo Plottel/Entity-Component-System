@@ -10,8 +10,5 @@ namespace MyGame
     /// </summary>
     public class CTeam : Component
     {
-        public CTeam ()
-        {
-        }
     }
 }

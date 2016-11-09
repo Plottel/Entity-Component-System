@@ -47,7 +47,6 @@
     <Compile Include="src\Components\Component.cs" />
     <Compile Include="src\Systems\System.cs" />
     <Compile Include="src\EntityFactory.cs" />
-    <Compile Include="src\EntityListener.cs" />
     <Compile Include="src\World.cs" />
     <Compile Include="src\Components\CRenderable.cs" />
     <Compile Include="src\Components\CPosition.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="src\Systems\EntityHolderSystem.cs" />
     <Compile Include="src\Components\Tags\CPlayerTeam.cs" />
     <Compile Include="src\Components\Tags\CEnemyTeam.cs" />
-    <Compile Include="src\Components\CCollidable.cs" />
     <Compile Include="src\Systems\EnemyAISystem.cs" />
     <Compile Include="src\Components\CCollision.cs" />
     <Compile Include="src\Components\Tags\CExcludeAll.cs" />
@@ -91,20 +89,20 @@
     <Compile Include="src\Systems\PlayerAISystem.cs" />
     <Compile Include="src\Components\CStatusAnimations.cs" />
     <Compile Include="src\Systems\Rendering Systems\StatusAnimationRenderingSystem.cs" />
-    <Compile Include="src\Components\Tags\CGotStatusEffect.cs" />
     <Compile Include="src\Systems\GotStatusEffectSystem.cs" />
     <Compile Include="src\Components\Tags\CProjectile.cs" />
     <Compile Include="src\Components\CFreezingBullet.cs" />
     <Compile Include="src\Components\CLifetime.cs" />
     <Compile Include="src\Systems\LifetimeSystem.cs" />
-    <Compile Include="src\Components\Tags\CDamagesOnImpact.cs" />
     <Compile Include="src\Systems\ExplosionManSystem.cs" />
     <Compile Include="src\Components\CExplosionMan.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="src\Systems\PlayerSystem.cs" />
     <Compile Include="src\Components\CStatusAnimation.cs" />
     <Compile Include="src\Systems\Collision Systems\PoisonZoneCollisionHandlerSystem.cs" />
     <Compile Include="src\Components\Tags\CTeam.cs" />
+    <Compile Include="src\Components\Tags\CCollidable.cs" />
+    <Compile Include="src\Components\CDamagesOnImpact.cs" />
+    <Compile Include="src\Components\CGotStatusEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">

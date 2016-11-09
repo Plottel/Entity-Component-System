@@ -33,9 +33,20 @@ namespace MyGame
             {
                 lifetime = World.GetComponent<CLifetime>(Entities[i]);
 
-                if (Utils.DurationReached(lifetime.CreatedAt, lifetime.Lifetime))
+                if (TimeLimitReached(lifetime.CreatedAt, lifetime.Lifetime))
                     World.RemoveEntity(Entities[i]);
             }
+        }
+
+        /// <summary>
+        /// Specifies whether or not an Entity's Lifetime is over.
+        /// </summary>
+        /// <returns><c>true</c>, if Lifetime is over, <c>false</c> otherwise.</returns>
+        /// <param name="creationTime">Time the Entity was created.</param>
+        /// <param name="lifetime">Lifetime of the Entity.</param>
+        private bool TimeLimitReached(uint creationTime, int lifetime)
+        {
+            return Utils.DurationReached(creationTime, lifetime);
         }
     }
 }

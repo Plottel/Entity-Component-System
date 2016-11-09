@@ -25,28 +25,6 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Adds the Entity to the Attacks dictionary so attacks against it are checked.
-        /// </summary>
-        /// <param name="entID">The Entity to be added.</param>
-        public override void Add (ulong entID)
-        {
-            _attacks.Add(entID, new List<int>());
-            base.Add (entID);
-        }
-
-        /// <summary>
-        /// Removes the Entity from the Attacks dictionary so attacks against it are no longer checked.
-        /// </summary>
-        /// <param name="entID">The Entity to be removed.</param>
-        public override void Remove (ulong entID)
-        {
-            if (HasEntity(entID))
-                _attacks.Remove(entID);
-
-            base.Remove(entID);
-        }
-
-        /// <summary>
         /// Processes all Attacks against each Entity. After each attack, the Entity's health is checked.
         /// If the Entity is out of health, it is removed from the World.
         /// </summary>
@@ -85,6 +63,28 @@ namespace MyGame
             {
                 _attacks[Entities[i]].Clear();
             }
+        }
+
+        /// <summary>
+        /// Adds the Entity to the Attacks dictionary so attacks against it are checked.
+        /// </summary>
+        /// <param name="entID">The Entity to be added.</param>
+        public override void Add (ulong entID)
+        {
+            _attacks.Add(entID, new List<int>());
+            base.Add (entID);
+        }
+
+        /// <summary>
+        /// Removes the Entity from the Attacks dictionary so attacks against it are no longer checked.
+        /// </summary>
+        /// <param name="entID">The Entity to be removed.</param>
+        public override void Remove (ulong entID)
+        {
+            if (HasEntity(entID))
+                _attacks.Remove(entID);
+
+            base.Remove(entID);
         }
 
         /// <summary>
