@@ -13,9 +13,9 @@ namespace MyGame
         private int _health;
 
         /// <summary>
-        /// The current damage.
+        /// The current amount of damage the Entity has taken.
         /// </summary>
-        private int _damage;
+        public int Damage {get; set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.CHealth"/> class.
@@ -24,7 +24,7 @@ namespace MyGame
         public CHealth (int health)
         {
             _health = health;
-            _damage = 0;
+            Damage = 0;
         }
 
         /// <summary>
@@ -37,22 +37,12 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Gets or sets the damage.
-        /// </summary>
-        /// <value>The damage.</value>
-        public int Damage
-        {
-            get {return _damage;}
-            set {_damage = value;}
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this <see cref="T:MyGame.CHealth"/> out of health.
         /// </summary>
         /// <returns><c>true</c> if damage is greater than max health, <c>false</c> otherwise.</returns>
         public bool OutOfHealth
         {
-            get {return _damage > _health;}
+            get {return Damage >= _health;}
         }
     }
 }

@@ -38,10 +38,10 @@ namespace MyGame
                 statusAnims = World.GetComponent<CStatusAnimations>(Entities[i]);
                 pos = World.GetComponent<CPosition>(Entities[i]);
 
-                if (statusEffects.Effects.Contains(typeof(CFrozen)))
+                if (statusEffects.Contains(typeof(CFrozen)))
                     HandleFreezeEffect(statusAnims, pos);
 
-                if (statusEffects.Effects.Contains(typeof(CPoison)))
+                if (statusEffects.Contains(typeof(CPoison)))
                     HandlePoisonEffect(statusAnims, pos);
             }
 

@@ -13,7 +13,7 @@ namespace MyGame
         /// <summary>
         /// How often the System will operate.
         /// </summary>
-        private int _tickInterval = 2000;
+        private int _tickInterval = 250;
 
         /// <summary>
         /// The last time the System operated. This is used to determine the next System tick.

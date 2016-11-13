@@ -16,7 +16,8 @@ namespace MyGame
             #region MISC SYSTEMS
             world.AddSystem(new InputSystem(world)); 
             world.AddSystem(new PlayerSystem(world)); 
-            world.AddSystem(new SpawningSystem(world)); 
+            world.AddSystem(new SpawningSystem(world));
+            world.AddSystem(new LootSystem(world));
             world.AddSystem(new MovementSystem(world)); 
             world.AddSystem(new LifetimeSystem(world)); 
             #endregion MISC SYSTEMS

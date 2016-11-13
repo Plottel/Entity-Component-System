@@ -118,20 +118,17 @@ namespace MyGame
         /// <param name="entID">The Entity to check.</param>
         public bool EntityPassesFilter(ulong entID)
         {
-            //All the Components of the Entity
-            Dictionary<Type, Component> entComponents = World.GetAllComponentsOfEntity(entID);
-
             //Check Entity has all components the System will operate on.
             foreach (Type t in Include)
             {
-                if (!entComponents.ContainsKey(t))
+                if (!World.EntityHasComponent(entID, t))
                     return false;
             }
 
             //Check Entity does NOT have any components the System will NOT operate on.
             foreach (Type t in Exclude)
             {
-                if (entComponents.ContainsKey(t))
+                if (World.EntityHasComponent(entID, t))
                     return false;
             }
 

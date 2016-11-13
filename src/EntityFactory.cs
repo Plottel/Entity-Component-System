@@ -42,10 +42,10 @@ namespace MyGame
         #endregion DECLARE ENTITY SIZE AND POSITION DETAILS
 
         #region DECLARE ENTITY COMBAT DETAILS
-        public const int CASTLE_HP = 200;
+        public const int CASTLE_HP = 5000;
 
-        public const int SWORD_MAN_HP = 3;
-        public const int SWORD_MAN_SPEED = 1;
+        public const int SWORD_MAN_HP = 20;
+        public const int SWORD_MAN_SPEED = 2;
         public const int SWORD_MAN_DAMAGE = 1;
         public const int SWORD_MAN_RANGE = 1;
         public const int SWORD_MAN_COOLDOWN = 1000;
@@ -55,9 +55,9 @@ namespace MyGame
         public const int PLAYER_ARROW_DAMAGE = 2;
 
         public const int PLAYER_ARCHER_RANGE = 700;
-        public const int PLAYER_ARCHER_COOLDOWN = 2000;
+        public const int PLAYER_ARCHER_COOLDOWN = 1000;
 
-        public const int ENEMY_ARCHER_HP = 3;
+        public const int ENEMY_ARCHER_HP = 10;
         public const int ENEMY_ARCHER_SPEED = 1;
         public const int ENEMY_ARCHER_RANGE = 100;
         public const int ENEMY_ARCHER_COOLDOWN = 2000;
@@ -66,7 +66,7 @@ namespace MyGame
         public const int ENEMY_ARROW_SPEED = 5;
         public const int ENEMY_ARROW_DAMAGE = 2;
 
-        public const int BATTERING_RAM_HP = 20;
+        public const int BATTERING_RAM_HP = 50;
         public const int BATTERING_RAM_SPEED = 1;
         public const int BATTERING_RAM_DAMAGE = 5;
         public const int BATTERING_RAM_RANGE = 1;

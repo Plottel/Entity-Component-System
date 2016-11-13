@@ -20,7 +20,7 @@ namespace MyGame
         /// <summary>
         /// When the poison was applied. Used to determine if it is still active.
         /// </summary>
-        private uint _timeApplied;
+        public uint TimeApplied {get; set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.CPoison"/> class.
@@ -32,7 +32,7 @@ namespace MyGame
         {
             _strength = strength;
             _duration = duration;
-            _timeApplied = timeApplied;
+            TimeApplied = timeApplied;
         }
 
         /// <summary>
@@ -51,16 +51,6 @@ namespace MyGame
         public int Duration
         {
             get {return _duration;}
-        }
-
-        /// <summary>
-        /// Gets or sets the time the poison was applied.
-        /// </summary>
-        /// <value>The time the poison was applied.</value>
-        public uint TimeApplied
-        {
-            get {return _timeApplied;}
-            set {_timeApplied = value;}
         }
     }
 }

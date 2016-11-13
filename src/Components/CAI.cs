@@ -10,16 +10,6 @@ namespace MyGame
     public class CAI: Component
     {
         /// <summary>
-        /// The target.
-        /// </summary>
-        private ulong _targetID;
-
-        /// <summary>
-        /// Indicates if the Entity has a target.
-        /// </summary>
-        private bool _hasTarget;
-
-        /// <summary>
         /// The attack range.
         /// </summary>
         private int _range;
@@ -30,9 +20,20 @@ namespace MyGame
         private int _cooldown;
 
         /// <summary>
+        /// The Entity's target.
+        /// </summary>
+        public ulong TargetID {get; set;}
+
+        /// <summary>
+        /// Indicates if the Entity has a target.
+        /// </summary>
+        /// <returns><c>true</c> if the Entity has a target, <c>false</c> otherwise.</returns>
+        public bool HasTarget {get; set;}
+
+        /// <summary>
         /// The last time the Entity attacked. This is used to evaluate if an attack can be performed.
         /// </summary>
-        private uint _lastAttackTime;
+        public uint LastAttackTime {get; set;}
 
         /// <summary>
         /// The attack type of the Entity. This is used to determine what happens when an attack is performed.
@@ -42,12 +43,13 @@ namespace MyGame
         /// <summary>
         /// Indicates if the Entity is in range of its target.
         /// </summary>
-        private bool _isInRange;
+        public bool IsInRange {get; set;}
 
         /// <summary>
         /// Indicates if the attack is ready to be used.
         /// </summary>
-        private bool _attackIsReady;      
+        /// <returns><c>true</c> if the Entity's attack is ready, <c>false</c> otherwise.</returns>
+        public bool AttackIsReady {get; set;}      
 
         /// <summary>
         /// An AI Component can be created with or without a TargetID.
@@ -68,24 +70,14 @@ namespace MyGame
             _range = range;
             _cooldown = cooldown;
             _attackType = attackType;
-            _isInRange = false;
-            _attackIsReady = false;
+            IsInRange = false;
+            AttackIsReady = false;
 
             /// <summary>
             /// Entity IDs start at 1. If the targetID is 0, the AI is not created with a target.
             /// </summary>
-            _hasTarget = targetID != 0;
-            _targetID = targetID;
-        }
-
-        /// <summary>
-        /// Gets or sets the target.
-        /// </summary>
-        /// <value>The target.</value>
-        public ulong TargetID
-        {
-            get {return _targetID;}
-            set {_targetID = value;}
+            HasTarget= targetID != 0;
+            TargetID = targetID;
         }
 
         /// <summary>
@@ -107,52 +99,12 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Gets or sets the time the last attack was performed.
-        /// </summary>
-        /// <value>The last attack time.</value>
-        public uint LastAttackTime
-        {
-            get {return _lastAttackTime;}
-            set {_lastAttackTime = value;}
-        }
-
-        /// <summary>
         /// Gets the type of the attack.
         /// </summary>
         /// <value>The type of the attack.</value>
         public AttackType AttackType
         {
             get {return _attackType;}
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the Entity is in range to attack.
-        /// </summary>
-        /// <value><c>true</c> if is in range; otherwise, <c>false</c>.</value>
-        public bool IsInRange
-        {
-            get {return _isInRange;}
-            set {_isInRange = value;}
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the Entity's attack is ready.
-        /// </summary>
-        /// <value><c>true</c> if attack is ready; otherwise, <c>false</c>.</value>
-        public bool AttackIsReady
-        {
-            get {return _attackIsReady;}
-            set {_attackIsReady = value;}
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether the Entity has a valid target.
-        /// </summary>
-        /// <value><c>true</c> if has target; otherwise, <c>false</c>.</value>
-        public bool HasTarget
-        {
-            get {return _hasTarget;}
-            set {_hasTarget = value;}
         }
     }
 }

@@ -16,6 +16,16 @@ namespace MyGame
         private readonly List<CStatusAnimation> _anims = new List<CStatusAnimation>();
 
         /// <summary>
+        /// Gets the <see cref="T:MyGame.CStatusAnimations"/> at the specified index.
+        /// Allows indexing directly from the class, rather than CStatusAnimations.Anims[i]
+        /// </summary>
+        /// <param name="index">Index.</param>
+        public CStatusAnimation this[int index]
+        {
+            get {return _anims[index];}
+        }
+
+        /// <summary>
         /// Gets the List of Status Animations.
         /// </summary>
         /// <value>The List of Status Animations.</value>

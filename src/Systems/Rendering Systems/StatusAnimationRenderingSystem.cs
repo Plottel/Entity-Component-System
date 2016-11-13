@@ -45,7 +45,7 @@ namespace MyGame
                 /// </summary>
                 for (int j = statusAnims.Anims.Count - 1; j >= 0; j--)
                 {
-                    anim = statusAnims.Anims[j];
+                    anim = statusAnims[j];
 
                     if (World.EntityHasComponent(Entities[i], anim.LinkedComponent))
                     {

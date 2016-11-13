@@ -163,6 +163,7 @@ namespace MyGame
             CCollision entOneCollision;
             CCollision entTwoCollision;
 
+            //Handle collision for the first Entity
             if (!World.EntityHasComponent(entOne, typeof(CCollision)))
             {
                 World.AddComponent(entOne, new CCollision(entTwo));
@@ -170,9 +171,10 @@ namespace MyGame
             else
             {
                 entOneCollision = World.GetComponent<CCollision>(entOne);
-                entOneCollision.CollidedWith.Add(entTwo);
+                entOneCollision.AddCollision(entTwo);
             }
 
+            //Handle collision for the second Entity
             if (!World.EntityHasComponent(entTwo, typeof(CCollision)))
             {
                 World.AddComponent(entTwo, new CCollision(entOne));
@@ -180,7 +182,7 @@ namespace MyGame
             else
             {
                 entTwoCollision = World.GetComponent<CCollision>(entTwo);
-                entTwoCollision.CollidedWith.Add(entOne);
+                entTwoCollision.AddCollision(entOne);
             }
         }
 

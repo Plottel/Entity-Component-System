@@ -43,14 +43,14 @@ namespace MyGame
                 /// Apply damage to the first Entity the Entity has collided with that still exists in
                 /// the World and also has a Health Component. If none are found, the Arrow remains live.
                 /// </summary>
-                for (int j = 0; j < collision.CollidedWith.Count; j++)
+                for (int j = 0; j < collision.Count; j++)
                 {
-                    if (World.HasEntity(collision.CollidedWith[j]))
+                    if (World.HasEntity(collision[j]))
                     {
-                        if (World.EntityHasComponent(collision.CollidedWith[j], typeof(CHealth)))
+                        if (World.EntityHasComponent(collision[j], typeof(CHealth)))
                         {
                             damage = World.GetComponent<CDamage>(Entities[i]);
-                            damageSystem.RegisterAttack(collision.CollidedWith[j], damage.Damage);
+                            damageSystem.RegisterAttack(collision[j], damage.Damage);
                         }
                     }          
                 }

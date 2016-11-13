@@ -40,29 +40,29 @@ namespace MyGame
                 /// <summary>
                 /// This loop represents each Entity colliding with the Freeze Zone.
                 /// </summary>
-                foreach (ulong target in collision.CollidedWith)
+                for (int j = 0; j < collision.Count; j++)
                 {
                     //If not already Frozen, add a Frozen Component.
-                    if (!World.EntityHasComponent(target, typeof(CFrozen)))
+                    if (!World.EntityHasComponent(collision[j], typeof(CFrozen)))
                     {
                         //Don't freeze projectiles
-                        if (!World.EntityHasComponent(target, typeof(CProjectile)))
-                            World.AddComponent(target, new CFrozen(freezeZoneFrozen.Duration, World.GameTime));
+                        if (!World.EntityHasComponent(collision[j], typeof(CProjectile)))
+                            World.AddComponent(collision[j], new CFrozen(freezeZoneFrozen.Duration, World.GameTime));
 
-                        if (!World.EntityHasComponent(target, typeof(CGotStatusEffect)))
+                        if (!World.EntityHasComponent(collision[j], typeof(CGotStatusEffect)))
                         {
-                            World.AddComponent(target, new CGotStatusEffect(typeof(CFrozen))); 
+                            World.AddComponent(collision[j], new CGotStatusEffect(typeof(CFrozen))); 
                         }
                         else
                         {
-                            CGotStatusEffect statusEffects = World.GetComponent<CGotStatusEffect>(target);
+                            CGotStatusEffect statusEffects = World.GetComponent<CGotStatusEffect>(collision[j]);
                             statusEffects.AddEffect(typeof(CFrozen));
                         }
                             
                     }
                     else //If already Frozen, refresh the duration.
                     {
-                        collidedFrozen = World.GetComponent<CFrozen>(target);
+                        collidedFrozen = World.GetComponent<CFrozen>(collision[i]);
                         collidedFrozen.TimeApplied = World.GameTime;
                     }
                 }

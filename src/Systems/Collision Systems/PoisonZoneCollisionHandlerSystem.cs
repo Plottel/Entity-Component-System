@@ -44,26 +44,26 @@ namespace MyGame
                 /// <summary>
                 /// This loop represents each Entity colliding with the Poison Zone.
                 /// </summary>
-                foreach (ulong target in collision.CollidedWith)
+                for (int j = 0; j < collision.Count; j++)
                 {
-                    if (!World.EntityHasComponent(target, typeof(CPoison)))
+                    if (!World.EntityHasComponent(collision[j], typeof(CPoison)))
                     {
-                        World.AddComponent(target, new CPoison(poisonEffect.Strength, poisonEffect.Duration, World.GameTime));
+                        World.AddComponent(collision[j], new CPoison(poisonEffect.Strength, poisonEffect.Duration, World.GameTime));
 
-                        if (!World.EntityHasComponent(target, typeof(CGotStatusEffect)))
+                        if (!World.EntityHasComponent(collision[j], typeof(CGotStatusEffect)))
                         {
-                            World.AddComponent(target, new CGotStatusEffect(typeof(CPoison)));
+                            World.AddComponent(collision[j], new CGotStatusEffect(typeof(CPoison)));
                         }
                         else
                         {
-                            CGotStatusEffect statusEffects = World.GetComponent<CGotStatusEffect>(target);
+                            CGotStatusEffect statusEffects = World.GetComponent<CGotStatusEffect>(collision[j]);
                             statusEffects.AddEffect(typeof(CPoison));
                         }
                             
                     }
                     else //If entity already has a Poison Component, refresh its duration.
                     {
-                        targetPoisonEffect = World.GetComponent<CPoison>(target);
+                        targetPoisonEffect = World.GetComponent<CPoison>(collision[j]);
                         targetPoisonEffect.TimeApplied = World.GameTime;
                     }
                 }

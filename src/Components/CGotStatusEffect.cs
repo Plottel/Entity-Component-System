@@ -24,6 +24,16 @@ namespace MyGame
         }
 
         /// <summary>
+        /// Gets the <see cref="T:MyGame.CGotStatusEffect"/> at the specified index.
+        /// Allows Effects to be accessed directly from the class, rather than CGotStatusEffect.Effects[i]
+        /// </summary>
+        /// <param name="index">Index.</param>
+        public Type this[int index]
+        {
+            get {return _effects[index];}
+        }
+
+        /// <summary>
         /// Adds the passed in Status Effect to the list of Effects.
         /// </summary>
         /// <param name="effect">The Status Effect type to be added.</param>
@@ -33,15 +43,22 @@ namespace MyGame
         }
 
         /// <summary>
-        /// Gets the list of Status Effect types.
+        /// Specifies if the Component contains the specified Effect.
         /// </summary>
-        /// <value>The Status Effects.</value>
-        public List<Type> Effects
+        /// <returns><c>true</c> if the Component contains the Effect, <c>false</c> otherwise.</returns>
+        /// <param name="effect">The Effect to check.</param>
+        public bool Contains(Type effect)
         {
-            get
-            {
-                return _effects;
-            }
+            return _effects.Contains(effect);
+        }
+
+        /// <summary>
+        /// Gets the number of Status Effects in the Component.
+        /// </summary>
+        /// <value>The number of Status Effects.</value>
+        public int Count
+        {
+            get {return _effects.Count;}
         }
     }
 }

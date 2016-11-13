@@ -11,7 +11,7 @@ namespace MyGame
         /// <summary>
         /// The Bitmap.
         /// </summary>
-        private Bitmap _img;
+        public Bitmap Img {get; set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.CRenderable"/> class.
@@ -19,17 +19,7 @@ namespace MyGame
         /// <param name="img">The Bitmap to be stored in the Component.</param>
         public CRenderable (Bitmap img)
         {
-            _img = img;
-        }
-
-        /// <summary>
-        /// Gets or sets the Bitmap.
-        /// </summary>
-        /// <value>The Bitmap.</value>
-        public Bitmap Img
-        {
-            get {return _img;}
-            set {_img = value;}
+            Img = img;
         }
     }
 }

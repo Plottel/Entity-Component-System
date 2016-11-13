@@ -76,8 +76,8 @@ namespace MyGame
                 {
                     playerAI.HasTarget = false;
 
-                    playerAnim = World.GetComponent<CAnimation>(Entities[i]);
-                    SwinGame.AssignAnimation(playerAnim.Anim, "Still", playerAnim.AnimScript);
+                    //playerAnim = World.GetComponent<CAnimation>(Entities[i]);
+                    //SwinGame.AssignAnimation(playerAnim.Anim, "Still", playerAnim.AnimScript);
                 }
 
                 if (!playerAI.HasTarget)

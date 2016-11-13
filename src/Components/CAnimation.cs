@@ -10,14 +10,14 @@ namespace MyGame
     public class CAnimation : Component
     {
         /// <summary>
-        /// The Bitmap used for the Animation.
+        /// Gets or sets the Bitmap used for the Animation.
         /// </summary>
-        private Bitmap _img;
+        public Bitmap Img {get; set;}
 
         /// <summary>
-        /// The current Animation.
+        /// Gets or sets the current Animation for the Entity.
         /// </summary>
-        private Animation _anim;
+        public Animation Anim {get; set;}
 
         /// <summary>
         /// The Animation Script containing Animation details.
@@ -32,29 +32,9 @@ namespace MyGame
         /// <param name="animScript">The Animation Script containing Animation details.</param>
         public CAnimation (Bitmap img, Animation anim, AnimationScript animScript)
         {
-            _img = img;
-            _anim = anim;
+            Img = img;
+            Anim = anim;
             _animScript = animScript;
-        }
-
-        /// <summary>
-        /// Gets or sets the image.
-        /// </summary>
-        /// <value>The image.</value>
-        public Bitmap Img
-        {
-            get {return _img;}
-            set {_img = value;}
-        }
-
-        /// <summary>
-        /// Gets or sets the animation.
-        /// </summary>
-        /// <value>The animation.</value>
-        public Animation Anim
-        {
-            get {return _anim;}
-            set {_anim = value;}
         }
 
         /// <summary>

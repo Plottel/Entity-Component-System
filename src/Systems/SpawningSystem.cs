@@ -13,7 +13,17 @@ namespace MyGame
         /// <summary>
         /// The x coordinate where units will be spawned.
         /// </summary>
-        private const int _spawnAtX = 1130;
+        private const int SPAWN_AT_X = 1130;
+
+        /// <summary>
+        /// The minimum y coordinate where units can be spawned.
+        /// </summary>
+        private const int MIN_Y_SPAWN = 100;
+
+        /// <summary>
+        /// The maximum y coordinate where units can be spawned.
+        /// </summary>
+        private const int MAX_Y_SPAWN = 500;
 
         /// <summary>
         /// Seed used to randomise y coordinate spawn locations.
@@ -23,12 +33,28 @@ namespace MyGame
         /// <summary>
         /// How often the System will spawn units.
         /// </summary>
-        private uint _spawnInterval = 500;
+        private uint _spawnInterval = 5000;
 
         /// <summary>
         /// When the System last spawned. Used to determine when the next spawn will occur.
         /// </summary>
         private uint _lastSpawn;
+
+        /// <summary>
+        /// How many archers will be created for each spawn.
+        /// </summary>
+        private const int ARCHERS_PER_SPAWN = 10;
+
+        /// <summary>
+        /// How many sword men will be created for each spawn.
+        /// </summary>
+        private const int SWORD_MEN_PER_SPAWN = 5;
+
+        /// <summary>
+        /// How many battering rams will be created for each spawn.
+        /// </summary>
+        private const int BATTERING_RAMS_PER_SPAWN = 3;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.SpawningSystem"/> class.
@@ -48,22 +74,17 @@ namespace MyGame
             {
                 _lastSpawn = World.GameTime;
 
-                //EntityFactory.CreateSwordMan(_spawnAtX, _seed.Next(100, 500));
-                //EntityFactory.CreateBatteringRam(_spawnAtX, _seed.Next(100, 500));
-                //EntityFactory.CreateEnemyArcher(_spawnAtX, _seed.Next(100, 500));
+                //Spawn archers
+                for (int i = 0; i < ARCHERS_PER_SPAWN; i++)
+                    EntityFactory.CreateEnemyArcher(SPAWN_AT_X, _seed.Next(MIN_Y_SPAWN, MAX_Y_SPAWN));
 
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 200);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 205);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 210);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 215);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 220);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 225);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 230);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 235);
+                //Spawn sword men
+                for (int i = 0; i < SWORD_MEN_PER_SPAWN; i++)
+                    EntityFactory.CreateSwordMan(SPAWN_AT_X, _seed.Next(MIN_Y_SPAWN, MAX_Y_SPAWN));
 
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 50);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 150);
-                EntityFactory.CreateEnemyArcher(_spawnAtX, 500);
+                //Spawn battering rams
+                for (int i = 0; i < BATTERING_RAMS_PER_SPAWN; i++)
+                    EntityFactory.CreateBatteringRam(SPAWN_AT_X, _seed.Next(MIN_Y_SPAWN, MAX_Y_SPAWN));
             }
         }
 

@@ -48,7 +48,6 @@ namespace MyGame
         {
         }
 
-
         public override void Process()
         {
         }

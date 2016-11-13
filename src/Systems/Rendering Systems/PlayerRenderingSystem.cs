@@ -123,12 +123,6 @@ namespace MyGame
             SwinGame.DrawBitmap(_archersText, 220, 35);
             SwinGame.DrawText(PlayerSystem.ARCHER_COUNT.ToString(), Color.Black, SwinGame.FontNamed("GameFont"), 290, 35);
 
-            //SwinGame.DrawBitmap(_wizardsText, 220, 60);
-            //SwinGame.DrawText(playerComp.WizardCount.ToString(), Color.Black, SwinGame.FontNamed("GameFont"), 290, 60);
-
-            //SwinGame.DrawBitmap(_buyWizardText, 375, 10);
-            //SwinGame.DrawBitmap(_twentyGoldText, 405, 30);
-
             SwinGame.DrawBitmap(_buyArcherText, 505, 10);
             SwinGame.DrawBitmap(_tenGoldText, 535, 30);
 

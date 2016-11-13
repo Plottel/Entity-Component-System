@@ -12,22 +12,22 @@ namespace MyGame
         /// <summary>
         /// The x position.
         /// </summary>
-        private float _x;
+        public float X {get; set;}
 
         /// <summary>
         /// The y position.
         /// </summary>
-        private float _y;
+        public float Y {get; set;}
 
         /// <summary>
         /// The width of the Entity.
         /// </summary>
-        private int _width;
+        public int Width {get; set;}
 
         /// <summary>
         /// The height of the Entity.
         /// </summary>
-        private int _height;
+        public int Height {get; set;}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MyGame.CPosition"/> class.
@@ -48,50 +48,10 @@ namespace MyGame
         /// <param name="height">The height of the Entity.</param>
         public CPosition(float x, float y, int width, int height)
         {
-            _x = x;
-            _y = y;
-            _width = width;
-            _height = height;
-        }
-
-        /// <summary>
-        /// Gets or sets the x position.
-        /// </summary>
-        /// <value>The x position.</value>
-        public float X
-        {
-            get {return _x;}
-            set {_x = value;}
-        }
-
-        /// <summary>
-        /// Gets or sets the y position.
-        /// </summary>
-        /// <value>The y position.</value>
-        public float Y
-        {
-            get {return _y;}
-            set {_y = value;}
-        }
-
-        /// <summary>
-        /// Gets or sets the width of the Entity.
-        /// </summary>
-        /// <value>The width of the Entity.</value>
-        public int Width
-        {
-            get {return _width;}
-            set {_width= value;}
-        }
-
-        /// <summary>
-        /// Gets or sets the height of the Entity.
-        /// </summary>
-        /// <value>The height of the Entity.</value>
-        public int Height
-        {
-            get {return _height;}
-            set {_height = value;}
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
         }
 
         /// <summary>
