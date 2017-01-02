@@ -9,7 +9,7 @@
       <File FileName="src\GameMain.cs" Line="62" Column="42" />
       <File FileName="src\Systems\SpawningSystem.cs" Line="42" Column="9" />
       <File FileName="src\EntityFactory.cs" Line="81" Column="50" />
-      <File FileName="src\Systems\PoisonedSystem.cs" Line="16" Column="40" />
+      <File FileName="src\Systems\PoisonedSystem.cs" Line="34" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.MyGameWin PreferredExecutionTarget="MonoDevelop.Default" />
