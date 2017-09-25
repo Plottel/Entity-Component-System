@@ -1,7 +1,5 @@
 # Entity Component System
 
-This repo is a game I made in my 2nd semester of university for the subject "Object-Oriented Programming".
+* UML of architecture - https://drive.google.com/file/d/0B3l1W8X5L1LmbTRtdWRleWt3SFE/view?usp=sharing
 
-It's a clone of the game Defend Your Castle on xgenstudios.com.
-
-It's written in an Entity-Component-System architecture which is an extreme version of the Component Pattern where data and functionality are entirely segregated.
+A simple base defence game I made in my 2nd semester of university for the subject "Object-Oriented Programming". Ironically, it's written using an Entity-Component-System architecture.
